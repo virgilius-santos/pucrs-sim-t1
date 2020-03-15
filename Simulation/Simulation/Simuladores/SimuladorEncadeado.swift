@@ -20,8 +20,8 @@ public class SimuladorEncadeado {
                 
                 // configurar a saida da fila de entrada
                 // configurar a chegada da fila de saida
-                .transicao(entrada: filaDeEntrada,
-                           saida: filaDeSaida),
+                .transicao(origem: filaDeEntrada,
+                           destino: filaDeSaida),
                 
                 // configurar a saida da fila
                 .saida(fila: filaDeSaida),

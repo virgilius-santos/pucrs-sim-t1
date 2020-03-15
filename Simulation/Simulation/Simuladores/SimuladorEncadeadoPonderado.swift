@@ -19,8 +19,8 @@ public class SimuladorEncadeadoPonderado {
                 
                 // configurar a saida da fila de entrada
                 // configurar a chegada da fila de saida
-                .transicaoPonderada(entrada: filaDeEntrada,
-                                    saida: filaDeSaida,
+                .transicaoPonderada(origem: filaDeEntrada,
+                                    destino: filaDeSaida,
                                     taxa: taxaDeSaida),
                 
                 // configurar a saida da fila

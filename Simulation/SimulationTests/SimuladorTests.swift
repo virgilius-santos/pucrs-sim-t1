@@ -46,8 +46,8 @@ class SimuladorTests: XCTestCase {
         sut = SimuladorDummy(escalonador: escalonadorSpy)
         
         sut.configurarAgendamentoDeTransicao(
-            filaDeEntrada: fila1Spy,
-            filaDeSaida: fila2Spy)
+            filaDeOrigem: fila1Spy,
+            filaDeDestino: fila2Spy)
         
         XCTAssertNotNil(fila1Spy.agendarSaida)
         
@@ -55,9 +55,15 @@ class SimuladorTests: XCTestCase {
         
         XCTAssertTrue(escalonadorSpy.adicionarChamadoSpy!)
         XCTAssertEqual(escalonadorSpy.eventoSpy!.tipo, .transicao)
+        
+        escalonadorSpy.eventoSpy!.acao(4)
+        XCTAssertNil(fila1Spy.chegadaTempoSpy)
+        XCTAssertNil(fila2Spy.saidaTempoSpy)
+        XCTAssertEqual(fila1Spy.saidaTempoSpy, 4)
+        XCTAssertEqual(fila2Spy.chegadaTempoSpy, 4)
     }
     
-    func testConfigurarAgendamentoDeTransicaoPonderado() {
+    func testConfigurarAgendamentoDeTransicaoComSaida() {
         let random = CongruenteLinear()
         
         let fila1Spy = FilaSpy(
@@ -76,8 +82,8 @@ class SimuladorTests: XCTestCase {
         sut = SimuladorDummy(escalonador: escalonadorSpy)
         
         sut.configurarAgendamentoDeTransicao(
-            filaDeEntrada: fila1Spy,
-            filaDeSaida: fila2Spy,
+            filaDeOrigem: fila1Spy,
+            filaDeDestino: fila2Spy,
             saida: 1)
         
         XCTAssertNotNil(fila1Spy.agendarSaida)
@@ -86,6 +92,49 @@ class SimuladorTests: XCTestCase {
         
         XCTAssertTrue(escalonadorSpy.adicionarChamadoSpy!)
         XCTAssertEqual(escalonadorSpy.eventoSpy!.tipo, .saida)
+        
+        escalonadorSpy.eventoSpy!.acao(7)
+        XCTAssertNil(fila1Spy.chegadaTempoSpy)
+        XCTAssertNil(fila2Spy.saidaTempoSpy)
+        XCTAssertNil(fila2Spy.chegadaTempoSpy)
+        XCTAssertEqual(fila1Spy.saidaTempoSpy, 7)
+    }
+    
+    func testConfigurarAgendamentoDeTransicaoComRetorno() {
+        let random = CongruenteLinear()
+        
+        let fila1Spy = FilaSpy(
+            taxaEntrada: Tempo(inicio: 1, fim: 2),
+            taxaSaida: Tempo(inicio: 2, fim: 4),
+            kendall: Kendall(c: 2, k: 4, n: 25),
+            random: random)
+        
+        let fila2Spy = FilaSpy(
+            taxaEntrada: Tempo(inicio: 1, fim: 2),
+            taxaSaida: Tempo(inicio: 2, fim: 4),
+            kendall: Kendall(c: 2, k: 4, n: 0),
+            random: random)
+        
+        let escalonadorSpy = EscalonadorSpy()
+        sut = SimuladorDummy(escalonador: escalonadorSpy)
+        
+        sut.configurarAgendamentoDeTransicao(
+            filaDeOrigem: fila1Spy,
+            filaDeDestino: fila2Spy,
+            retorno: 1)
+        
+        XCTAssertNotNil(fila1Spy.agendarSaida)
+        
+        fila1Spy.agendarSaida!()
+        
+        XCTAssertTrue(escalonadorSpy.adicionarChamadoSpy!)
+        XCTAssertEqual(escalonadorSpy.eventoSpy!.tipo, .transicao)
+        
+        escalonadorSpy.eventoSpy!.acao(7)
+        XCTAssertNil(fila2Spy.saidaTempoSpy)
+        XCTAssertNil(fila2Spy.chegadaTempoSpy)
+        XCTAssertEqual(fila1Spy.saidaTempoSpy, 7)
+        XCTAssertEqual(fila1Spy.chegadaTempoSpy, 7)
     }
     
     func testGerarEventoSaida() {
@@ -157,8 +206,8 @@ class SimuladorTests: XCTestCase {
         let escalonadorSpy = EscalonadorSpy()
         sut = SimuladorDummy(escalonador: escalonadorSpy)
         
-        sut.gerarEventoTransicao(filaDeEntrada: fila1Spy,
-                                 filaDeSaida: fila2Spy)
+        sut.gerarEventoTransicao(filaDeOrigem: fila1Spy,
+                                 filaDeDestino: fila2Spy)
         
         let evento = escalonadorSpy.eventoSpy
         XCTAssertNotNil(evento)

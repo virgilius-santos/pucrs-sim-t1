@@ -50,13 +50,13 @@ public extension Simulador {
     }
     
     /// gera os eventos de transicao de uma fila para outra no escalonador
-    func gerarEventoTransicao(filaDeEntrada: Fila, filaDeSaida: Fila) {
+    func gerarEventoTransicao(filaDeOrigem: Fila, filaDeDestino: Fila) {
         let evento = Evento(tipo: .transicao,
-                            tempo: filaDeEntrada.proximaSaida,
+                            tempo: filaDeOrigem.proximaSaida,
                             acao: { tempo in
-                                filaDeEntrada.saida(tempo: tempo)
-                                filaDeSaida.chegada(tempo: tempo) },
-                            fila: filaDeEntrada)
+                                filaDeOrigem.saida(tempo: tempo)
+                                filaDeDestino.chegada(tempo: tempo) },
+                            fila: filaDeOrigem)
         escalonador.adicionar(evento)
     }
     
@@ -79,16 +79,50 @@ public extension Simulador {
         }
     }
     
-    /// configura a transicao de uma fila para outra
-    func configurarAgendamentoDeTransicao(filaDeEntrada: Fila, filaDeSaida: Fila, saida: Double = 0) {
-        filaDeEntrada.agendarSaida = { [weak self] in
+    /**
+     configura a transicao de uma fila para outra fila, para a saida ou para a mesma fila.
+     
+     A prioridade é para saida, ou seja, se o parametro SAIDA for 100% será gerado um evento de saída.
+     
+     O RETORNO é caculado: (100% - SAIDA) * RETORNO + SAIDA, ou seja,
+     se a SAIDA = 20%, e o RETORNO = 40% a probabilidade de retorno é (100% - 20%) * 40% + 20% = 52%,
+     
+     então entre 0 e 20% a probabilidade de ir pra saida,
+     entre 20 e 52% a probabilidade de ir pra mesma fila,
+     e acima disse a probabilidade de ir pra fila de saida
+     
+     como visto no exemplo acima, o Agendamento é deirecionado a fila de saida somente se nenhum dos outros critérios for atendido.
+     
+     - parameter saida: Probabilidade em porcentagem do evento direcionar para saida.
+     - parameter retorno: Probabilidade em porcentagem do evento direcionar para a mesma fila.
+     */
+    func configurarAgendamentoDeTransicao(filaDeOrigem: Fila,
+                                          filaDeDestino: Fila,
+                                          saida: Double = 0,
+                                          retorno: Double = 0) {
+        var taxaDeSaida: Double = saida
+        taxaDeSaida = min(taxaDeSaida, 1)
+        taxaDeSaida = max(taxaDeSaida, 0)
+        
+        var taxaDeRetorno: Double = retorno
+        taxaDeRetorno = min(taxaDeRetorno, 1)
+        taxaDeRetorno = max(taxaDeRetorno, 0)
+        taxaDeRetorno = (1 - taxaDeSaida) * taxaDeRetorno + taxaDeSaida
+        
+        let probabilidade = self.random.uniformizado
+        
+        filaDeOrigem.agendarSaida = { [weak self] in
             if let self = self {
-                if self.random.uniformizado < saida {
-                    self.gerarEventoSaida(filaDeEntrada)
+                if probabilidade < taxaDeSaida {
+                    self.gerarEventoSaida(filaDeOrigem)
+                }
+                else if probabilidade < taxaDeRetorno {
+                    self.gerarEventoTransicao(filaDeOrigem: filaDeOrigem,
+                                              filaDeDestino: filaDeOrigem)
                 }
                 else {
-                    self.gerarEventoTransicao(filaDeEntrada: filaDeEntrada,
-                                              filaDeSaida: filaDeSaida)
+                    self.gerarEventoTransicao(filaDeOrigem: filaDeOrigem,
+                                              filaDeDestino: filaDeDestino)
                 }
             }
         }

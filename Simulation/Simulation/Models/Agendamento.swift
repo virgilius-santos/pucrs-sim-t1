@@ -3,8 +3,8 @@ import Foundation
 
 public enum Agendamento {
     case chegada(fila: Fila)
-    case transicao(entrada: Fila, saida: Fila)
-    case transicaoPonderada(entrada: Fila, saida: Fila, taxa: Double)
+    case transicao(origem: Fila, destino: Fila)
+    case transicaoPonderada(origem: Fila, destino: Fila, taxa: Double)
     case saida(fila: Fila)
     
     var estatisticas: [Estatistica] {
@@ -26,10 +26,10 @@ extension Simulador {
         switch agendamento {
             case let .chegada(fila):
                 gerarEventoChegada(fila)
-            case let .transicao(filaEntrada, filaSaida):
-                configurarAgendamentoDeTransicao(filaDeEntrada: filaEntrada, filaDeSaida: filaSaida)
-            case let .transicaoPonderada(filaEntrada, filaSaida, saida):
-                configurarAgendamentoDeTransicao(filaDeEntrada: filaEntrada, filaDeSaida: filaSaida, saida: saida)
+            case let .transicao(filaDeOrigem, filaDeDestino):
+                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem, filaDeDestino: filaDeDestino)
+            case let .transicaoPonderada(filaDeOrigem, filaDeDestino, saida):
+                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem, filaDeDestino: filaDeDestino, saida: saida)
             case let .saida(fila):
                 configurarAgendamentoDeSaida(fila)
         }
