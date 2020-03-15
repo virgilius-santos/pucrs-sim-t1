@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1835E5BA241E799600526060 /* FilaEncadeadaPonderada.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835E5B9241E799600526060 /* FilaEncadeadaPonderada.swift */; };
+		1835E5BA241E799600526060 /* SimuladorEncadeadoPonderado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835E5B9241E799600526060 /* SimuladorEncadeadoPonderado.swift */; };
 		1835E5BC241E93D600526060 /* Agendamento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835E5BB241E93D600526060 /* Agendamento.swift */; };
-		1835E5BE241E983900526060 /* FilaGenerica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835E5BD241E983900526060 /* FilaGenerica.swift */; };
 		184024EC241CEDEA008DE504 /* Simulation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184024E2241CEDE9008DE504 /* Simulation.framework */; };
 		184024F1241CEDEA008DE504 /* CongruenteLinearTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184024F0241CEDEA008DE504 /* CongruenteLinearTests.swift */; };
 		184024F3241CEDEA008DE504 /* Simulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 184024E5241CEDE9008DE504 /* Simulation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -22,11 +21,11 @@
 		18402509241D1181008DE504 /* Tempo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402508241D1181008DE504 /* Tempo.swift */; };
 		1840250B241D136B008DE504 /* TempoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840250A241D136B008DE504 /* TempoTests.swift */; };
 		1840250D241D155B008DE504 /* Fila.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840250C241D155B008DE504 /* Fila.swift */; };
-		1840250F241D189B008DE504 /* FilaSimples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840250E241D189B008DE504 /* FilaSimples.swift */; };
+		1840250F241D189B008DE504 /* SimuladorSimples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840250E241D189B008DE504 /* SimuladorSimples.swift */; };
 		18402511241D18C4008DE504 /* SimuladorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402510241D18C4008DE504 /* SimuladorTests.swift */; };
 		18402513241D1C79008DE504 /* FilaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402512241D1C79008DE504 /* FilaTests.swift */; };
 		1840251B241D856A008DE504 /* SimuladorIntegracao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251A241D856A008DE504 /* SimuladorIntegracao.swift */; };
-		1840251D241D90BE008DE504 /* FilaEncadeada.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251C241D90BE008DE504 /* FilaEncadeada.swift */; };
+		1840251D241D90BE008DE504 /* SimuladorEncadeado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251C241D90BE008DE504 /* SimuladorEncadeado.swift */; };
 		1840251F241D93DA008DE504 /* Estatistica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251E241D93DA008DE504 /* Estatistica.swift */; };
 		18402521241D9461008DE504 /* Simulador.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402520241D9461008DE504 /* Simulador.swift */; };
 		18FEC158241E484000A9C8E9 /* GerenciadorEstatisticas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FEC157241E484000A9C8E9 /* GerenciadorEstatisticas.swift */; };
@@ -44,9 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1835E5B9241E799600526060 /* FilaEncadeadaPonderada.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilaEncadeadaPonderada.swift; sourceTree = "<group>"; };
+		1835E5B9241E799600526060 /* SimuladorEncadeadoPonderado.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorEncadeadoPonderado.swift; sourceTree = "<group>"; };
 		1835E5BB241E93D600526060 /* Agendamento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Agendamento.swift; sourceTree = "<group>"; };
-		1835E5BD241E983900526060 /* FilaGenerica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilaGenerica.swift; sourceTree = "<group>"; };
 		184024E2241CEDE9008DE504 /* Simulation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Simulation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		184024E5241CEDE9008DE504 /* Simulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Simulation.h; sourceTree = "<group>"; };
 		184024E6241CEDE9008DE504 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,11 +60,11 @@
 		18402508241D1181008DE504 /* Tempo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tempo.swift; sourceTree = "<group>"; };
 		1840250A241D136B008DE504 /* TempoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoTests.swift; sourceTree = "<group>"; };
 		1840250C241D155B008DE504 /* Fila.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fila.swift; sourceTree = "<group>"; };
-		1840250E241D189B008DE504 /* FilaSimples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilaSimples.swift; sourceTree = "<group>"; };
+		1840250E241D189B008DE504 /* SimuladorSimples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorSimples.swift; sourceTree = "<group>"; };
 		18402510241D18C4008DE504 /* SimuladorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorTests.swift; sourceTree = "<group>"; };
 		18402512241D1C79008DE504 /* FilaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilaTests.swift; sourceTree = "<group>"; };
 		1840251A241D856A008DE504 /* SimuladorIntegracao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorIntegracao.swift; sourceTree = "<group>"; };
-		1840251C241D90BE008DE504 /* FilaEncadeada.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilaEncadeada.swift; sourceTree = "<group>"; };
+		1840251C241D90BE008DE504 /* SimuladorEncadeado.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorEncadeado.swift; sourceTree = "<group>"; };
 		1840251E241D93DA008DE504 /* Estatistica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Estatistica.swift; sourceTree = "<group>"; };
 		18402520241D9461008DE504 /* Simulador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulador.swift; sourceTree = "<group>"; };
 		18FEC157241E484000A9C8E9 /* GerenciadorEstatisticas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GerenciadorEstatisticas.swift; sourceTree = "<group>"; };
@@ -116,7 +114,7 @@
 				18FEC154241E47E500A9C8E9 /* Support */,
 				18FEC156241E482800A9C8E9 /* Estatistica */,
 				18FEC15A241E48EE00A9C8E9 /* Models */,
-				18FEC159241E48C300A9C8E9 /* Fila */,
+				18FEC159241E48C300A9C8E9 /* Simuladores */,
 				184024FC241CEE0F008DE504 /* CongruenteLinear.swift */,
 				18402502241CF8F0008DE504 /* Escalonador.swift */,
 				1840250C241D155B008DE504 /* Fila.swift */,
@@ -157,15 +155,14 @@
 			path = Estatistica;
 			sourceTree = "<group>";
 		};
-		18FEC159241E48C300A9C8E9 /* Fila */ = {
+		18FEC159241E48C300A9C8E9 /* Simuladores */ = {
 			isa = PBXGroup;
 			children = (
-				1835E5B9241E799600526060 /* FilaEncadeadaPonderada.swift */,
-				1840251C241D90BE008DE504 /* FilaEncadeada.swift */,
-				1835E5BD241E983900526060 /* FilaGenerica.swift */,
-				1840250E241D189B008DE504 /* FilaSimples.swift */,
+				1835E5B9241E799600526060 /* SimuladorEncadeadoPonderado.swift */,
+				1840251C241D90BE008DE504 /* SimuladorEncadeado.swift */,
+				1840250E241D189B008DE504 /* SimuladorSimples.swift */,
 			);
-			path = Fila;
+			path = Simuladores;
 			sourceTree = "<group>";
 		};
 		18FEC15A241E48EE00A9C8E9 /* Models */ = {
@@ -296,15 +293,14 @@
 				18FEC15C241E49D100A9C8E9 /* Alias.swift in Sources */,
 				18402505241CFA16008DE504 /* Evento.swift in Sources */,
 				1840251F241D93DA008DE504 /* Estatistica.swift in Sources */,
-				1835E5BA241E799600526060 /* FilaEncadeadaPonderada.swift in Sources */,
-				1840250F241D189B008DE504 /* FilaSimples.swift in Sources */,
-				1835E5BE241E983900526060 /* FilaGenerica.swift in Sources */,
+				1835E5BA241E799600526060 /* SimuladorEncadeadoPonderado.swift in Sources */,
+				1840250F241D189B008DE504 /* SimuladorSimples.swift in Sources */,
 				184024FF241CEE0F008DE504 /* Configuracao.swift in Sources */,
 				18402503241CF8F0008DE504 /* Escalonador.swift in Sources */,
 				18402521241D9461008DE504 /* Simulador.swift in Sources */,
 				1835E5BC241E93D600526060 /* Agendamento.swift in Sources */,
 				18402509241D1181008DE504 /* Tempo.swift in Sources */,
-				1840251D241D90BE008DE504 /* FilaEncadeada.swift in Sources */,
+				1840251D241D90BE008DE504 /* SimuladorEncadeado.swift in Sources */,
 				184024FE241CEE0F008DE504 /* CongruenteLinear.swift in Sources */,
 				18402507241D0E75008DE504 /* Kendall.swift in Sources */,
 			);

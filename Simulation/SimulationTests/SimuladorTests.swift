@@ -226,14 +226,12 @@ class SimuladorTests: XCTestCase {
     }
     
     class SimuladorDummy: Simulador {
-        var random: CongruenteLinear = .init()
-        let escalonador: Escalonador
         
         init(escalonador: Escalonador) {
-            self.escalonador = escalonador
+            super.init(agendamentos: [], random: .init(), escalonador: escalonador)
         }
         
-        func simular() -> [Estatistica] {
+        override func simular() -> [Estatistica] {
             []
         }
     }

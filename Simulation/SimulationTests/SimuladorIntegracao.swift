@@ -22,7 +22,7 @@ class SimuladorIntegracao: XCTestCase {
             kendall: Kendall(c: 2, k: 4, n: 25),
             random: random)
         
-        let sut = FilaSimples(fila: fila, random: random)
+        let sut = SimuladorSimples(fila: fila, random: random)
         
         let estatisticas = sut.simular()
         
@@ -55,7 +55,7 @@ class SimuladorIntegracao: XCTestCase {
             kendall: Kendall(c: 2, k: 4, n: 0),
             random: random)
         
-        let sut = FilaEncadeada(
+        let sut = SimuladorEncadeado(
             filaDeEntrada: filaDeEntrada,
             filaDeSaida: filaDeSaida,
             random: random)
@@ -91,7 +91,7 @@ class SimuladorIntegracao: XCTestCase {
             kendall: Kendall(c: 2, k: 4, n: 0),
             random: random)
         
-        let sut = FilaEncadeadaPonderada(
+        let sut = SimuladorEncadeadoPonderado(
             filaDeEntrada: filaDeEntrada,
             filaDeSaida: filaDeSaida,
             random: random,

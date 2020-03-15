@@ -1,40 +1,37 @@
 
 import Foundation
 
-public protocol Simulador: class {
-    var escalonador: Escalonador { get }
-    var random: CongruenteLinear { get }
+public class Simulador {
     
-    func simular() -> [Estatistica]
+    public let escalonador: Escalonador
+    public let random: CongruenteLinear
     
-    /// gera os eventos de chegada no escalonador
-    func gerarEventoChegada(_ fila: Fila)
+    let agendamentos: [Agendamento]
     
-    /// gera os eventos de saida no escalonador
-    func gerarEventoSaida(_ fila: Fila)
+    public init(agendamentos: [Agendamento],
+                random: CongruenteLinear,
+                escalonador: Escalonador = Escalonador()) {
+        self.agendamentos = agendamentos
+        self.random = random
+        self.escalonador = escalonador
+    }
     
-    /// gera os eventos de saida no escalonador
-    func gerarEventoTransicao(filaDeEntrada: Fila, filaDeSaida: Fila)
-    
-    /// recebe um evento, executa a ação dele e caso seja um evento de chegada, agenda uma prox chegada
-    func processarEvento(_ evento: Evento)
-    
-    /// configura a saida da fila
-    func configurarAgendamentoDeSaida(_ fila: Fila)
-    
-    /// configura a saida da fila
-    func configurarAgendamentoDeTransicao(filaDeEntrada: Fila, filaDeSaida: Fila, saida: Double)
-    
-    /// roda a simulacao sem interrupcoes
-    func rodarSimulacaoCompleta()
-    
-    func imprimir(estatisticas: [Estatistica])
+    public func simular() -> [Estatistica] {
+        
+        configurar(agendamentos: agendamentos)
+        
+        // roda a simulacao
+        rodarSimulacaoCompleta()
+        
+        return agendamentos.flatMap { $0.estatisticas }
+    }
 }
 
 public extension Simulador {
     
     // MARK: Eventos
     
+    /// gera os eventos de chegada no escalonador
     func gerarEventoChegada(_ fila: Fila) {
         let evento = Evento(tipo: .chegada,
                             tempo: fila.proximaChegada,
@@ -43,6 +40,7 @@ public extension Simulador {
         escalonador.adicionar(evento)
     }
     
+    /// gera os eventos de saida no escalonador
     func gerarEventoSaida(_ fila: Fila) {
         let evento = Evento(tipo: .saida,
                             tempo: fila.proximaSaida,
@@ -51,6 +49,7 @@ public extension Simulador {
         escalonador.adicionar(evento)
     }
     
+    /// gera os eventos de transicao de uma fila para outra no escalonador
     func gerarEventoTransicao(filaDeEntrada: Fila, filaDeSaida: Fila) {
         let evento = Evento(tipo: .transicao,
                             tempo: filaDeEntrada.proximaSaida,
@@ -61,6 +60,7 @@ public extension Simulador {
         escalonador.adicionar(evento)
     }
     
+    /// recebe um evento, executa a ação dele e caso seja um evento de chegada, agenda uma prox chegada
     func processarEvento(_ evento: Evento) {
         evento.acao(escalonador.tempo)
         if evento.tipo == .chegada, evento.fila.temProximoEventoDeChegada {
@@ -70,6 +70,7 @@ public extension Simulador {
     
     // MARK: Configuracao
     
+    /// configura a saida da fila
     func configurarAgendamentoDeSaida(_ fila: Fila) {
         fila.agendarSaida = { [weak self] in
             if let self = self {
@@ -78,7 +79,8 @@ public extension Simulador {
         }
     }
     
-    func configurarAgendamentoDeTransicao(filaDeEntrada: Fila, filaDeSaida: Fila, saida: Double) {
+    /// configura a transicao de uma fila para outra
+    func configurarAgendamentoDeTransicao(filaDeEntrada: Fila, filaDeSaida: Fila, saida: Double = 0) {
         filaDeEntrada.agendarSaida = { [weak self] in
             if let self = self {
                 if self.random.uniformizado < saida {
@@ -92,14 +94,9 @@ public extension Simulador {
         }
     }
     
-    func configurarAgendamentoDeTransicao(filaDeEntrada: Fila, filaDeSaida: Fila) {
-        configurarAgendamentoDeTransicao(filaDeEntrada: filaDeEntrada,
-                                         filaDeSaida: filaDeSaida,
-                                         saida: 0)
-    }
-    
     // MARK: Ação global
     
+    /// roda a simulacao sem interrupcoes
     func rodarSimulacaoCompleta() {
         while let evento = escalonador.proximo() {
             processarEvento(evento)
