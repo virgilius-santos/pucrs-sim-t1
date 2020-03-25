@@ -35,10 +35,15 @@ class GerenciadorEstatisticas {
     /// o tempo é incrementado no indice de acordo com a quantidade de pessoal na fila
     /// p.ex. se a fila esta vazia, o arrray na posicao 0 terá o tempo incrementado
     /// p.ex. se tem uma pessoa na fila esta vazia, o arrray na posicao 1 terá o tempo incrementado
-    func updateEstatisticas(evt: Evento.Tipo, tempo: Double, quantDaFila: Int, perdas: Int) {
+    func updateEstatisticas(evt: Evento.Tipo,
+                            tempo: Double,
+                            quantAnteriorDaFila: Int,
+                            quantDaFila: Int,
+                            perdas: Int) {
+        
         var contatores = estatisticaAtual.contatores
-        let index: Int = buscarIndexContadorAtual(quantDaFila: quantDaFila)
-        contatores[index] = (contatores[index] ?? 0) + (tempo - estatisticaAtual.tempo)
+        let index: Int = quantAnteriorDaFila
+        contatores[index] = (contatores[quantAnteriorDaFila] ?? 0) + (tempo - estatisticaAtual.tempo)
         estatisticaAtual = Estatistica(
             filaID: id,
             quantDaFila: quantDaFila,

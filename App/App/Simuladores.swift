@@ -2,18 +2,18 @@ import Foundation
 import Simulation
 
 func FilaSimples(
+    valoresFixos: [Double] = [],
     taxaEntrada: Tempo,
     taxaSaida: Tempo,
     kendall: Kendall
 ) {
     
-    let random = CongruenteLinear()
+    let random = CongruenteLinear(maxIteracoes: kendall.n, valoresFixos: valoresFixos)
 
     let fila = Fila(
         taxaEntrada: taxaEntrada,
         taxaSaida: taxaSaida,
-        kendall: kendall,
-        random: random)
+        kendall: kendall)
 
     let sut = SimuladorSimples(fila: fila, random: random)
 
@@ -30,19 +30,17 @@ func FilaEncadeada(
     kendallFila2: Kendall
 ) {
     
-    let random = CongruenteLinear()
+    let random = CongruenteLinear(maxIteracoes: kendallFila1.n)
 
     let filaDeEntrada = Fila(
         taxaEntrada: taxaEntradaFila1,
         taxaSaida: taxaSaidaFila1,
-        kendall: kendallFila1,
-        random: random)
+        kendall: kendallFila1)
 
     let filaDeSaida = Fila(
         taxaEntrada: taxaEntradaFila2,
         taxaSaida: taxaSaidaFila2,
-        kendall: kendallFila2,
-        random: random)
+        kendall: kendallFila2)
 
     let sut = SimuladorEncadeado(
         filaDeEntrada: filaDeEntrada,

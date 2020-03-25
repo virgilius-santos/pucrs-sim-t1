@@ -9,8 +9,7 @@ class EscalonadorTests: XCTestCase {
     let fila = Fila(
         taxaEntrada: Tempo(inicio: 1, fim: 2),
         taxaSaida: Tempo(inicio: 2, fim: 4),
-        kendall: Kendall(c: 2, k: 4, n: 25),
-        random: .init())
+        kendall: Kendall(c: 2, k: 4, n: 25))
     
     func testQueue() {
         // given: inicializado
@@ -81,5 +80,16 @@ class EscalonadorTests: XCTestCase {
         XCTAssertEqual(sut.proximo()!.tempo, 1)
         XCTAssertEqual(sut.proximo()!.tempo, 2)
         XCTAssertEqual(sut.proximo()!.tempo, 5)
+    }
+    
+    class CongruenteLinearMock: CongruenteLinear {
+        
+        init() {
+            super.init(maxIteracoes: 20)
+        }
+        
+        override func uniformizado() -> Double? {
+            0.42
+        }
     }
 }

@@ -23,9 +23,13 @@ public class Simulador {
         // roda a simulacao
         rodarSimulacaoCompleta()
         
-        return configDeEventos
-            .flatMap { $0.filas }
+        let filas: Set<Fila> = Set<Fila>(configDeEventos
+            .flatMap { $0.filas })
+        
+        let estatisticas: [Estatistica] = filas
             .flatMap { $0.dados.estatisticas }
+        
+        return estatisticas
     }
 }
 
@@ -35,8 +39,13 @@ public extension Simulador {
     
     /// gera os eventos de chegada no escalonador
     func gerarEventoChegada(_ fila: Fila) {
+        
+        guard let randomUniformizado = self.random.uniformizado() else { return }
+        
+        let tempo: Double = fila.proximaChegada(randomUniformizado: randomUniformizado)
+        
         let evento = Evento(tipo: .chegada,
-                            tempo: fila.proximaChegada,
+                            tempo: tempo,
                             acao: { tempo in fila.chegada(tempo: tempo) },
                             fila: fila)
         escalonador.adicionar(evento)
@@ -44,8 +53,13 @@ public extension Simulador {
     
     /// gera os eventos de saida no escalonador
     func gerarEventoSaida(_ fila: Fila) {
+        
+        guard let randomUniformizado = self.random.uniformizado() else { return }
+        
+        let tempo: Double = fila.proximaSaida(randomUniformizado: randomUniformizado)
+        
         let evento = Evento(tipo: .saida,
-                            tempo: fila.proximaSaida,
+                            tempo: tempo,
                             acao: { tempo in fila.saida(tempo: tempo) },
                             fila: fila)
         escalonador.adicionar(evento)
@@ -53,8 +67,13 @@ public extension Simulador {
     
     /// gera os eventos de transicao de uma fila para outra no escalonador
     func gerarEventoTransicao(filaDeOrigem: Fila, filaDeDestino: Fila) {
+        
+        guard let randomUniformizado = self.random.uniformizado() else { return }
+        
+        let tempo: Double = filaDeOrigem.proximaSaida(randomUniformizado: randomUniformizado)
+        
         let evento = Evento(tipo: .transicao,
-                            tempo: filaDeOrigem.proximaSaida,
+                            tempo: tempo,
                             acao: { tempo in
                                 filaDeOrigem.saida(tempo: tempo)
                                 filaDeDestino.chegada(tempo: tempo) },
@@ -65,7 +84,7 @@ public extension Simulador {
     /// recebe um evento, executa a ação dele e caso seja um evento de chegada, agenda uma prox chegada
     func processarEvento(_ evento: Evento) {
         evento.acao(escalonador.tempo)
-        if evento.tipo == .chegada, evento.fila.temProximoEventoDeChegada {
+        if evento.tipo == .chegada {
             gerarEventoChegada(evento.fila)
         }
     }
@@ -111,10 +130,10 @@ public extension Simulador {
         taxaDeRetorno = max(taxaDeRetorno, 0)
         taxaDeRetorno = (1 - taxaDeSaida) * taxaDeRetorno + taxaDeSaida
         
-        let probabilidade = self.random.uniformizado
-        
         filaDeOrigem.agendarSaida = { [weak self] in
-            if let self = self {
+            if let self = self,
+                let probabilidade = self.random.uniformizado() {
+                                
                 if probabilidade < taxaDeSaida {
                     self.gerarEventoSaida(filaDeOrigem)
                 }
@@ -134,7 +153,7 @@ public extension Simulador {
     
     /// roda a simulacao sem interrupcoes
     func rodarSimulacaoCompleta() {
-        while let evento = escalonador.proximo() {
+        while let evento = escalonador.proximo(), random.temProxima {
             processarEvento(evento)
         }
     }

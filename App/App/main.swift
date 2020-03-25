@@ -19,14 +19,15 @@ print("simulador escolhido: ", tipoSimulador)
 switch tipoSimulador {
     case .simples:
         FilaSimples(
+            valoresFixos: [1, 0.3276, 0.8851, 0.1643, 0.5542, 0.6813, 0.7221, 0.9881],
             taxaEntrada: Tempo(inicio: 1, fim: 2),
-            taxaSaida: Tempo(inicio: 2, fim: 4),
+            taxaSaida: Tempo(inicio: 3, fim: 6),
             kendall: Kendall(
                 a: "G",
                 b: "G",
                 c: 1,
-                k: 10,
-                n: 10,
+                k: 3,
+                n: 8,
                 d: 10)
     )
     

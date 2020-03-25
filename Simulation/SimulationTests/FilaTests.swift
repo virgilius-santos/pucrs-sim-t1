@@ -11,8 +11,7 @@ class FilaTests: XCTestCase {
         // given: dado que foi inicializado
         sut = .init(taxaEntrada: Tempo(inicio: 1, fim: 2),
                     taxaSaida: Tempo(inicio: 3, fim: 6),
-                    kendall: Kendall(c: 1, k: 2),
-                    random: CongruenteLinear())
+                    kendall: Kendall(c: 1, k: 2))
         
         // then: o tamanho deve estar zerado
         XCTAssertEqual(sut.quantDaFila, 0)
@@ -26,8 +25,7 @@ class FilaTests: XCTestCase {
         // given: dado que foi inicializado
         sut = .init(taxaEntrada: Tempo(inicio: 1, fim: 2),
                     taxaSaida: Tempo(inicio: 3, fim: 6),
-                    kendall: Kendall(c: 1, k: 2),
-                    random: CongruenteLinear())
+                    kendall: Kendall(c: 1, k: 2))
         
         // when: uma chegada eh registrada
         sut.chegada(tempo: .zero)
@@ -47,8 +45,7 @@ class FilaTests: XCTestCase {
         // given: dado que foi inicializado
         sut = .init(taxaEntrada: Tempo(inicio: 1, fim: 2),
                     taxaSaida: Tempo(inicio: 3, fim: 6),
-                    kendall: Kendall(c: 1, k: 1),
-                    random: CongruenteLinear())
+                    kendall: Kendall(c: 1, k: 1))
         
         // then: a perda deve estar zerada
         XCTAssertEqual(sut.perdas, 0)
@@ -71,8 +68,7 @@ class FilaTests: XCTestCase {
         // given: dado que foi inicializado
         sut = .init(taxaEntrada: Tempo(inicio: 1, fim: 2),
                     taxaSaida: Tempo(inicio: 3, fim: 6),
-                    kendall: Kendall(c: 1, k: 2),
-                    random: CongruenteLinear())
+                    kendall: Kendall(c: 1, k: 2))
         
         var exp = expectation(description: "agendarSaida")
         var tempoDeSaida: Bool?
@@ -117,8 +113,7 @@ class FilaTests: XCTestCase {
         // given: dado que foi inicializado
         sut = .init(taxaEntrada: Tempo(inicio: 1, fim: 2),
                     taxaSaida: Tempo(inicio: 3, fim: 6),
-                    kendall: Kendall(c: 1, k: 2),
-                    random: CongruenteLinear())
+                    kendall: Kendall(c: 1, k: 2))
         
         sut.chegada(tempo: .zero)
         
@@ -147,8 +142,7 @@ class FilaTests: XCTestCase {
         // given: dado que foi inicializado
         sut = .init(taxaEntrada: Tempo(inicio: 1, fim: 2),
                     taxaSaida: Tempo(inicio: 3, fim: 6),
-                    kendall: Kendall(c: 1, k: 2),
-                    random: CongruenteLinear())
+                    kendall: Kendall(c: 1, k: 2))
         
         let exp = expectation(description: "agendarSaida")
         exp.isInverted = true
@@ -175,8 +169,7 @@ class FilaTests: XCTestCase {
         // given: dado que foi inicializado
         sut = .init(taxaEntrada: Tempo(inicio: 1, fim: 2),
                     taxaSaida: Tempo(inicio: 3, fim: 6),
-                    kendall: Kendall(c: 1),
-                    random: CongruenteLinear())
+                    kendall: Kendall(c: 1))
         
         // when: a saida eh chamada com a fila vazia
         sut.saida(tempo: .zero)

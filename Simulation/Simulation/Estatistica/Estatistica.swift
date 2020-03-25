@@ -11,13 +11,18 @@ public struct Estatistica: CustomStringConvertible {
     let contatores: [Int : Double]
     
     public var description: String {
+        let conts: [Double] = contatores
+            .lazy
+            .sorted(by: { $0.key < $1.key })
+            .map { ($0.value / tempo) * 100.0 }
+        
         var str = String()
         str += "id: \(filaID.format())"
         str += "evt: \(evento.description.format(10))"
         str += "qtd: \(quantDaFila.format())"
         str += "perdas: \(perdas.format())"
         str += "t: \(tempo.format().format(7))"
-        str += "conts: \(contatores.values.map({ ($0*100.0/tempo).format() }))\n*****"
+        str += "conts: \(conts.map({ $0.format() }))\n*****"
         return str
     }
 }

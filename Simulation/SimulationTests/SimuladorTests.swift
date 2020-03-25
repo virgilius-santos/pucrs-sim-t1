@@ -7,16 +7,17 @@ class SimuladorTests: XCTestCase {
     var sut: Simulador!
     
     func testConfigurarAgendamentoDeSaida() {
-        let random = CongruenteLinear()
         
         let fila = Fila(
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
-            kendall: Kendall(c: 2, k: 4, n: 25),
-            random: random)
+            kendall: Kendall(c: 2, k: 4, n: 25))
         
         let escalonadorSpy = EscalonadorSpy()
-        sut = SimuladorDummy(escalonador: escalonadorSpy)
+        
+        sut = Simulador(configDeEventos: [],
+                        random: CongruenteLinearMock(),
+                        escalonador: escalonadorSpy)
         
         sut.configurarAgendamentoDeSaida(fila)
         
@@ -28,22 +29,22 @@ class SimuladorTests: XCTestCase {
     }
     
     func testConfigurarAgendamentoDeTransicao() {
-        let random = CongruenteLinear()
         
         let fila1Spy = FilaSpy(
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
-            kendall: Kendall(c: 2, k: 4, n: 25),
-            random: random)
+            kendall: Kendall(c: 2, k: 4, n: 25))
         
         let fila2Spy = FilaSpy(
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
-            kendall: Kendall(c: 2, k: 4, n: 0),
-            random: random)
+            kendall: Kendall(c: 2, k: 4, n: 0))
         
         let escalonadorSpy = EscalonadorSpy()
-        sut = SimuladorDummy(escalonador: escalonadorSpy)
+        
+        sut = Simulador(configDeEventos: [],
+                        random: CongruenteLinearMock(),
+                        escalonador: escalonadorSpy)
         
         sut.configurarAgendamentoDeTransicao(
             filaDeOrigem: fila1Spy,
@@ -64,22 +65,22 @@ class SimuladorTests: XCTestCase {
     }
     
     func testConfigurarAgendamentoDeTransicaoComSaida() {
-        let random = CongruenteLinear()
         
         let fila1Spy = FilaSpy(
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
-            kendall: Kendall(c: 2, k: 4, n: 25),
-            random: random)
+            kendall: Kendall(c: 2, k: 4, n: 25))
         
         let fila2Spy = FilaSpy(
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
-            kendall: Kendall(c: 2, k: 4, n: 0),
-            random: random)
+            kendall: Kendall(c: 2, k: 4, n: 0))
         
         let escalonadorSpy = EscalonadorSpy()
-        sut = SimuladorDummy(escalonador: escalonadorSpy)
+        
+        sut = Simulador(configDeEventos: [],
+                        random: CongruenteLinearMock(),
+                        escalonador: escalonadorSpy)
         
         sut.configurarAgendamentoDeTransicao(
             filaDeOrigem: fila1Spy,
@@ -101,22 +102,22 @@ class SimuladorTests: XCTestCase {
     }
     
     func testConfigurarAgendamentoDeTransicaoComRetorno() {
-        let random = CongruenteLinear()
         
         let fila1Spy = FilaSpy(
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
-            kendall: Kendall(c: 2, k: 4, n: 25),
-            random: random)
+            kendall: Kendall(c: 2, k: 4, n: 25))
         
         let fila2Spy = FilaSpy(
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
-            kendall: Kendall(c: 2, k: 4, n: 0),
-            random: random)
+            kendall: Kendall(c: 2, k: 4, n: 0))
         
         let escalonadorSpy = EscalonadorSpy()
-        sut = SimuladorDummy(escalonador: escalonadorSpy)
+        
+        sut = Simulador(configDeEventos: [],
+                        random: CongruenteLinearMock(),
+                        escalonador: escalonadorSpy)
         
         sut.configurarAgendamentoDeTransicao(
             filaDeOrigem: fila1Spy,
@@ -138,16 +139,16 @@ class SimuladorTests: XCTestCase {
     }
     
     func testGerarEventoSaida() {
-        let random = CongruenteLinear()
         
         let filaSpy = FilaSpy(
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
-            kendall: Kendall(c: 2, k: 4, n: 25),
-            random: random)
+            kendall: Kendall(c: 2, k: 4, n: 25))
         
         let escalonadorSpy = EscalonadorSpy()
-        sut = SimuladorDummy(escalonador: escalonadorSpy)
+        sut = Simulador(configDeEventos: [],
+                        random: CongruenteLinearMock(),
+                        escalonador: escalonadorSpy)
         
         sut.gerarEventoSaida(filaSpy)
         
@@ -164,16 +165,17 @@ class SimuladorTests: XCTestCase {
     }
     
     func testGerarEventoChegada() {
-        let random = CongruenteLinear()
         
         let filaSpy = FilaSpy(
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
-            kendall: Kendall(c: 2, k: 4, n: 25),
-            random: random)
+            kendall: Kendall(c: 2, k: 4, n: 25))
         
         let escalonadorSpy = EscalonadorSpy()
-        sut = SimuladorDummy(escalonador: escalonadorSpy)
+        
+        sut = Simulador(configDeEventos: [],
+                        random: CongruenteLinearMock(),
+                        escalonador: escalonadorSpy)
         
         sut.gerarEventoChegada(filaSpy)
         
@@ -189,22 +191,22 @@ class SimuladorTests: XCTestCase {
     }
     
     func testGerarEventoTransicao() {
-        let random = CongruenteLinear()
         
         let fila1Spy = FilaSpy(
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
-            kendall: Kendall(c: 2, k: 4, n: 25),
-            random: random)
+            kendall: Kendall(c: 2, k: 4, n: 25))
         
         let fila2Spy = FilaSpy(
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
-            kendall: Kendall(c: 2, k: 4, n: 0),
-            random: random)
+            kendall: Kendall(c: 2, k: 4, n: 0))
         
         let escalonadorSpy = EscalonadorSpy()
-        sut = SimuladorDummy(escalonador: escalonadorSpy)
+        
+        sut = Simulador(configDeEventos: [],
+                        random: CongruenteLinearMock(),
+                        escalonador: escalonadorSpy)
         
         sut.gerarEventoTransicao(filaDeOrigem: fila1Spy,
                                  filaDeDestino: fila2Spy)
@@ -222,17 +224,17 @@ class SimuladorTests: XCTestCase {
     }
     
     func testProcessarEventoComUmaChegada() {
-        
-        let random = CongruenteLinear()
-        
+                
         let filaSpy = FilaSpy(
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
-            kendall: Kendall(c: 2, k: 4, n: 25),
-            random: random)
+            kendall: Kendall(c: 2, k: 4, n: 25))
         
         let escalonadorSpy = EscalonadorSpy()
-        sut = SimuladorDummy(escalonador: escalonadorSpy)
+        
+        sut = Simulador(configDeEventos: [],
+                        random: CongruenteLinearMock(),
+                        escalonador: escalonadorSpy)
         
         var acaoSpy: Bool?
         
@@ -249,17 +251,17 @@ class SimuladorTests: XCTestCase {
     }
     
     func testProcessarEventoComUmaSaida() {
-      
-        let random = CongruenteLinear()
-        
+              
         let filaSpy = FilaSpy(
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
-            kendall: Kendall(c: 2, k: 4, n: 25),
-            random: random)
+            kendall: Kendall(c: 2, k: 4, n: 25))
         
         let escalonadorSpy = EscalonadorSpy()
-        sut = SimuladorDummy(escalonador: escalonadorSpy)
+        
+        sut = Simulador(configDeEventos: [],
+                        random: CongruenteLinearMock(),
+                        escalonador: escalonadorSpy)
         
         var acaoSpy: Bool?
         
@@ -272,17 +274,6 @@ class SimuladorTests: XCTestCase {
         
         XCTAssertEqual(acaoSpy, true)
         XCTAssertNil(escalonadorSpy.adicionarChamadoSpy)
-    }
-    
-    class SimuladorDummy: Simulador {
-        
-        init(escalonador: Escalonador) {
-            super.init(configDeEventos: [], random: .init(), escalonador: escalonador)
-        }
-        
-        override func simular() -> [Estatistica] {
-            []
-        }
     }
     
     class EscalonadorSpy: Escalonador {
@@ -298,13 +289,6 @@ class SimuladorTests: XCTestCase {
         
         var saidaTempoSpy: Double?
         var chegadaTempoSpy: Double?
-        override var proximaSaida: Double {
-            return 56
-        }
-        
-        override var proximaChegada: Double {
-            return 42
-        }
         
         override func saida(tempo: Double) {
             saidaTempoSpy = tempo
@@ -312,6 +296,25 @@ class SimuladorTests: XCTestCase {
         
         override func chegada(tempo: Double) {
             chegadaTempoSpy = tempo
+        }
+        
+        override func proximaChegada(randomUniformizado: Double) -> Double {
+            return 42
+        }
+        
+        override func proximaSaida(randomUniformizado: Double) -> Double {
+            return 56
+        }
+    }
+    
+    class CongruenteLinearMock: CongruenteLinear {
+        
+        init() {
+            super.init(maxIteracoes: 20)
+        }
+        
+        override func uniformizado() -> Double? {
+            0.42
         }
     }
 }

@@ -2,27 +2,52 @@
 import Foundation
 
 public class CongruenteLinear {
-
+    
+    var temProxima: Bool {
+        numeroIterecoes < maxIteracoes
+    }
+    
     /// retorna um valor aleatorio inteiro
-    var valor: UInt {
+    private var valor: UInt {
         let atual = _valor
         updateValues(valor: _valor)
         return atual
     }
     
-    /// retorna um valor aleatorio uniformizado
-    var uniformizado: Double {
+    private var _valor: UInt = .zero
+    
+    /// quantidade de randomicos usados
+    private var numeroIterecoes: Int = 0
+    
+    /// quantidade maxima de randomicos
+    private let maxIteracoes: Int
+    
+    /// valores aleatorios fornecidos arbitrariamente
+    private let valoresFixos: [Double]
+    
+    public init(maxIteracoes: Int, valoresFixos: [Double] = []) {
+        self.maxIteracoes = maxIteracoes
+        self.valoresFixos = valoresFixos
+        
+        let semente: UInt = Config.CongruenteLinear.semente
+        updateValues(valor: semente)
+    }
+    
+    /// retorna um valor aleatorio uniformizado se o numero de iterações for menor que o máximo informado
+    func uniformizado() -> Double? {
+        
+        guard temProxima else { return nil }
+        
+        numeroIterecoes += 1
+        
+        if numeroIterecoes - 1 < valoresFixos.count {
+            return valoresFixos[numeroIterecoes - 1]
+        }
+        
         let atual = _valor
         let M: UInt = Config.CongruenteLinear.M
         updateValues(valor: _valor)
         return atual.double() / M.double()
-    }
-    
-    private var _valor: UInt = .zero
-    
-    public init() {
-        let semente: UInt = Config.CongruenteLinear.semente
-        updateValues(valor: semente)
     }
     
     /// calcula o proximo pseudo aleatorio

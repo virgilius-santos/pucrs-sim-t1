@@ -11,7 +11,7 @@ public struct Kendall {
     /// capacidade da fila
     let k: Int
     ///  tamanho da população
-    let n: Int
+    public let n: Int
     /// política de atendimento
     let d: Int
     
