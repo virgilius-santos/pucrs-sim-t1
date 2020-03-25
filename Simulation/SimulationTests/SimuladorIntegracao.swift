@@ -102,5 +102,7 @@ class SimuladorIntegracao: XCTestCase {
         estatisticas.forEach { estatistica in
             XCTAssertEqual(estatistica.contatores.values.reduce(0, +), estatistica.tempo)
         }
+        
+        XCTAssertEqual(estatisticas.count, 20)
     }
 }
