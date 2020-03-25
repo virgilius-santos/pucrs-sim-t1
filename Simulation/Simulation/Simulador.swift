@@ -6,24 +6,26 @@ public class Simulador {
     public let escalonador: Escalonador
     public let random: CongruenteLinear
     
-    let agendamentos: [Agendamento]
+    let configDeEventos: [Config.Evento]
     
-    public init(agendamentos: [Agendamento],
+    public init(configDeEventos: [Config.Evento],
                 random: CongruenteLinear,
                 escalonador: Escalonador = Escalonador()) {
-        self.agendamentos = agendamentos
+        self.configDeEventos = configDeEventos
         self.random = random
         self.escalonador = escalonador
     }
     
     public func simular() -> [Estatistica] {
         
-        configurar(agendamentos: agendamentos)
+        configurar(configDeEventos: configDeEventos)
         
         // roda a simulacao
         rodarSimulacaoCompleta()
         
-        return agendamentos.flatMap { $0.estatisticas }
+        return configDeEventos
+            .flatMap { $0.filas }
+            .flatMap { $0.dados.estatisticas }
     }
 }
 
@@ -137,6 +139,7 @@ public extension Simulador {
         }
     }
     
+    /// imprime no prompt as estatisticas
     func imprimir(estatisticas: [Estatistica]) {
         print("--start--")
         estatisticas
@@ -144,5 +147,31 @@ public extension Simulador {
             .forEach { print($0) }
         print("--end--")
         print("--\n--")
+    }
+}
+
+extension Simulador {
+    
+    // MARK: Configuração
+    
+    /// recebe uma configuração de evento e chama os metodos configuração adequados
+    func configurar(configDeEventos: Config.Evento) {
+        switch configDeEventos {
+            case let .chegada(fila):
+                gerarEventoChegada(fila)
+            case let .transicao(filaDeOrigem, filaDeDestino):
+                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem, filaDeDestino: filaDeDestino)
+            case let .transicaoPonderada(filaDeOrigem, filaDeDestino, saida):
+                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem, filaDeDestino: filaDeDestino, saida: saida)
+            case let .transicaoPonderadaComRetorno(filaDeOrigem, filaDeDestino, saida, retorno):
+                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem, filaDeDestino: filaDeDestino, saida: saida, retorno: retorno)
+            case let .saida(fila):
+                configurarAgendamentoDeSaida(fila)
+        }
+    }
+    
+    /// recebe uma lista para configura o simulador
+    func configurar(configDeEventos: [Config.Evento]) {
+        configDeEventos.forEach { configurar(configDeEventos: $0) }
     }
 }

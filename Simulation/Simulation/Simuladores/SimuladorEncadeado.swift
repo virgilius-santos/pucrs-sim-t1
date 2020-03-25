@@ -13,7 +13,7 @@ public class SimuladorEncadeado {
     ) {
         
         simulador = Simulador(
-            agendamentos: [
+            configDeEventos: [
                 
                 // gera a primeira chegada no escalonador
                 .chegada(fila: filaDeEntrada),

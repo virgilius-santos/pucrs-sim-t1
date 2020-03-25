@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1835E5BA241E799600526060 /* SimuladorEncadeadoPonderado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835E5B9241E799600526060 /* SimuladorEncadeadoPonderado.swift */; };
-		1835E5BC241E93D600526060 /* Agendamento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835E5BB241E93D600526060 /* Agendamento.swift */; };
 		184024EC241CEDEA008DE504 /* Simulation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184024E2241CEDE9008DE504 /* Simulation.framework */; };
 		184024F1241CEDEA008DE504 /* CongruenteLinearTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184024F0241CEDEA008DE504 /* CongruenteLinearTests.swift */; };
 		184024F3241CEDEA008DE504 /* Simulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 184024E5241CEDE9008DE504 /* Simulation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -44,7 +43,6 @@
 
 /* Begin PBXFileReference section */
 		1835E5B9241E799600526060 /* SimuladorEncadeadoPonderado.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorEncadeadoPonderado.swift; sourceTree = "<group>"; };
-		1835E5BB241E93D600526060 /* Agendamento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Agendamento.swift; sourceTree = "<group>"; };
 		184024E2241CEDE9008DE504 /* Simulation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Simulation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		184024E5241CEDE9008DE504 /* Simulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Simulation.h; sourceTree = "<group>"; };
 		184024E6241CEDE9008DE504 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -168,7 +166,6 @@
 		18FEC15A241E48EE00A9C8E9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1835E5BB241E93D600526060 /* Agendamento.swift */,
 				18FEC15B241E49D100A9C8E9 /* Alias.swift */,
 				184024FD241CEE0F008DE504 /* Configuracao.swift */,
 				18402504241CFA16008DE504 /* Evento.swift */,
@@ -298,7 +295,6 @@
 				184024FF241CEE0F008DE504 /* Configuracao.swift in Sources */,
 				18402503241CF8F0008DE504 /* Escalonador.swift in Sources */,
 				18402521241D9461008DE504 /* Simulador.swift in Sources */,
-				1835E5BC241E93D600526060 /* Agendamento.swift in Sources */,
 				18402509241D1181008DE504 /* Tempo.swift in Sources */,
 				1840251D241D90BE008DE504 /* SimuladorEncadeado.swift in Sources */,
 				184024FE241CEE0F008DE504 /* CongruenteLinear.swift in Sources */,

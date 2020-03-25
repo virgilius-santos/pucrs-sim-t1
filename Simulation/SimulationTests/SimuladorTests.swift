@@ -277,7 +277,7 @@ class SimuladorTests: XCTestCase {
     class SimuladorDummy: Simulador {
         
         init(escalonador: Escalonador) {
-            super.init(agendamentos: [], random: .init(), escalonador: escalonador)
+            super.init(configDeEventos: [], random: .init(), escalonador: escalonador)
         }
         
         override func simular() -> [Estatistica] {
