@@ -52,10 +52,8 @@ public extension Simulador {
     }
     
     /// gera os eventos de saida no escalonador
-    func gerarEventoSaida(_ fila: Fila) {
-        
-        guard let randomUniformizado = self.random.uniformizado() else { return }
-        
+    func gerarEventoSaida(_ fila: Fila, randomUniformizado: Double) {
+                
         let tempo: Double = fila.proximaSaida(randomUniformizado: randomUniformizado)
         
         let evento = Evento(tipo: .saida,
@@ -66,10 +64,8 @@ public extension Simulador {
     }
     
     /// gera os eventos de transicao de uma fila para outra no escalonador
-    func gerarEventoTransicao(filaDeOrigem: Fila, filaDeDestino: Fila) {
-        
-        guard let randomUniformizado = self.random.uniformizado() else { return }
-        
+    func gerarEventoTransicao(filaDeOrigem: Fila, filaDeDestino: Fila, randomUniformizado: Double) {
+                
         let tempo: Double = filaDeOrigem.proximaSaida(randomUniformizado: randomUniformizado)
         
         let evento = Evento(tipo: .transicao,
@@ -94,8 +90,9 @@ public extension Simulador {
     /// configura a saida da fila
     func configurarAgendamentoDeSaida(_ fila: Fila) {
         fila.agendarSaida = { [weak self] in
-            if let self = self {
-                self.gerarEventoSaida(fila)
+            if let self = self,
+                let probabilidade = self.random.uniformizado() {
+                self.gerarEventoSaida(fila, randomUniformizado: probabilidade)
             }
         }
     }
@@ -135,15 +132,18 @@ public extension Simulador {
                 let probabilidade = self.random.uniformizado() {
                                 
                 if probabilidade < taxaDeSaida {
-                    self.gerarEventoSaida(filaDeOrigem)
+                    self.gerarEventoSaida(filaDeOrigem,
+                                          randomUniformizado: probabilidade)
                 }
                 else if probabilidade < taxaDeRetorno {
                     self.gerarEventoTransicao(filaDeOrigem: filaDeOrigem,
-                                              filaDeDestino: filaDeOrigem)
+                                              filaDeDestino: filaDeOrigem,
+                                              randomUniformizado: probabilidade)
                 }
                 else {
                     self.gerarEventoTransicao(filaDeOrigem: filaDeOrigem,
-                                              filaDeDestino: filaDeDestino)
+                                              filaDeDestino: filaDeDestino,
+                                              randomUniformizado: probabilidade)
                 }
             }
         }

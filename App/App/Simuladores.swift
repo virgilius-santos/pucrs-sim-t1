@@ -22,6 +22,7 @@ func FilaSimples(
 }
 
 func FilaEncadeada(
+    valoresFixos: [Double] = [],
     taxaEntradaFila1: Tempo,
     taxaSaidaFila1: Tempo,
     kendallFila1: Kendall,
@@ -30,7 +31,7 @@ func FilaEncadeada(
     kendallFila2: Kendall
 ) {
     
-    let random = CongruenteLinear(maxIteracoes: kendallFila1.n)
+    let random = CongruenteLinear(maxIteracoes: kendallFila1.n, valoresFixos: valoresFixos)
 
     let filaDeEntrada = Fila(
         taxaEntrada: taxaEntradaFila1,
