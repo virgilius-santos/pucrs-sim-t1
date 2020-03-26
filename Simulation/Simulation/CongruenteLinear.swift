@@ -3,7 +3,7 @@ import Foundation
 
 public class CongruenteLinear {
     
-    private var temProxima: Bool {
+    var temProxima: Bool {
         numeroIterecoes < maxIteracoes
     }
     

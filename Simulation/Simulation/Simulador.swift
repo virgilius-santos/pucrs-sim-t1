@@ -6,7 +6,7 @@ public class Simulador {
     public let escalonador: Escalonador
     public let random: CongruenteLinear
     
-    private let configDeEventos: [Config.Evento]
+    let configDeEventos: [Config.Evento]
     
     public init(configDeEventos: [Config.Evento],
                 random: CongruenteLinear,
@@ -19,7 +19,7 @@ public class Simulador {
     @discardableResult
     public func simular() -> [Estatistica] {
         
-        configurar(configDeEventos: configDeEventos)
+        configurar()
         
         // roda a simulacao
         rodarSimulacaoCompleta()
@@ -43,11 +43,26 @@ public class Simulador {
         print("--\n--")
     }
     
+    /// recebe uma lista para configura o simulador
+    func configurar() {
+        configDeEventos.forEach { configurar(configDeEvento: $0) }
+    }
+    
+    /// roda um step da simulacao
+    func rodarPassoDaSimulacao() -> Bool {
+        if
+            random.temProxima,
+            let evento = escalonador.proximo()
+        {
+            processarEvento(evento)
+            return true
+        }
+        return false
+    }
+    
     /// roda a simulacao sem interrupcoes
     private func rodarSimulacaoCompleta() {
-        while let evento = escalonador.proximo() {
-            processarEvento(evento)
-        }
+        while rodarPassoDaSimulacao() {}
     }
     
     /// recebe um evento, executa a ação dele e caso seja um evento de chegada, agenda uma prox chegada
@@ -107,15 +122,10 @@ extension Simulador {
     
     // MARK: Configuração
     
-    /// recebe uma lista para configura o simulador
-    private func configurar(configDeEventos: [Config.Evento]) {
-        configDeEventos.forEach { configurar(configDeEventos: $0) }
-    }
-    
     /// recebe uma configuração de evento e chama os metodos configuração adequados
-    private func configurar(configDeEventos: Config.Evento) {
+    private func configurar(configDeEvento: Config.Evento) {
         
-        switch configDeEventos {
+        switch configDeEvento {
             case let .chegada(fila):
                 gerarEventoChegada(fila)
             

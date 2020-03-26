@@ -14,12 +14,14 @@ class SimuladorIntegracao: XCTestCase {
 //        Config.CongruenteLinear.M
 //        Config.CongruenteLinear.semente
         
-        let random = CongruenteLinear(maxIteracoes: 25)
+        let kendall = Kendall(c: 2, k: 4, n: 25)
+        
+        let random = CongruenteLinear(maxIteracoes: kendall.n)
         
         let fila = Fila(
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
-            kendall: Kendall(c: 2, k: 4, n: 25))
+            kendall: kendall)
         
         let sut = SimuladorSimples(fila: fila, random: random)
         
@@ -29,7 +31,7 @@ class SimuladorIntegracao: XCTestCase {
             XCTAssertEqual(estatistica.contatores.values.reduce(0, +), estatistica.tempo)
         }
         
-        XCTAssertEqual(estatisticas.count, 26)
+        XCTAssertEqual(estatisticas.count, 23)
     }
     
     func testFilaEncadeada() {
@@ -42,15 +44,16 @@ class SimuladorIntegracao: XCTestCase {
         //        Config.CongruenteLinear.M
         //        Config.CongruenteLinear.semente
 
-        let random = CongruenteLinear(maxIteracoes: 26)
+        let kendall = Kendall(c: 2, k: 4, n: 25)
+        
+        let random = CongruenteLinear(maxIteracoes: kendall.n)
 
         let filaDeEntrada = Fila(
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
-            kendall: Kendall(c: 2, k: 4, n: 4))
+            kendall: kendall)
 
         let filaDeSaida = Fila(
-            taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
             kendall: Kendall(c: 2, k: 4, n: 0))
 
@@ -65,7 +68,7 @@ class SimuladorIntegracao: XCTestCase {
             XCTAssertEqual(estatistica.contatores.values.reduce(0, +), estatistica.tempo)
         }
         
-        XCTAssertEqual(estatisticas.count, 37)
+        XCTAssertEqual(estatisticas.count, 30)
     }
     
     func testFilaEncadeadaPonderada() {
@@ -78,15 +81,16 @@ class SimuladorIntegracao: XCTestCase {
         //        Config.CongruenteLinear.M
         //        Config.CongruenteLinear.semente
 
-        let random = CongruenteLinear(maxIteracoes: 20)
+        let kendall = Kendall(c: 2, k: 4, n: 25)
+        
+        let random = CongruenteLinear(maxIteracoes: kendall.n)
 
         let filaDeEntrada = Fila(
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
-            kendall: Kendall(c: 2, k: 4, n: 4))
+            kendall: kendall)
 
         let filaDeSaida = Fila(
-            taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
             kendall: Kendall(c: 2, k: 4, n: 0))
 
@@ -102,6 +106,6 @@ class SimuladorIntegracao: XCTestCase {
             XCTAssertEqual(estatistica.contatores.values.reduce(0, +), estatistica.tempo)
         }
 
-        XCTAssertEqual(estatisticas.count, 24)
+        XCTAssertEqual(estatisticas.count, 26)
     }
 }
