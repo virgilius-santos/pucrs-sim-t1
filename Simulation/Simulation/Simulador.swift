@@ -31,16 +31,42 @@ public class Simulador {
         
         return estatisticas
     }
+    
+    /// roda a simulacao sem interrupcoes
+    func rodarSimulacaoCompleta() {
+        while
+            let evento = escalonador.proximo(),
+            let randomUniformizado = self.random.uniformizado()
+        {
+            processarEvento(evento, randomUniformizado: randomUniformizado)
+        }
+    }
+    
+    /// recebe um evento, executa a ação dele e caso seja um evento de chegada, agenda uma prox chegada
+    func processarEvento(_ evento: Evento, randomUniformizado: Double) {
+        evento.acao(escalonador.tempo)
+        if evento.tipo == .chegada {
+            gerarEventoChegada(evento.fila, randomUniformizado: randomUniformizado)
+        }
+    }
+    
+    /// imprime no prompt as estatisticas
+    func imprimir(estatisticas: [Estatistica]) {
+        print("--start--")
+        estatisticas
+            .sorted(by: { $0.tempo < $1.tempo })
+            .forEach { print($0) }
+        print("--end--")
+        print("--\n--")
+    }
 }
 
-public extension Simulador {
+extension Simulador {
     
-    // MARK: Eventos
+    // MARK: Gerar Eventos
     
     /// gera os eventos de chegada no escalonador
-    func gerarEventoChegada(_ fila: Fila) {
-        
-        guard let randomUniformizado = self.random.uniformizado() else { return }
+    func gerarEventoChegada(_ fila: Fila, randomUniformizado: Double) {
         
         let tempo: Double = fila.proximaChegada(randomUniformizado: randomUniformizado)
         
@@ -76,23 +102,52 @@ public extension Simulador {
                             fila: filaDeOrigem)
         escalonador.adicionar(evento)
     }
+}
+
+extension Simulador {
     
-    /// recebe um evento, executa a ação dele e caso seja um evento de chegada, agenda uma prox chegada
-    func processarEvento(_ evento: Evento) {
-        evento.acao(escalonador.tempo)
-        if evento.tipo == .chegada {
-            gerarEventoChegada(evento.fila)
+    // MARK: Configuração
+    
+    /// recebe uma lista para configura o simulador
+    func configurar(configDeEventos: [Config.Evento]) {
+        configDeEventos.forEach { configurar(configDeEventos: $0) }
+    }
+    
+    /// recebe uma configuração de evento e chama os metodos configuração adequados
+    func configurar(configDeEventos: Config.Evento) {
+        guard let randomUniformizado = self.random.uniformizado() else { return }
+        switch configDeEventos {
+            case let .chegada(fila):
+                gerarEventoChegada(fila, randomUniformizado: randomUniformizado)
+            
+            case let .transicao(filaDeOrigem, filaDeDestino):
+                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem,
+                                                 filaDeDestino: filaDeDestino,
+                                                 randomUniformizado: randomUniformizado)
+            
+            case let .transicaoPonderada(filaDeOrigem, filaDeDestino, saida):
+                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem,
+                                                 filaDeDestino: filaDeDestino,
+                                                 saida: saida,
+                                                 randomUniformizado: randomUniformizado)
+            
+            case let .transicaoPonderadaComRetorno(filaDeOrigem, filaDeDestino, saida, retorno):
+                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem,
+                                                 filaDeDestino: filaDeDestino,
+                                                 saida: saida,
+                                                 retorno: retorno,
+                                                 randomUniformizado: randomUniformizado)
+            
+            case let .saida(fila):
+                configurarAgendamentoDeSaida(fila, randomUniformizado: randomUniformizado)
         }
     }
     
-    // MARK: Configuracao
-    
     /// configura a saida da fila
-    func configurarAgendamentoDeSaida(_ fila: Fila) {
+    func configurarAgendamentoDeSaida(_ fila: Fila, randomUniformizado: Double) {
         fila.agendarSaida = { [weak self] in
-            if let self = self,
-                let probabilidade = self.random.uniformizado() {
-                self.gerarEventoSaida(fila, randomUniformizado: probabilidade)
+            if let self = self {
+                self.gerarEventoSaida(fila, randomUniformizado: randomUniformizado)
             }
         }
     }
@@ -117,7 +172,8 @@ public extension Simulador {
     func configurarAgendamentoDeTransicao(filaDeOrigem: Fila,
                                           filaDeDestino: Fila,
                                           saida: Double = 0,
-                                          retorno: Double = 0) {
+                                          retorno: Double = 0,
+                                          randomUniformizado: Double) {
         var taxaDeSaida: Double = saida
         taxaDeSaida = min(taxaDeSaida, 1)
         taxaDeSaida = max(taxaDeSaida, 0)
@@ -128,69 +184,23 @@ public extension Simulador {
         taxaDeRetorno = (1 - taxaDeSaida) * taxaDeRetorno + taxaDeSaida
         
         filaDeOrigem.agendarSaida = { [weak self] in
-            if let self = self,
-                let probabilidade = self.random.uniformizado() {
-                                
-                if probabilidade < taxaDeSaida {
+            if let self = self {
+                
+                if randomUniformizado < taxaDeSaida {
                     self.gerarEventoSaida(filaDeOrigem,
-                                          randomUniformizado: probabilidade)
+                                          randomUniformizado: randomUniformizado)
                 }
-                else if probabilidade < taxaDeRetorno {
+                else if randomUniformizado < taxaDeRetorno {
                     self.gerarEventoTransicao(filaDeOrigem: filaDeOrigem,
                                               filaDeDestino: filaDeOrigem,
-                                              randomUniformizado: probabilidade)
+                                              randomUniformizado: randomUniformizado)
                 }
                 else {
                     self.gerarEventoTransicao(filaDeOrigem: filaDeOrigem,
                                               filaDeDestino: filaDeDestino,
-                                              randomUniformizado: probabilidade)
+                                              randomUniformizado: randomUniformizado)
                 }
             }
         }
-    }
-    
-    // MARK: Ação global
-    
-    /// roda a simulacao sem interrupcoes
-    func rodarSimulacaoCompleta() {
-        while let evento = escalonador.proximo(), random.temProxima {
-            processarEvento(evento)
-        }
-    }
-    
-    /// imprime no prompt as estatisticas
-    func imprimir(estatisticas: [Estatistica]) {
-        print("--start--")
-        estatisticas
-            .sorted(by: { $0.tempo < $1.tempo })
-            .forEach { print($0) }
-        print("--end--")
-        print("--\n--")
-    }
-}
-
-extension Simulador {
-    
-    // MARK: Configuração
-    
-    /// recebe uma configuração de evento e chama os metodos configuração adequados
-    func configurar(configDeEventos: Config.Evento) {
-        switch configDeEventos {
-            case let .chegada(fila):
-                gerarEventoChegada(fila)
-            case let .transicao(filaDeOrigem, filaDeDestino):
-                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem, filaDeDestino: filaDeDestino)
-            case let .transicaoPonderada(filaDeOrigem, filaDeDestino, saida):
-                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem, filaDeDestino: filaDeDestino, saida: saida)
-            case let .transicaoPonderadaComRetorno(filaDeOrigem, filaDeDestino, saida, retorno):
-                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem, filaDeDestino: filaDeDestino, saida: saida, retorno: retorno)
-            case let .saida(fila):
-                configurarAgendamentoDeSaida(fila)
-        }
-    }
-    
-    /// recebe uma lista para configura o simulador
-    func configurar(configDeEventos: [Config.Evento]) {
-        configDeEventos.forEach { configurar(configDeEventos: $0) }
     }
 }

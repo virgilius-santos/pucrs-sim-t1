@@ -27,6 +27,7 @@
 		1840251D241D90BE008DE504 /* SimuladorEncadeado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251C241D90BE008DE504 /* SimuladorEncadeado.swift */; };
 		1840251F241D93DA008DE504 /* Estatistica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251E241D93DA008DE504 /* Estatistica.swift */; };
 		18402521241D9461008DE504 /* Simulador.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402520241D9461008DE504 /* Simulador.swift */; };
+		189E2758242C4DDA0014D570 /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E2757242C4DDA0014D570 /* ConfigTests.swift */; };
 		18FEC158241E484000A9C8E9 /* GerenciadorEstatisticas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FEC157241E484000A9C8E9 /* GerenciadorEstatisticas.swift */; };
 		18FEC15C241E49D100A9C8E9 /* Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FEC15B241E49D100A9C8E9 /* Alias.swift */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,7 @@
 		1840251C241D90BE008DE504 /* SimuladorEncadeado.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorEncadeado.swift; sourceTree = "<group>"; };
 		1840251E241D93DA008DE504 /* Estatistica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Estatistica.swift; sourceTree = "<group>"; };
 		18402520241D9461008DE504 /* Simulador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulador.swift; sourceTree = "<group>"; };
+		189E2757242C4DDA0014D570 /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
 		18FEC157241E484000A9C8E9 /* GerenciadorEstatisticas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GerenciadorEstatisticas.swift; sourceTree = "<group>"; };
 		18FEC15B241E49D100A9C8E9 /* Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alias.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				184024F2241CEDEA008DE504 /* Info.plist */,
+				189E2757242C4DDA0014D570 /* ConfigTests.swift */,
 				184024F0241CEDEA008DE504 /* CongruenteLinearTests.swift */,
 				18402500241CF7BB008DE504 /* EscalonadorTests.swift */,
 				18402512241D1C79008DE504 /* FilaTests.swift */,
@@ -308,6 +311,7 @@
 			files = (
 				18402513241D1C79008DE504 /* FilaTests.swift in Sources */,
 				1840251B241D856A008DE504 /* SimuladorIntegracao.swift in Sources */,
+				189E2758242C4DDA0014D570 /* ConfigTests.swift in Sources */,
 				184024F1241CEDEA008DE504 /* CongruenteLinearTests.swift in Sources */,
 				1840250B241D136B008DE504 /* TempoTests.swift in Sources */,
 				18402511241D18C4008DE504 /* SimuladorTests.swift in Sources */,

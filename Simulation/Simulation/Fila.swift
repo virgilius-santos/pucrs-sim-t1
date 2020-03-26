@@ -34,11 +34,23 @@ public class Fila: Hashable {
     private let taxaSaida: Tempo
     private let kendall: Kendall
     
-    public init(taxaEntrada: Tempo, taxaSaida: Tempo, kendall: Kendall) {
+    public init(taxaEntrada: Tempo = .init(inicio: 0, fim: 0),
+                taxaSaida: Tempo,
+                kendall: Kendall) {
         self.taxaEntrada = taxaEntrada
         self.taxaSaida = taxaSaida
         self.kendall = kendall
-        self.dados = .init(id: id, capacidade: kendall.k)
+        self.dados = .init(id: id)
+    }
+    
+    init(taxaEntrada: Tempo = .init(inicio: 0, fim: 0),
+         taxaSaida: Tempo = .init(inicio: 0, fim: 0),
+         kendall: Kendall = .init(),
+         dados: GerenciadorEstatisticas = .init(id: _id+1)) {
+        self.taxaEntrada = taxaEntrada
+        self.taxaSaida = taxaSaida
+        self.kendall = kendall
+        self.dados = dados
     }
     
     /// proxima saida que ocorrerá na fila
@@ -90,7 +102,7 @@ public class Fila: Hashable {
     /// o tempo é incrementado no indice de acordo com a quantidade de pessoal na fila
     /// p.ex. se a fila esta vazia, o arrray na posicao 0 terá o tempo incrementado
     /// p.ex. se tem uma pessoa na fila esta vazia, o arrray na posicao 1 terá o tempo incrementado
-    func updateEstatisticas(evt: Evento.Tipo, tempo: Double, quantAnteriorDaFila: Int) {
+    private func updateEstatisticas(evt: Evento.Tipo, tempo: Double, quantAnteriorDaFila: Int) {
         dados.updateEstatisticas(
             evt: evt,
             tempo: tempo,

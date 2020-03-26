@@ -14,12 +14,13 @@ class SimuladorTests: XCTestCase {
             kendall: Kendall(c: 2, k: 4, n: 25))
         
         let escalonadorSpy = EscalonadorSpy()
-        
+                
         sut = Simulador(configDeEventos: [],
-                        random: CongruenteLinearMock(),
+                        random: .init(maxIteracoes: 0),
                         escalonador: escalonadorSpy)
         
-        sut.configurarAgendamentoDeSaida(fila)
+        sut.configurarAgendamentoDeSaida(fila,
+                                         randomUniformizado: 0.42)
         
         XCTAssertNotNil(fila.agendarSaida)
         
@@ -43,12 +44,13 @@ class SimuladorTests: XCTestCase {
         let escalonadorSpy = EscalonadorSpy()
         
         sut = Simulador(configDeEventos: [],
-                        random: CongruenteLinearMock(),
+                        random: .init(maxIteracoes: 0),
                         escalonador: escalonadorSpy)
         
         sut.configurarAgendamentoDeTransicao(
             filaDeOrigem: fila1Spy,
-            filaDeDestino: fila2Spy)
+            filaDeDestino: fila2Spy,
+            randomUniformizado: 0.42)
         
         XCTAssertNotNil(fila1Spy.agendarSaida)
         
@@ -79,13 +81,14 @@ class SimuladorTests: XCTestCase {
         let escalonadorSpy = EscalonadorSpy()
         
         sut = Simulador(configDeEventos: [],
-                        random: CongruenteLinearMock(),
+                        random: .init(maxIteracoes: 0),
                         escalonador: escalonadorSpy)
         
         sut.configurarAgendamentoDeTransicao(
             filaDeOrigem: fila1Spy,
             filaDeDestino: fila2Spy,
-            saida: 1)
+            saida: 1,
+            randomUniformizado: 0.42)
         
         XCTAssertNotNil(fila1Spy.agendarSaida)
         
@@ -116,13 +119,14 @@ class SimuladorTests: XCTestCase {
         let escalonadorSpy = EscalonadorSpy()
         
         sut = Simulador(configDeEventos: [],
-                        random: CongruenteLinearMock(),
+                        random: .init(maxIteracoes: 0),
                         escalonador: escalonadorSpy)
         
         sut.configurarAgendamentoDeTransicao(
             filaDeOrigem: fila1Spy,
             filaDeDestino: fila2Spy,
-            retorno: 1)
+            retorno: 1,
+            randomUniformizado: 0.42)
         
         XCTAssertNotNil(fila1Spy.agendarSaida)
         
@@ -147,10 +151,10 @@ class SimuladorTests: XCTestCase {
         
         let escalonadorSpy = EscalonadorSpy()
         sut = Simulador(configDeEventos: [],
-                        random: CongruenteLinearMock(),
+                        random: .init(maxIteracoes: 0),
                         escalonador: escalonadorSpy)
         
-        sut.gerarEventoSaida(filaSpy)
+        sut.gerarEventoSaida(filaSpy, randomUniformizado: 0.46)
         
         let evento = escalonadorSpy.eventoSpy
         
@@ -174,10 +178,10 @@ class SimuladorTests: XCTestCase {
         let escalonadorSpy = EscalonadorSpy()
         
         sut = Simulador(configDeEventos: [],
-                        random: CongruenteLinearMock(),
+                        random: .init(maxIteracoes: 0),
                         escalonador: escalonadorSpy)
         
-        sut.gerarEventoChegada(filaSpy)
+        sut.gerarEventoChegada(filaSpy, randomUniformizado: 0.42)
         
         let evento = escalonadorSpy.eventoSpy
         XCTAssertNotNil(evento)
@@ -205,11 +209,12 @@ class SimuladorTests: XCTestCase {
         let escalonadorSpy = EscalonadorSpy()
         
         sut = Simulador(configDeEventos: [],
-                        random: CongruenteLinearMock(),
+                        random: .init(maxIteracoes: 0),
                         escalonador: escalonadorSpy)
         
         sut.gerarEventoTransicao(filaDeOrigem: fila1Spy,
-                                 filaDeDestino: fila2Spy)
+                                 filaDeDestino: fila2Spy,
+                                 randomUniformizado: 0.46)
         
         let evento = escalonadorSpy.eventoSpy
         XCTAssertNotNil(evento)
@@ -233,7 +238,7 @@ class SimuladorTests: XCTestCase {
         let escalonadorSpy = EscalonadorSpy()
         
         sut = Simulador(configDeEventos: [],
-                        random: CongruenteLinearMock(),
+                        random: .init(maxIteracoes: 0),
                         escalonador: escalonadorSpy)
         
         var acaoSpy: Bool?
@@ -243,7 +248,7 @@ class SimuladorTests: XCTestCase {
                             acao: { tempo in acaoSpy = true },
                             fila: filaSpy)
         
-        sut.processarEvento(evento)
+        sut.processarEvento(evento, randomUniformizado: 0.42)
         
         XCTAssertEqual(acaoSpy, true)
         XCTAssertEqual(escalonadorSpy.adicionarChamadoSpy, true)
@@ -260,7 +265,7 @@ class SimuladorTests: XCTestCase {
         let escalonadorSpy = EscalonadorSpy()
         
         sut = Simulador(configDeEventos: [],
-                        random: CongruenteLinearMock(),
+                        random: .init(maxIteracoes: 0),
                         escalonador: escalonadorSpy)
         
         var acaoSpy: Bool?
@@ -270,7 +275,7 @@ class SimuladorTests: XCTestCase {
                             acao: { tempo in acaoSpy = true },
                             fila: filaSpy)
         
-        sut.processarEvento(evento)
+        sut.processarEvento(evento, randomUniformizado: 0.42)
         
         XCTAssertEqual(acaoSpy, true)
         XCTAssertNil(escalonadorSpy.adicionarChamadoSpy)
@@ -304,17 +309,6 @@ class SimuladorTests: XCTestCase {
         
         override func proximaSaida(randomUniformizado: Double) -> Double {
             return 56
-        }
-    }
-    
-    class CongruenteLinearMock: CongruenteLinear {
-        
-        init() {
-            super.init(maxIteracoes: 20)
-        }
-        
-        override func uniformizado() -> Double? {
-            0.42
         }
     }
 }

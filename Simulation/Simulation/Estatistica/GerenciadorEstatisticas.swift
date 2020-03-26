@@ -15,11 +15,9 @@ class GerenciadorEstatisticas {
     private(set) var estatisticas: [Estatistica]
     
     let id: Int
-    let capacidade: Int
     
-    init(id: Int, capacidade k: Int) {
+    init(id: Int) {
         self.id = id
-        self.capacidade = k
         
         self.estatisticaAtual = .init(
             filaID: id,
@@ -51,14 +49,5 @@ class GerenciadorEstatisticas {
             evento: evt,
             tempo: tempo,
             contatores: contatores)
-    }
-    
-    /// busca o indice que representa o numero de ocupações da fila
-    /// p.ex. se a fila esta vazia, retorna 0 (zero)
-    /// p.ex. se tem uma pessoa na fila esta vazia, retorna 1 (um)
-    private func buscarIndexContadorAtual(_ index: Int = 0, quantDaFila: Int) -> Int {
-        if index >= capacidade { return capacidade - 1 }
-        if quantDaFila == index { return index }
-        return buscarIndexContadorAtual(index + 1, quantDaFila: quantDaFila)
     }
 }

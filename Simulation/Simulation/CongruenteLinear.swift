@@ -3,7 +3,7 @@ import Foundation
 
 public class CongruenteLinear {
     
-    var temProxima: Bool {
+    private var temProxima: Bool {
         numeroIterecoes < maxIteracoes
     }
     
@@ -44,10 +44,8 @@ public class CongruenteLinear {
             return valoresFixos[numeroIterecoes - 1]
         }
         
-        let atual = _valor
         let M: UInt = Config.CongruenteLinear.M
-        updateValues(valor: _valor)
-        return atual.double() / M.double()
+        return valor.double() / M.double()
     }
     
     /// calcula o proximo pseudo aleatorio

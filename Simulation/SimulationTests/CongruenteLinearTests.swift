@@ -44,4 +44,25 @@ class CongruenteLinearTests: XCTestCase {
         XCTAssertNotEqual(uniformizado0, uniformizado2)
         XCTAssertNotEqual(uniformizado1, uniformizado2)
     }
+    
+    func testRetornarValores() {
+        //given: inicializado
+        sut = .init(maxIteracoes: 3, valoresFixos: [0.1, 0.2])
+        
+        //when: o proximo é chamado
+        let uniformizados: [Double?] = [
+            sut.uniformizado(),
+            sut.uniformizado(),
+            sut.uniformizado(),
+            sut.uniformizado(),
+        ]
+        
+        let primeiroCalculo: Double = 0.45438265800476074
+        
+        //then: deve retornar valores diferentes
+        XCTAssertEqual(uniformizados[0], 0.1)
+        XCTAssertEqual(uniformizados[1], 0.2)
+        XCTAssertEqual(uniformizados[2], primeiroCalculo)
+        XCTAssertNil(uniformizados[3])
+    }
 }
