@@ -15,3 +15,7 @@ O simulador contem as seguintes estruturas:
 - disparo de rotinas de tratamento de eventos;
 - contabilização de perda de clientes nas filas; e
 - contabilização dos resultados de simulação.
+
+Resultados da simulação com o arquivo anexo FilaSimples1.yml
+*****
+id: 0    evt: chegada   qtd: 3    perdas: 1    t: 8.33   conts: ["24.02", "22.64", "21.44", "31.90"]

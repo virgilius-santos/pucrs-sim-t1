@@ -15,7 +15,7 @@ enum Simuladores {
 //        Config.CongruenteLinear.M = 9
 //        Config.CongruenteLinear.semente = 9
 
-let tipoSimulador = Simuladores.encadeado
+let tipoSimulador = Simuladores.simples
 print("simulador escolhido: ", tipoSimulador)
 switch tipoSimulador {
     case .simples1:
