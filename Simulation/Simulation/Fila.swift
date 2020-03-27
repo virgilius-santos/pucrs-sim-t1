@@ -28,7 +28,7 @@ public class Fila: Hashable {
     private(set) var quantDaFila: Int = .zero
     
     /// quantidade de perdas da fila
-    private(set) var perdas: Int = .zero
+    var perdas: Int = .zero
     
     private let taxaEntrada: Tempo
     private let taxaSaida: Tempo

@@ -21,7 +21,7 @@
 		1840250B241D136B008DE504 /* TempoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840250A241D136B008DE504 /* TempoTests.swift */; };
 		1840250D241D155B008DE504 /* Fila.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840250C241D155B008DE504 /* Fila.swift */; };
 		1840250F241D189B008DE504 /* SimuladorSimples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840250E241D189B008DE504 /* SimuladorSimples.swift */; };
-		18402511241D18C4008DE504 /* SimuladorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402510241D18C4008DE504 /* SimuladorTests.swift */; };
+		18402511241D18C4008DE504 /* SimuladorFilaSimplesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402510241D18C4008DE504 /* SimuladorFilaSimplesTests.swift */; };
 		18402513241D1C79008DE504 /* FilaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402512241D1C79008DE504 /* FilaTests.swift */; };
 		1840251B241D856A008DE504 /* SimuladorIntegracao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251A241D856A008DE504 /* SimuladorIntegracao.swift */; };
 		1840251D241D90BE008DE504 /* SimuladorEncadeado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251C241D90BE008DE504 /* SimuladorEncadeado.swift */; };
@@ -60,7 +60,7 @@
 		1840250A241D136B008DE504 /* TempoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoTests.swift; sourceTree = "<group>"; };
 		1840250C241D155B008DE504 /* Fila.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fila.swift; sourceTree = "<group>"; };
 		1840250E241D189B008DE504 /* SimuladorSimples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorSimples.swift; sourceTree = "<group>"; };
-		18402510241D18C4008DE504 /* SimuladorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorTests.swift; sourceTree = "<group>"; };
+		18402510241D18C4008DE504 /* SimuladorFilaSimplesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorFilaSimplesTests.swift; sourceTree = "<group>"; };
 		18402512241D1C79008DE504 /* FilaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilaTests.swift; sourceTree = "<group>"; };
 		1840251A241D856A008DE504 /* SimuladorIntegracao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorIntegracao.swift; sourceTree = "<group>"; };
 		1840251C241D90BE008DE504 /* SimuladorEncadeado.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorEncadeado.swift; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 				18402500241CF7BB008DE504 /* EscalonadorTests.swift */,
 				18402512241D1C79008DE504 /* FilaTests.swift */,
 				1840250A241D136B008DE504 /* TempoTests.swift */,
-				18402510241D18C4008DE504 /* SimuladorTests.swift */,
+				18402510241D18C4008DE504 /* SimuladorFilaSimplesTests.swift */,
 				1840251A241D856A008DE504 /* SimuladorIntegracao.swift */,
 			);
 			path = SimulationTests;
@@ -314,7 +314,7 @@
 				189E2758242C4DDA0014D570 /* ConfigTests.swift in Sources */,
 				184024F1241CEDEA008DE504 /* CongruenteLinearTests.swift in Sources */,
 				1840250B241D136B008DE504 /* TempoTests.swift in Sources */,
-				18402511241D18C4008DE504 /* SimuladorTests.swift in Sources */,
+				18402511241D18C4008DE504 /* SimuladorFilaSimplesTests.swift in Sources */,
 				18402501241CF7BB008DE504 /* EscalonadorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

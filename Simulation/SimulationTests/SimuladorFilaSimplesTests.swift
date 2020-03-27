@@ -2,7 +2,7 @@
 import XCTest
 @testable import Simulation
 
-class SimuladorTests: XCTestCase {
+class SimuladorFilaSimplesTests: XCTestCase {
 
     var sut: Simulador!
     var valoresFixos: [Double]!
@@ -249,7 +249,7 @@ class SimuladorTests: XCTestCase {
 //        XCTAssertEqual(fila2Spy.chegadaTempoSpy, 4)
 //    }
     
-    func testConfigEventosFilaSimples() {
+    func test_filaSimples_configuracaoDeEventos() {
         
         setupFilaSimples()
         
@@ -270,7 +270,7 @@ class SimuladorTests: XCTestCase {
         XCTAssertNotNil(filaSpy1.agendarSaida)
     }
     
-    func testPrimeiroEvento() {
+    func test_filaSimples_evento_chegada_comAgendamentoDeSaida() {
         
         setupFilaSimples()
         
@@ -308,7 +308,7 @@ class SimuladorTests: XCTestCase {
         XCTAssertEqual(proximaSaida.count, 1)
     }
     
-    func testSegundoEvento() {
+    func test_filaSimples_evento_chegada_semAgendamentoDeSaida() {
         
         setupFilaSimples()
         
@@ -340,7 +340,7 @@ class SimuladorTests: XCTestCase {
         XCTAssertEqual(proximaSaida.count, 0)
     }
     
-    func testTerceiroEvento() {
+    func test_filaSimples_evento_saida_comAgendamentoDeSaida() {
         
         setupFilaSimples()
         
@@ -353,7 +353,7 @@ class SimuladorTests: XCTestCase {
         let proximaChegadas = filaSpy1.proximaChegadaSpy
         let proximaSaida = filaSpy1.proximaSaidaSpy
         
-        // chegada na fila
+        // saida na fila
         XCTAssertEqual(saidas[0], 5.9828)
         
         // agendamento de saida
@@ -378,19 +378,94 @@ class SimuladorTests: XCTestCase {
         XCTAssertEqual(proximaSaida.count, 1)
     }
     
+    func test_filaSimples_loopCompleto() {
+        
+        setupFilaSimples()
+        
+        for _ in 0 ..< 6 {
+            XCTAssertTrue(sut.rodarPassoDaSimulacao())
+        }
+        
+        XCTAssertFalse(sut.rodarPassoDaSimulacao())
+        XCTAssertFalse(sut.rodarPassoDaSimulacao())
+        
+        let chegadas = filaSpy1.chegadaTempoSpy
+        let saidas = filaSpy1.saidaTempoSpy
+        let randoms = randomSpy.uniformizadoSpy
+        let eventos = escalonadorSpy.eventoSpy
+        let proximos = escalonadorSpy.proximoSpy
+        let filas = escalonadorSpy.filaSpy
+        let proximaChegadas = filaSpy1.proximaChegadaSpy
+        let proximaSaida = filaSpy1.proximaSaidaSpy
+        
+        randoms
+            .enumerated()
+            .forEach { XCTAssertEqual(self.valoresFixos[$0.offset], $0.element) }
+
+        XCTAssertEqual(filaSpy1.perdasSpy, 1)
+        
+        XCTAssertEqual(proximos[0].tempo, 2.0)
+        XCTAssertEqual(proximos[0].evt!.tipo, .chegada)
+        XCTAssertEqual(proximos[1].tempo, 3.8851)
+        XCTAssertEqual(proximos[1].evt!.tipo, .chegada)
+        XCTAssertEqual(proximos[2].tempo, 5.0494)
+        XCTAssertEqual(proximos[2].evt!.tipo, .chegada)
+        XCTAssertEqual(proximos[3].tempo, 5.9828)
+        XCTAssertEqual(proximos[3].evt!.tipo, .saida)
+        XCTAssertEqual(proximos[4].tempo, 6.6036)
+        XCTAssertEqual(proximos[4].evt!.tipo, .chegada)
+        XCTAssertEqual(proximos[5].tempo, 8.3257)
+        XCTAssertEqual(proximos[5].evt!.tipo, .chegada)
+        
+        XCTAssertEqual(filas[0].tempo, 11.0267)
+        XCTAssertEqual(filas[0].evento.tipo, .saida)
+        XCTAssertEqual(filas[1].tempo, 10.3138, accuracy: 0.0001)
+        XCTAssertEqual(filas[1].evento.tipo, .chegada)
+        
+        XCTAssertEqual(eventos[0].tempo, 2.0)
+        XCTAssertEqual(eventos[0].tipo, .chegada)
+        XCTAssertEqual(eventos[1].tempo, 3.9828)
+        XCTAssertEqual(eventos[1].tipo, .saida)
+        XCTAssertEqual(eventos[2].tempo, 1.8851)
+        XCTAssertEqual(eventos[2].tipo, .chegada)
+        XCTAssertEqual(eventos[3].tempo, 1.1643)
+        XCTAssertEqual(eventos[3].tipo, .chegada)
+        XCTAssertEqual(eventos[4].tempo, 1.5542)
+        XCTAssertEqual(eventos[4].tipo, .chegada)
+        XCTAssertEqual(eventos[5].tempo, 5.0439)
+        XCTAssertEqual(eventos[5].tipo, .saida)
+        XCTAssertEqual(eventos[6].tempo, 1.7221)
+        XCTAssertEqual(eventos[6].tipo, .chegada)
+        XCTAssertEqual(eventos[7].tempo, 1.9881)
+        XCTAssertEqual(eventos[7].tipo, .chegada)
+        
+        XCTAssertEqual(chegadas.count, 5)
+        XCTAssertEqual(saidas.count, 1)
+        XCTAssertEqual(eventos.count, 8)
+        XCTAssertEqual(proximos.count, 6)
+        XCTAssertEqual(filas.count, 2)
+        XCTAssertEqual(randoms.count, 8)
+        XCTAssertEqual(proximaChegadas.count, 6)
+        XCTAssertEqual(proximaSaida.count, 2)
+    }
+    
     func executarEventos(pulando: Int) {
         for _ in 0 ..< pulando {
             XCTAssertTrue(sut.rodarPassoDaSimulacao())
         }
         
+        clearSpy()
+        
+        XCTAssertTrue(sut.rodarPassoDaSimulacao())
+    }
+    
+    func clearSpy() {
         filaSpy1.chegadaTempoSpy = []
         filaSpy1.saidaTempoSpy = []
         randomSpy.uniformizadoSpy = []
         escalonadorSpy.eventoSpy = []
         filaSpy1.proximaChegadaSpy = []
         filaSpy1.proximaSaidaSpy = []
-        
-        XCTAssertTrue(sut.rodarPassoDaSimulacao())
     }
     
     func setupFilaSimples() {
@@ -407,9 +482,20 @@ class SimuladorTests: XCTestCase {
     
     class EscalonadorSpy: Escalonador {
         var eventoSpy: [Evento] = []
+        var proximoSpy: [(tempo: Double, evt: Evento?)] = []
+        var filaSpy: [KeyValue] = []
+        
         override func adicionar(_ evento: Evento) {
             super.adicionar(evento)
             eventoSpy.append(evento)
+            filaSpy = fila
+        }
+        
+        override func proximo() -> Evento? {
+            let proximo = super.proximo()
+            proximoSpy.append((tempo, proximo))
+            filaSpy = fila
+            return proximo
         }
     }
     
@@ -420,10 +506,17 @@ class SimuladorTests: XCTestCase {
         var proximaChegadaSpy: [Double] = []
         var proximaSaidaSpy: [Double] = []
         var agendarSaidaSpy: [(ActionVoid)?] = []
+        var perdasSpy: Int = -1
         
         override var agendarSaida: (ActionVoid)? {
             didSet {
                 agendarSaidaSpy.append(agendarSaida)
+            }
+        }
+        
+        override var perdas: Int {
+            didSet {
+                perdasSpy = perdas
             }
         }
         

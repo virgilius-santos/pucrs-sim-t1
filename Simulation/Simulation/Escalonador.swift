@@ -7,7 +7,7 @@ public class Escalonador {
     
     private(set) var tempo: Double = 0
     
-    private var fila: [KeyValue] = []
+    private(set) var fila: [KeyValue] = []
     
     public init() {}
     
