@@ -11,25 +11,26 @@ public struct Estatistica: CustomStringConvertible {
     let contatores: [Int : Double]
     
     public var description: String {
-        let conts: [Double] = contatores
+        let conts: [(String, String)] = contatores
             .lazy
             .sorted(by: { $0.key < $1.key })
-            .map { ($0.value / tempo) * 100.0 }
+            .map { ($0.value, ($0.value / tempo) * 100.0) }
+            .map { ($0.0.format(4), $0.1.format()) }
         
         var str = String()
         str += "id: \(filaID.format())"
         str += "evt: \(evento.description.format(10))"
         str += "qtd: \(quantDaFila.format())"
         str += "perdas: \(perdas.format())"
-        str += "t: \(tempo.format().format(7))"
-        str += "conts: \(conts.map({ $0.format() }))\n*****"
+        str += "t: \(tempo.format(4).format(12))"
+        str += "conts: \(conts)\n*****"
         return str
     }
 }
 
 private extension Double {
-    func format() -> String {
-        return String(format: "%2.2f", self)
+    func format(_ n: Int = 2) -> String {
+        return String(format: "%2.\(n)f", self)
     }
 }
 
@@ -40,7 +41,7 @@ private extension String {
 }
 
 private extension Int {
-    func format(_ lenght: Int = 5) -> String {
+    func format(_ lenght: Int = 7) -> String {
         return "\(self)".padding(toLength: lenght, withPad: " ", startingAt: 0)
     }
 }
