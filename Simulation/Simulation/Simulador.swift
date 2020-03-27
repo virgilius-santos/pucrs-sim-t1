@@ -17,7 +17,7 @@ public class Simulador {
     }
     
     @discardableResult
-    public func simular() -> [Estatistica] {
+    public func simular() -> [GerenciadorEstatisticas] {
         
         configurar()
         
@@ -27,20 +27,9 @@ public class Simulador {
         let filas: Set<Fila> = Set<Fila>(configDeEventos
             .flatMap { $0.filas })
         
-        let estatisticas: [Estatistica] = filas
-            .flatMap { $0.dados.estatisticas }
+        let estatisticas: [GerenciadorEstatisticas] = filas.map { $0.dados }
         
         return estatisticas
-    }
-    
-    /// imprime no prompt as estatisticas
-    func imprimir(estatisticas: [Estatistica]) {
-        print("--start--")
-        estatisticas
-            .sorted(by: { $0.tempo < $1.tempo })
-            .forEach { print($0) }
-        print("--end--")
-        print("--\n--")
     }
     
     /// recebe uma lista para configura o simulador

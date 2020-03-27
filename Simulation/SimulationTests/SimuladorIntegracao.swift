@@ -25,7 +25,7 @@ class SimuladorIntegracao: XCTestCase {
         
         let sut = SimuladorSimples(fila: fila, random: random)
         
-        let estatisticas = sut.simular()
+        let estatisticas: [Estatistica] = sut.simular().flatMap { $0.estatisticas }
         
         estatisticas.forEach { estatistica in
             XCTAssertEqual(estatistica.contatores.values.reduce(0, +), estatistica.tempo)
@@ -62,7 +62,7 @@ class SimuladorIntegracao: XCTestCase {
             filaDeSaida: filaDeSaida,
             random: random)
 
-        let estatisticas = sut.simular()
+        let estatisticas: [Estatistica] = sut.simular().flatMap { $0.estatisticas }
 
         estatisticas.forEach { estatistica in
             XCTAssertEqual(estatistica.contatores.values.reduce(0, +), estatistica.tempo)
@@ -100,7 +100,7 @@ class SimuladorIntegracao: XCTestCase {
             random: random,
             taxaDeSaida: 0.8)
 
-        let estatisticas = sut.simular()
+        let estatisticas: [Estatistica] = sut.simular().flatMap { $0.estatisticas }
 
         estatisticas.forEach { estatistica in
             XCTAssertEqual(estatistica.contatores.values.reduce(0, +), estatistica.tempo)

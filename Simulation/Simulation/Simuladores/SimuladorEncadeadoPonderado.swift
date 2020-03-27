@@ -31,7 +31,7 @@ public class SimuladorEncadeadoPonderado {
             escalonador: escalonador)
     }
     
-    public func simular() -> [Estatistica] {
+    public func simular() -> [GerenciadorEstatisticas] {
         return simulador.simular()
     }
 }

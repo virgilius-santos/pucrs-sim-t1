@@ -1,7 +1,7 @@
 
 import Foundation
 
-class GerenciadorEstatisticas {
+public class GerenciadorEstatisticas {
     
     /// guarda as informações da fila em relcao ao ultimo tempo passado,
     /// seja na entrada ou saida
@@ -49,5 +49,18 @@ class GerenciadorEstatisticas {
             evento: evt,
             tempo: tempo,
             contatores: contatores)
+    }
+}
+
+public extension Array where Element == GerenciadorEstatisticas {
+    /// imprime no prompt as estatisticas
+    func imprimir(limit: Int = 5) {
+        print("--start--")
+        flatMap { $0.estatisticas }
+            .suffix(limit)
+            .sorted(by: { $0.filaID < $1.filaID && $0.tempo < $1.tempo })
+            .forEach { print($0) }
+        print("--end--")
+        print("--\n--")
     }
 }
