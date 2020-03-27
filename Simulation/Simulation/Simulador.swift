@@ -68,7 +68,7 @@ public class Simulador {
     /// recebe um evento, executa a ação dele e caso seja um evento de chegada, agenda uma prox chegada
     private func processarEvento(_ evento: Evento) {
         evento.acao(escalonador.tempo)
-        if evento.tipo == .chegada {
+        if evento.tipo == .chegada, random.temProxima {
             gerarEventoChegada(evento.fila)
         }
     }

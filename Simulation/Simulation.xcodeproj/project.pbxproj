@@ -28,6 +28,7 @@
 		1840251F241D93DA008DE504 /* Estatistica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251E241D93DA008DE504 /* Estatistica.swift */; };
 		18402521241D9461008DE504 /* Simulador.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402520241D9461008DE504 /* Simulador.swift */; };
 		189E2758242C4DDA0014D570 /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E2757242C4DDA0014D570 /* ConfigTests.swift */; };
+		189E275A242D7E1A0014D570 /* SimuladorFilaTandemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */; };
 		18FEC158241E484000A9C8E9 /* GerenciadorEstatisticas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FEC157241E484000A9C8E9 /* GerenciadorEstatisticas.swift */; };
 		18FEC15C241E49D100A9C8E9 /* Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FEC15B241E49D100A9C8E9 /* Alias.swift */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,7 @@
 		1840251E241D93DA008DE504 /* Estatistica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Estatistica.swift; sourceTree = "<group>"; };
 		18402520241D9461008DE504 /* Simulador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulador.swift; sourceTree = "<group>"; };
 		189E2757242C4DDA0014D570 /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
+		189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorFilaTandemTests.swift; sourceTree = "<group>"; };
 		18FEC157241E484000A9C8E9 /* GerenciadorEstatisticas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GerenciadorEstatisticas.swift; sourceTree = "<group>"; };
 		18FEC15B241E49D100A9C8E9 /* Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alias.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +135,7 @@
 				18402512241D1C79008DE504 /* FilaTests.swift */,
 				1840250A241D136B008DE504 /* TempoTests.swift */,
 				18402510241D18C4008DE504 /* SimuladorFilaSimplesTests.swift */,
+				189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */,
 				1840251A241D856A008DE504 /* SimuladorIntegracao.swift */,
 			);
 			path = SimulationTests;
@@ -310,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18402513241D1C79008DE504 /* FilaTests.swift in Sources */,
+				189E275A242D7E1A0014D570 /* SimuladorFilaTandemTests.swift in Sources */,
 				1840251B241D856A008DE504 /* SimuladorIntegracao.swift in Sources */,
 				189E2758242C4DDA0014D570 /* ConfigTests.swift in Sources */,
 				184024F1241CEDEA008DE504 /* CongruenteLinearTests.swift in Sources */,
