@@ -22,54 +22,146 @@ Rodamos as seguintes simulações:
 
 Resultados da simulação
 
-# Simulação com lista mockada
+# Simulação com lista mockada  
 
-rndnumbersPerSeed:  8
-seeds:              Mock list
-Queue:              F1 (G/G/1/3)
-Arrival:            1.0 ... 2.0
-Service:            3.0 ... 6.0
+rndnumbersPerSeed:  8  
+seeds:              Mock list  
+Queue:              F1 (G/G/1/3)  
+Arrival:            1.0 ... 2.0  
+Service:            3.0 ... 6.0  
 
-## FilaSimples1-teste.yml                                       ## Simulacao
-=========================================================       =========================================================
-   State               Time               Probability               State               Time               Probability
-      0               2,0000                24,02%                     0               2,0000                24,02%
-      1               1,8851                22,64%                     1               1,8851                22,64%
-      2               1,7851                21,44%                     2               1,7851                21,44%
-      3               2,6555                31,90%                     3               2,6555                31,90%
+<table align="center" cellpadding="10">
+    <thead>
+        <tr>
+            <th colspan=3>FilaSimples1-teste.yml</th>
+            <th colspan=3>Simulacao</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr align="center">
+            <td>State</td>
+            <td>Time</td>
+            <td>Probability</td>
+            <td>State</td>
+            <td>Time</td>
+            <td>Probability</td>
+        </tr>
+        <tr align="center">
+            <td>0</td>
+            <td>2,0000</td>
+            <td>24,02%</td>
+            <td>0</td>
+            <td>2,0000</td>
+            <td>24,02%</td>
+        </tr>
+        <tr align="center">
+            <td>1</td>
+            <td>1,8851</td>
+            <td>22,64%</td>
+            <td>1</td>
+            <td>1,8851</td>
+            <td>22,64%</td>
+        </tr>
+        <tr align="center">
+            <td>2</td>
+            <td>1,7851</td>
+            <td>21,44%</td>
+            <td>2</td>
+            <td>1,7851</td>
+            <td>21,44%</td>
+        </tr>
+         <tr align="center">
+            <td>3</td>
+            <td>2,6555</td>
+            <td>31,90%</td>
+            <td>3</td>
+            <td>2,6555</td>
+            <td>31,90%</td>
+        </tr>
+        <tr>
+            <td colspan=6></td>
+        </tr>
+        <tr>
+            <td colspan=3>Number of losses: 1</td>
+            <td colspan=3>Number of losses: 1</td>
+        </tr>
+        <tr>
+            <td colspan=3>Simulation average time: 8,3257</td>
+            <td colspan=3>Simulation average time: 8,3257</td>
+        </tr>
+    </tbody>
+</table>
 
-Number of losses: 1                                                 Number of losses: 1
-Simulation average time: 8,3257                                     Simulation average time: 8.33
-=========================================================       =========================================================
-
--
---
--------------------------------------------------------------------------------------------------------------------------
---
 -
 
 # Simulação com dados randomicos
 
-rndnumbersPerSeed:  100.000
-seeds:              29
-Queue:              F1 (G/G/1/3)
-Arrival:            1.0 ... 2.0
-Service:            3.0 ... 6.0
+rndnumbersPerSeed:  100.000  
+seeds:              29  
+Queue:              F1 (G/G/1/3)  
+Arrival:            1.0 ... 2.0  
+Service:            3.0 ... 6.0  
 
-## FilaSimples1.yml                                             ## Simulacao
-=========================================================       =========================================================
-   State               Time               Probability               State               Time               Probability
-      0               2,0000                 0,00%                     0               1.4544                 0.00%
-      1               1,1991                 0,00%                     1               1.4310                 0.00%
-      2           19384,3395                17,23%                     2           19449.8230                17.29%
-      3           93094,7673                82,76%                     3           93021.2707                82.70%
+<table align="center" cellpadding="10">
+    <thead>
+        <tr>
+            <th colspan=3>FilaSimples1.yml</th>
+            <th colspan=3>Simulacao</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr align="center">
+            <td>State</td>
+            <td>Time</td>
+            <td>Probability</td>
+            <td>State</td>
+            <td>Time</td>
+            <td>Probability</td>
+        </tr>
+        <tr align="center">
+            <td>0</td>
+            <td>2,0000</td>
+            <td>0,00%</td>
+            <td>0</td>
+            <td>1.4544</td>
+            <td>0,00%</td>
+        </tr>
+        <tr align="center">
+            <td>1</td>
+            <td>1,1991</td>
+            <td>0,00%</td>
+            <td>1</td>
+            <td>1.4310</td>
+            <td>0,00%</td>
+        </tr>
+        <tr align="center">
+            <td>2</td>
+            <td>19384,3395</td>
+            <td>17,23%</td>
+            <td>2</td>
+            <td>19449.8230</td>
+            <td>17.29%</td>
+        </tr>
+         <tr align="center">
+            <td>3</td>
+            <td>93094,7673</td>
+            <td>82,76%</td>
+            <td>3</td>
+            <td>93021.2707</td>
+            <td>82.70%</td>
+        </tr>
+        <tr>
+            <td colspan=6></td>
+        </tr>
+        <tr>
+            <td colspan=3>Number of losses: 49963</td>
+            <td colspan=3>Number of losses: 50015</td>
+        </tr>
+        <tr>
+            <td colspan=3>Simulation average time: 112482,3059</td>
+            <td colspan=3>Simulation average time: 112473.9791</td>
+        </tr>
+    </tbody>
+</table>
 
-Number of losses: 49963                                             Number of losses: 50015
-Simulation average time: 112482,3059                                Simulation average time: 112473.9791
-=========================================================       =========================================================
-
--
---
--------------------------------------------------------------------------------------------------------------------------
---
 -
