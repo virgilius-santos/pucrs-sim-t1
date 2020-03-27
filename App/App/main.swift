@@ -4,7 +4,7 @@ import Simulation
 
 enum Simuladores {
     case simples, encadeado
-    case simples1
+//    case simples1
 }
 
 // para mudar as configurações do congruente,
@@ -18,39 +18,39 @@ enum Simuladores {
 let tipoSimulador = Simuladores.simples
 print("simulador escolhido: ", tipoSimulador)
 switch tipoSimulador {
-    case .simples1:
-        FilaSimples(
-            valoresFixos: [
-                0.5,
-                0.9921,
-                0.0004,
-                0.5534,
-                0.2761,
-                0.3398,
-                0.8963,
-                0.9023,
-                0.0132,
-                0.4569,
-                0.5121,
-                0.9208,
-                0.0171,
-                0.2299,
-                0.8545,
-                0.6001,
-                0.2921
-            ],
-            taxaEntrada: Tempo(inicio: 1, fim: 2),
-            taxaSaida: Tempo(inicio: 3, fim: 6),
-            kendall: Kendall(
-                a: "G",
-                b: "G",
-                c: 1,
-                k: 3,
-                n: 8,
-                d: 10))
+//    case .simples1:
+//        FilaSimples(
+//            valoresFixos: [
+//                0.5,
+//                0.9921,
+//                0.0004,
+//                0.5534,
+//                0.2761,
+//                0.3398,
+//                0.8963,
+//                0.9023,
+//                0.0132,
+//                0.4569,
+//                0.5121,
+//                0.9208,
+//                0.0171,
+//                0.2299,
+//                0.8545,
+//                0.6001,
+//                0.2921
+//            ],
+//            taxaEntrada: Tempo(inicio: 1, fim: 2),
+//            taxaSaida: Tempo(inicio: 3, fim: 6),
+//            kendall: Kendall(
+//                a: "G",
+//                b: "G",
+//                c: 1,
+//                k: 3,
+//                n: 8,
+//                d: 10))
     case .simples:
         FilaSimples(
-            valoresFixos: [1, 0.3276, 0.8851, 0.1643, 0.5542, 0.6813, 0.7221, 0.9881],
+//            valoresFixos: [1, 0.3276, 0.8851, 0.1643, 0.5542, 0.6813, 0.7221, 0.9881],
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 3, fim: 6),
             kendall: Kendall(
@@ -58,7 +58,7 @@ switch tipoSimulador {
                 b: "G",
                 c: 1,
                 k: 3,
-                n: 8,
+                n: 100000,
                 d: 10))
     
     case .encadeado:

@@ -18,7 +18,7 @@ func FilaSimples(
     let sut = SimuladorSimples(fila: fila, random: random)
 
     let estatisticas = sut.simular()
-    sut.imprimir(estatisticas: estatisticas)
+    sut.imprimir(estatisticas: [(estatisticas.last!)])
 }
 
 func FilaEncadeada(
