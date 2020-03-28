@@ -25,7 +25,7 @@ public class SimuladorSimples {
             escalonador: escalonador)
     }
     
-    public func simular() -> [GerenciadorEstatisticas] {
-        return simulador.simular()
+    public func simular() {
+        simulador.simular()
     }
 }

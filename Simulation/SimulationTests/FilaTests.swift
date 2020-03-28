@@ -9,7 +9,7 @@ class FilaTests: XCTestCase {
     func testChegada_QtdFila_aoIniciar_deveSerZero() {
         
         // given: dado que foi inicializado
-        sut = .init()
+        sut = Fila(tipoDeFila: .simples)
         
         // then: o tamanho deve estar zerado
         XCTAssertEqual(sut.quantDaFila, 0)
@@ -22,7 +22,7 @@ class FilaTests: XCTestCase {
         let dadosSpy = GerenciadorEstatisticasSpy(id: 0)
         
         // given: dado que foi inicializado
-        sut = .init(kendall: Kendall(c: 1, k: 2), dados: dadosSpy)
+        sut = .init(tipoDeFila: .simples, kendall: Kendall(c: 1, k: 2), dados: dadosSpy)
         
         let exp = expectation(description: "agendarSaida")
 
@@ -73,7 +73,7 @@ class FilaTests: XCTestCase {
         let dadosSpy = GerenciadorEstatisticasSpy(id: 0)
         
         // given: dado que foi inicializado
-        sut = .init(kendall: Kendall(c: 1, k: 2), dados: dadosSpy)
+        sut = .init(tipoDeFila: .simples, kendall: Kendall(c: 1, k: 2), dados: dadosSpy)
         
         // when: uma chegada eh registrada
         sut.chegada(tempo: 13)
@@ -115,7 +115,8 @@ class FilaTests: XCTestCase {
     func test_Fila_AgendarSaida_naoDeveSerChamada_comFilaVazia() {
         
         // given: dado que foi inicializado
-        sut = .init(taxaEntrada: Tempo(inicio: 1, fim: 2),
+        sut = .init(tipoDeFila: .tandem,
+                    taxaEntrada: Tempo(inicio: 1, fim: 2),
                     taxaSaida: Tempo(inicio: 3, fim: 6),
                     kendall: Kendall(c: 1, k: 2))
         
@@ -142,7 +143,8 @@ class FilaTests: XCTestCase {
     func test_Fila_calculo() {
         
         // given: dado que foi inicializado
-        sut = .init(taxaEntrada: Tempo(inicio: 1, fim: 2),
+        sut = .init(tipoDeFila: .simples,
+                    taxaEntrada: Tempo(inicio: 1, fim: 2),
                     taxaSaida: Tempo(inicio: 3, fim: 6))
         
         // when: a saida eh chamada com a fila vazia

@@ -6,19 +6,22 @@ func FilaSimples(
     taxaEntrada: Tempo,
     taxaSaida: Tempo,
     kendall: Kendall
-) {
+) -> [Fila] {
     
-    let random = CongruenteLinear(maxIteracoes: kendall.n, valoresFixos: valoresFixos)
+    let random = CongruenteLinear(maxIteracoes: kendall.n,
+                                  valoresFixos: valoresFixos)
 
     let fila = Fila(
+        id: 0,
+        tipoDeFila: .simples,
         taxaEntrada: taxaEntrada,
         taxaSaida: taxaSaida,
         kendall: kendall)
 
     let sut = SimuladorSimples(fila: fila, random: random)
 
-    let estatisticas = sut.simular()
-    estatisticas.imprimir()
+    let _ = sut.simular()
+    return [fila]
 }
 
 func FilaEncadeada(
@@ -26,20 +29,23 @@ func FilaEncadeada(
     taxaEntradaFila1: Tempo,
     taxaSaidaFila1: Tempo,
     kendallFila1: Kendall,
-    taxaEntradaFila2: Tempo,
     taxaSaidaFila2: Tempo,
     kendallFila2: Kendall
-) {
+) -> [Fila] {
     
-    let random = CongruenteLinear(maxIteracoes: kendallFila1.n, valoresFixos: valoresFixos)
+    let random = CongruenteLinear(maxIteracoes: kendallFila1.n,
+                                  valoresFixos: valoresFixos)
 
     let filaDeEntrada = Fila(
+        id: 0,
+        tipoDeFila: .tandem,
         taxaEntrada: taxaEntradaFila1,
         taxaSaida: taxaSaidaFila1,
         kendall: kendallFila1)
 
     let filaDeSaida = Fila(
-        taxaEntrada: taxaEntradaFila2,
+        id: 1,
+        tipoDeFila: .tandem,
         taxaSaida: taxaSaidaFila2,
         kendall: kendallFila2)
 
@@ -48,6 +54,6 @@ func FilaEncadeada(
         filaDeSaida: filaDeSaida,
         random: random)
 
-    let estatisticas = sut.simular()
-    estatisticas.imprimir()
+    let _ = sut.simular()
+    return [filaDeEntrada, filaDeSaida]
 }

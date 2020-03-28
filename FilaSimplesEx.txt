@@ -1,0 +1,31 @@
+
+G/G/1/5, chegadas entre 2..4, atendimento entre 3..5 
+G/G/2/5, chegadas entre 2..4, atendimento entre 3..5
+chegada inicial em 3.0
+usando 100.000 aleatorios
+
+simulador escolhido:  simples1
+--start--
+perdas: 14347  t: 171379.2749 
+conts: [
+    0        3.0000      0.00
+    1        3.8751      0.00
+    2       18.8539      0.01
+    3      201.4649      0.12
+    4    67887.8735     39.61
+    5   103264.2076     60.25
+]
+*****
+--end--
+
+simulador escolhido:  simples2
+--start--
+perdas: 0      t: 149989.8017 
+conts: [
+    0    2022.8711       1.35
+    1   95994.1063      64.00
+    2   51713.2211      34.48
+    3     259.6031       0.17
+]
+*****
+--end--

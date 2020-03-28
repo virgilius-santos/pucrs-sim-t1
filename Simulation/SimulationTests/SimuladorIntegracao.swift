@@ -19,13 +19,16 @@ class SimuladorIntegracao: XCTestCase {
         let random = CongruenteLinear(maxIteracoes: kendall.n)
         
         let fila = Fila(
+            tipoDeFila: .simples,
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
             kendall: kendall)
         
         let sut = SimuladorSimples(fila: fila, random: random)
         
-        let estatisticas: [Estatistica] = sut.simular().flatMap { $0.estatisticas }
+        sut.simular()
+        
+        let estatisticas: [Estatistica] = fila.dados.estatisticas
         
         estatisticas.forEach { estatistica in
             XCTAssertEqual(estatistica.contatores.values.reduce(0, +), estatistica.tempo)
@@ -49,11 +52,13 @@ class SimuladorIntegracao: XCTestCase {
         let random = CongruenteLinear(maxIteracoes: kendall.n)
 
         let filaDeEntrada = Fila(
+            tipoDeFila: .tandem,
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
             kendall: kendall)
 
         let filaDeSaida = Fila(
+            tipoDeFila: .tandem,
             taxaSaida: Tempo(inicio: 2, fim: 4),
             kendall: Kendall(c: 2, k: 4, n: 0))
 
@@ -62,7 +67,10 @@ class SimuladorIntegracao: XCTestCase {
             filaDeSaida: filaDeSaida,
             random: random)
 
-        let estatisticas: [Estatistica] = sut.simular().flatMap { $0.estatisticas }
+        sut.simular()
+        
+        let estatisticas: [Estatistica] = filaDeEntrada.dados.estatisticas
+            + filaDeSaida.dados.estatisticas
 
         estatisticas.forEach { estatistica in
             XCTAssertEqual(estatistica.contatores.values.reduce(0, +), estatistica.tempo)
@@ -86,11 +94,13 @@ class SimuladorIntegracao: XCTestCase {
         let random = CongruenteLinear(maxIteracoes: kendall.n)
 
         let filaDeEntrada = Fila(
+            tipoDeFila: .tandem,
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 2, fim: 4),
             kendall: kendall)
 
         let filaDeSaida = Fila(
+            tipoDeFila: .tandem,
             taxaSaida: Tempo(inicio: 2, fim: 4),
             kendall: Kendall(c: 2, k: 4, n: 0))
 
@@ -100,7 +110,10 @@ class SimuladorIntegracao: XCTestCase {
             random: random,
             taxaDeSaida: 0.8)
 
-        let estatisticas: [Estatistica] = sut.simular().flatMap { $0.estatisticas }
+        sut.simular()
+        
+        let estatisticas: [Estatistica] = filaDeEntrada.dados.estatisticas
+            + filaDeSaida.dados.estatisticas
 
         estatisticas.forEach { estatistica in
             XCTAssertEqual(estatistica.contatores.values.reduce(0, +), estatistica.tempo)

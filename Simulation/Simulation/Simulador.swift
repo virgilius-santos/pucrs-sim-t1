@@ -16,20 +16,13 @@ public class Simulador {
         self.escalonador = escalonador
     }
     
-    @discardableResult
-    public func simular() -> [GerenciadorEstatisticas] {
+    public func simular() {
         
+        // configurar transições
         configurar()
         
         // roda a simulacao
         rodarSimulacaoCompleta()
-        
-        let filas: Set<Fila> = Set<Fila>(configDeEventos
-            .flatMap { $0.filas })
-        
-        let estatisticas: [GerenciadorEstatisticas] = filas.map { $0.dados }
-        
-        return estatisticas
     }
     
     /// recebe uma lista para configura o simulador

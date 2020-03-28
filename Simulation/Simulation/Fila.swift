@@ -1,28 +1,20 @@
 
 import Foundation
 
-private var _id: Int = -1
+public enum TipoDeFila: String {
+    case simples, tandem, naoDefinida
+}
 
-public class Fila: Hashable {
+public class Fila {
     
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
+    let id: Int
     
-    public static func == (lhs: Fila, rhs: Fila) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    let id: Int = {
-        _id += 1
-        return _id
-    }()
     /// sera acionado sempre que um agendamento de saida for necessario
     var agendarSaida: (ActionVoid)?
     
     /// guarda as informações da fila em relcao ao ultimo tempo passado,
     /// seja na entrada ou saida
-    let dados: GerenciadorEstatisticas
+    private(set) lazy var dados: GerenciadorEstatisticas = .init(id: id)
     
     /// quantidade de elementos na fila
     private(set) var quantDaFila: Int = .zero
@@ -30,27 +22,39 @@ public class Fila: Hashable {
     /// quantidade de perdas da fila
     var perdas: Int = .zero
     
-    private let taxaEntrada: Tempo
-    private let taxaSaida: Tempo
-    private let kendall: Kendall
+    let tipoDeFila: TipoDeFila
+    var primeiroTempo: Double?
     
-    public init(taxaEntrada: Tempo = .init(inicio: 0, fim: 0),
+    let taxaEntrada: Tempo
+    let taxaSaida: Tempo
+    let kendall: Kendall
+    
+    public init(id: Int,
+                tipoDeFila: TipoDeFila,
+                taxaEntrada: Tempo = .init(inicio: 0, fim: 0),
                 taxaSaida: Tempo,
                 kendall: Kendall) {
+        self.id = id
         self.taxaEntrada = taxaEntrada
         self.taxaSaida = taxaSaida
         self.kendall = kendall
-        self.dados = .init(id: id)
+        self.tipoDeFila = tipoDeFila
     }
     
-    init(taxaEntrada: Tempo = .init(inicio: 0, fim: 0),
+    init(id: Int = 0,
+         tipoDeFila: TipoDeFila = .naoDefinida,
+         taxaEntrada: Tempo = .init(inicio: 0, fim: 0),
          taxaSaida: Tempo = .init(inicio: 0, fim: 0),
          kendall: Kendall = .init(),
-         dados: GerenciadorEstatisticas = .init(id: _id+1)) {
+         dados: GerenciadorEstatisticas? = nil) {
+        self.id = id
         self.taxaEntrada = taxaEntrada
         self.taxaSaida = taxaSaida
         self.kendall = kendall
-        self.dados = dados
+        self.tipoDeFila = tipoDeFila
+        if let dados = dados {
+            self.dados = dados
+        }
     }
     
     /// proxima saida que ocorrerá na fila
@@ -65,6 +69,9 @@ public class Fila: Hashable {
     
     /// aciona um evento de chegada na fila, disparando um ag de saida qdo necessario
     func chegada(tempo: Double) {
+        if primeiroTempo == nil {
+            primeiroTempo = tempo
+        }
         
         let quantAnteriorDaFila: Int = quantDaFila
         
@@ -109,5 +116,15 @@ public class Fila: Hashable {
             quantAnteriorDaFila: quantAnteriorDaFila,
             quantDaFila: quantDaFila,
             perdas: perdas)
+    }
+}
+
+extension Fila: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    public static func == (lhs: Fila, rhs: Fila) -> Bool {
+        lhs.id == rhs.id
     }
 }

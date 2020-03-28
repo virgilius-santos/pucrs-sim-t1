@@ -5,7 +5,7 @@ import XCTest
 class ConfigTests: XCTestCase {
 
     func testParse() {
-        let filaDummy = Fila()
+        let filaDummy = Fila(tipoDeFila: TipoDeFila.simples)
         
         let array: [Fila] = [
             Config.Evento.chegada(fila: filaDummy).filas,

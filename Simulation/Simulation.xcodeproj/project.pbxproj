@@ -29,6 +29,11 @@
 		18402521241D9461008DE504 /* Simulador.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402520241D9461008DE504 /* Simulador.swift */; };
 		189E2758242C4DDA0014D570 /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E2757242C4DDA0014D570 /* ConfigTests.swift */; };
 		189E275A242D7E1A0014D570 /* SimuladorFilaTandemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */; };
+		18E6CB19242F9B2D00B1FDA6 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB18242F9B2D00B1FDA6 /* StringExt.swift */; };
+		18E6CB1B242F9B4900B1FDA6 /* IntExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB1A242F9B4900B1FDA6 /* IntExt.swift */; };
+		18E6CB1D242F9B6500B1FDA6 /* DoubleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB1C242F9B6500B1FDA6 /* DoubleExt.swift */; };
+		18E6CB22242F9BD100B1FDA6 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB21242F9BD100B1FDA6 /* ArrayExt.swift */; };
+		18E6CB24242F9C1800B1FDA6 /* CollectionExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB23242F9C1800B1FDA6 /* CollectionExt.swift */; };
 		18FEC158241E484000A9C8E9 /* GerenciadorEstatisticas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FEC157241E484000A9C8E9 /* GerenciadorEstatisticas.swift */; };
 		18FEC15C241E49D100A9C8E9 /* Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FEC15B241E49D100A9C8E9 /* Alias.swift */; };
 /* End PBXBuildFile section */
@@ -69,6 +74,11 @@
 		18402520241D9461008DE504 /* Simulador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulador.swift; sourceTree = "<group>"; };
 		189E2757242C4DDA0014D570 /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
 		189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorFilaTandemTests.swift; sourceTree = "<group>"; };
+		18E6CB18242F9B2D00B1FDA6 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
+		18E6CB1A242F9B4900B1FDA6 /* IntExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExt.swift; sourceTree = "<group>"; };
+		18E6CB1C242F9B6500B1FDA6 /* DoubleExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExt.swift; sourceTree = "<group>"; };
+		18E6CB21242F9BD100B1FDA6 /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
+		18E6CB23242F9C1800B1FDA6 /* CollectionExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExt.swift; sourceTree = "<group>"; };
 		18FEC157241E484000A9C8E9 /* GerenciadorEstatisticas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GerenciadorEstatisticas.swift; sourceTree = "<group>"; };
 		18FEC15B241E49D100A9C8E9 /* Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alias.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +151,18 @@
 			path = SimulationTests;
 			sourceTree = "<group>";
 		};
+		18E6CB1E242F9B8A00B1FDA6 /* Ext */ = {
+			isa = PBXGroup;
+			children = (
+				18E6CB21242F9BD100B1FDA6 /* ArrayExt.swift */,
+				18E6CB23242F9C1800B1FDA6 /* CollectionExt.swift */,
+				18E6CB1C242F9B6500B1FDA6 /* DoubleExt.swift */,
+				18E6CB1A242F9B4900B1FDA6 /* IntExt.swift */,
+				18E6CB18242F9B2D00B1FDA6 /* StringExt.swift */,
+			);
+			path = Ext;
+			sourceTree = "<group>";
+		};
 		18FEC154241E47E500A9C8E9 /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +177,7 @@
 			children = (
 				1840251E241D93DA008DE504 /* Estatistica.swift */,
 				18FEC157241E484000A9C8E9 /* GerenciadorEstatisticas.swift */,
+				18E6CB1E242F9B8A00B1FDA6 /* Ext */,
 			);
 			path = Estatistica;
 			sourceTree = "<group>";
@@ -291,10 +314,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E6CB1D242F9B6500B1FDA6 /* DoubleExt.swift in Sources */,
 				18FEC158241E484000A9C8E9 /* GerenciadorEstatisticas.swift in Sources */,
 				1840250D241D155B008DE504 /* Fila.swift in Sources */,
+				18E6CB24242F9C1800B1FDA6 /* CollectionExt.swift in Sources */,
+				18E6CB22242F9BD100B1FDA6 /* ArrayExt.swift in Sources */,
 				18FEC15C241E49D100A9C8E9 /* Alias.swift in Sources */,
+				18E6CB1B242F9B4900B1FDA6 /* IntExt.swift in Sources */,
 				18402505241CFA16008DE504 /* Evento.swift in Sources */,
+				18E6CB19242F9B2D00B1FDA6 /* StringExt.swift in Sources */,
 				1840251F241D93DA008DE504 /* Estatistica.swift in Sources */,
 				1835E5BA241E799600526060 /* SimuladorEncadeadoPonderado.swift in Sources */,
 				1840250F241D189B008DE504 /* SimuladorSimples.swift in Sources */,
@@ -457,6 +485,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -473,6 +502,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.organization.Simulation;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -485,6 +515,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -501,6 +532,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.organization.Simulation;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

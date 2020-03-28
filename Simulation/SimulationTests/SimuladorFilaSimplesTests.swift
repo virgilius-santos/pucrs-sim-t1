@@ -21,6 +21,7 @@ class SimuladorFilaSimplesTests: XCTestCase {
             valoresFixos: valoresFixos)
         
         filaSpy1 = FilaSpy(
+            tipoDeFila: .simples,
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 3, fim: 6),
             kendall: kendall)

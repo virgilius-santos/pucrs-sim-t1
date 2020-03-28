@@ -25,11 +25,13 @@ class SimuladorFilaTandemTests: XCTestCase {
             valoresFixos: valoresFixos)
         
         filaSpy1 = FilaSpy(
+            tipoDeFila: .tandem,
             taxaEntrada: Tempo(inicio: 2, fim: 3),
             taxaSaida: Tempo(inicio: 2, fim: 5),
             kendall: kendall)
         
         filaSpy2 = FilaSpy(
+            tipoDeFila: .tandem,
             taxaSaida: Tempo(inicio: 3, fim: 5),
             kendall: Kendall(c: 1, k: 3))
         

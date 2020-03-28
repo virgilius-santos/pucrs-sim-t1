@@ -117,7 +117,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1120;
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Virgilius Santos";
 				TargetAttributes = {
 					18FEC190241E630C00A9C8E9 = {
@@ -272,6 +272,7 @@
 		18FEC199241E630C00A9C8E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KR99UBUHUT;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -283,6 +284,7 @@
 		18FEC19A241E630C00A9C8E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KR99UBUHUT;
 				ENABLE_HARDENED_RUNTIME = YES;

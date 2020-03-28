@@ -51,16 +51,3 @@ public class GerenciadorEstatisticas {
             contatores: contatores)
     }
 }
-
-public extension Array where Element == GerenciadorEstatisticas {
-    /// imprime no prompt as estatisticas
-    func imprimir(limit: Int = 5) {
-        print("--start--")
-        flatMap { $0.estatisticas }
-            .suffix(limit)
-            .sorted(by: { $0.filaID < $1.filaID && $0.tempo < $1.tempo })
-            .forEach { print($0) }
-        print("--end--")
-        print("--\n--")
-    }
-}

@@ -7,6 +7,7 @@ class EscalonadorTests: XCTestCase {
     var sut: Escalonador!
     
     let fila = Fila(
+        tipoDeFila: .simples,
         taxaEntrada: Tempo(inicio: 1, fim: 2),
         taxaSaida: Tempo(inicio: 2, fim: 4),
         kendall: Kendall(c: 2, k: 4, n: 25))
