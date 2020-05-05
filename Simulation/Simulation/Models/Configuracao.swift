@@ -27,6 +27,11 @@ public enum Config {
         /// configura a saída de uma fila
         case saida(fila: Fila)
         
+        /// configura a transicao de uma fila de origem para uma fila de destino
+        ///  com posibilidade de saida ou retorno para a mesma fila
+        case transicaoRede(origem: Fila,
+            destinos: [(fila: Fila, probabilidade: Double)])
+        
         /// retorna as filas que foram passadas para a configuração
         var filas: [Fila] {
             switch self {
@@ -40,6 +45,8 @@ public enum Config {
                     return [filaEntrada, filaSaida]
                 case let .saida(fila):
                     return [fila]
+                case let .transicaoRede(filaEntrada, destinos):
+                    return [filaEntrada] + destinos.map { $0.fila }
             }
         }
     }

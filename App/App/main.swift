@@ -3,9 +3,7 @@ import Foundation
 import Simulation
 
 enum Simuladores {
-    case simples
-    case simples1, simples2
-    case tendam
+    case simples, tendam, rede
 }
 
 func exec(_ tipoSimulador: Simuladores) -> [Fila] {
@@ -19,31 +17,31 @@ func exec(_ tipoSimulador: Simuladores) -> [Fila] {
                 taxaSaidaFila2: Tempo(inicio: 3, fim: 5),
                 kendallFila2: Kendall(c: 1, k: 3, n: 100000))
 
-        case .simples1:
-            return FilaSimples(
-                valoresFixos: [0.5],
-                taxaEntrada: Tempo(inicio: 2, fim: 4),
-                taxaSaida: Tempo(inicio: 3, fim: 5),
-                kendall: Kendall(
-                    a: "G",
-                    b: "G",
-                    c: 1,
-                    k: 5,
-                    n: 100000,
-                    d: 10))
-
-        case .simples2:
-            return FilaSimples(
-                valoresFixos: [0.5],
-                taxaEntrada: Tempo(inicio: 2, fim: 4),
-                taxaSaida: Tempo(inicio: 3, fim: 5),
-                kendall: Kendall(
-                    a: "G",
-                    b: "G",
-                    c: 2,
-                    k: 5,
-                    n: 100000,
-                    d: 10))
+//        case .simples1:
+//            return FilaSimples(
+//                valoresFixos: [0.5],
+//                taxaEntrada: Tempo(inicio: 2, fim: 4),
+//                taxaSaida: Tempo(inicio: 3, fim: 5),
+//                kendall: Kendall(
+//                    a: "G",
+//                    b: "G",
+//                    c: 1,
+//                    k: 5,
+//                    n: 100000,
+//                    d: 10))
+//
+//        case .simples2:
+//            return FilaSimples(
+//                valoresFixos: [0.5],
+//                taxaEntrada: Tempo(inicio: 2, fim: 4),
+//                taxaSaida: Tempo(inicio: 3, fim: 5),
+//                kendall: Kendall(
+//                    a: "G",
+//                    b: "G",
+//                    c: 2,
+//                    k: 5,
+//                    n: 100000,
+//                    d: 10))
 
         case .simples:
             return FilaSimples(
@@ -57,6 +55,9 @@ func exec(_ tipoSimulador: Simuladores) -> [Fila] {
                     k: 3,
                     n: 100000,
                     d: 10))
+        
+        case .rede:
+            return FilaRede()
     }
 }
 
@@ -95,6 +96,6 @@ var filas: [Fila]
 filas = [Fila]()
 for i in 0 ..< 5 {
     Config.CongruenteLinear.semente = sementes[i]
-    filas += exec(.tendam)
+    filas += exec(.rede)
 }
 filas.imprimir()

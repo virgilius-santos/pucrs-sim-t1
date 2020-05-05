@@ -128,6 +128,10 @@ extension Simulador {
             
             case let .saida(fila):
                 configurarAgendamentoDeSaida(fila)
+            
+            case let .transicaoRede(filaDeOrigem, destinos):
+                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem,
+                                                 destinos: destinos)
         }
     }
     
@@ -193,6 +197,51 @@ extension Simulador {
                                               filaDeDestino: filaDeDestino,
                                               randomUniformizado: randomUniformizado)
                 }
+            }
+        }
+    }
+    
+    private func configurarAgendamentoDeTransicao(
+        filaDeOrigem: Fila,
+        destinos: [(fila: Fila, probabilidade: Double)]
+    ) {
+        
+        var destinosNormalizados: [(fila: Fila, probabilidade: Double)]
+        
+        let probabilidadeTotal = destinos
+            .map { $0.probabilidade }
+            .reduce(0, +)
+        
+        if probabilidadeTotal > 1 {
+            destinosNormalizados = destinos
+                .map { ($0.fila, $0.probabilidade / probabilidadeTotal )}
+        }
+        else {
+            destinosNormalizados = destinos
+        }
+        
+        filaDeOrigem.agendarSaida = { [weak self] in
+            if
+                let self = self,
+                let randomUniformizado = self.random.uniformizado()
+            {
+                
+                var aux: Double = 0
+                for dest in destinosNormalizados {
+                    if randomUniformizado <= (dest.probabilidade + aux) {
+                        self.gerarEventoTransicao(
+                            filaDeOrigem: filaDeOrigem,
+                            filaDeDestino: dest.fila,
+                            randomUniformizado: randomUniformizado)
+                        return
+                    }
+                    else {
+                        aux += dest.probabilidade
+                    }
+                }
+                
+                self.gerarEventoSaida(filaDeOrigem,
+                                      randomUniformizado: randomUniformizado)
             }
         }
     }
