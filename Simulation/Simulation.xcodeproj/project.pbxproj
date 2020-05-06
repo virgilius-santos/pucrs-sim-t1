@@ -27,6 +27,8 @@
 		1840251D241D90BE008DE504 /* SimuladorEncadeado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251C241D90BE008DE504 /* SimuladorEncadeado.swift */; };
 		1840251F241D93DA008DE504 /* Estatistica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251E241D93DA008DE504 /* Estatistica.swift */; };
 		18402521241D9461008DE504 /* Simulador.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402520241D9461008DE504 /* Simulador.swift */; };
+		187FF65924617B17004F4418 /* SimuladorFilaRedeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF65824617B17004F4418 /* SimuladorFilaRedeTests.swift */; };
+		187FF65B246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF65A246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift */; };
 		189E2758242C4DDA0014D570 /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E2757242C4DDA0014D570 /* ConfigTests.swift */; };
 		189E275A242D7E1A0014D570 /* SimuladorFilaTandemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */; };
 		18E6CB19242F9B2D00B1FDA6 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB18242F9B2D00B1FDA6 /* StringExt.swift */; };
@@ -72,6 +74,8 @@
 		1840251C241D90BE008DE504 /* SimuladorEncadeado.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorEncadeado.swift; sourceTree = "<group>"; };
 		1840251E241D93DA008DE504 /* Estatistica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Estatistica.swift; sourceTree = "<group>"; };
 		18402520241D9461008DE504 /* Simulador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulador.swift; sourceTree = "<group>"; };
+		187FF65824617B17004F4418 /* SimuladorFilaRedeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorFilaRedeTests.swift; sourceTree = "<group>"; };
+		187FF65A246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorFilaRoteadaSimplesTests.swift; sourceTree = "<group>"; };
 		189E2757242C4DDA0014D570 /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
 		189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorFilaTandemTests.swift; sourceTree = "<group>"; };
 		18E6CB18242F9B2D00B1FDA6 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
@@ -146,6 +150,8 @@
 				1840250A241D136B008DE504 /* TempoTests.swift */,
 				18402510241D18C4008DE504 /* SimuladorFilaSimplesTests.swift */,
 				189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */,
+				187FF65A246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift */,
+				187FF65824617B17004F4418 /* SimuladorFilaRedeTests.swift */,
 				1840251A241D856A008DE504 /* SimuladorIntegracao.swift */,
 			);
 			path = SimulationTests;
@@ -343,6 +349,8 @@
 				18402513241D1C79008DE504 /* FilaTests.swift in Sources */,
 				189E275A242D7E1A0014D570 /* SimuladorFilaTandemTests.swift in Sources */,
 				1840251B241D856A008DE504 /* SimuladorIntegracao.swift in Sources */,
+				187FF65B246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift in Sources */,
+				187FF65924617B17004F4418 /* SimuladorFilaRedeTests.swift in Sources */,
 				189E2758242C4DDA0014D570 /* ConfigTests.swift in Sources */,
 				184024F1241CEDEA008DE504 /* CongruenteLinearTests.swift in Sources */,
 				1840250B241D136B008DE504 /* TempoTests.swift in Sources */,
@@ -486,10 +494,10 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = KR99UBUHUT;
+				DEVELOPMENT_TEAM = WG2MU2748H;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -516,10 +524,10 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = KR99UBUHUT;
+				DEVELOPMENT_TEAM = WG2MU2748H;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -544,9 +552,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = KR99UBUHUT;
+				DEVELOPMENT_TEAM = WG2MU2748H;
 				INFOPLIST_FILE = SimulationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -555,6 +563,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.organization.SimulationTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_VERSION = 5.0;
@@ -566,9 +575,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = KR99UBUHUT;
+				DEVELOPMENT_TEAM = WG2MU2748H;
 				INFOPLIST_FILE = SimulationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -577,6 +586,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.organization.SimulationTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_VERSION = 5.0;

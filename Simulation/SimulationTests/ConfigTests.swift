@@ -13,10 +13,12 @@ class ConfigTests: XCTestCase {
             Config.Evento.transicao(origem: filaDummy, destino: filaDummy).filas,
             Config.Evento.transicaoPonderada(origem: filaDummy, destino: filaDummy, taxa: 0).filas,
             Config.Evento.transicaoPonderadaComRetorno(origem: filaDummy, destino: filaDummy, saida: 0, retorno: 0).filas,
+            
+            Config.Evento.transicaoRede(origem: filaDummy, destinos: [(filaDummy, 0), (filaDummy, 0)]).filas,
             ]
             .flatMap { $0 }
         
-        XCTAssertEqual(array.count, 8)
+        XCTAssertEqual(array.count, 11)
         XCTAssertEqual(Set<Fila>(array).count, 1)
     }
 }

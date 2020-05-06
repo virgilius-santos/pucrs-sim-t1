@@ -2,7 +2,7 @@
 import Foundation
 
 public enum TipoDeFila: String {
-    case simples, tandem, naoDefinida
+    case simples, tandem, naoDefinida, rede
 }
 
 public class Fila {

@@ -38,6 +38,77 @@ class SimuladorFilaSimplesTests: XCTestCase {
         escalonadorSpy = nil
     }
     
+    func test_filaSimples_loopCompleto() {
+        
+        setupFilaSimples()
+        
+        for _ in 0 ..< 6 {
+            XCTAssertTrue(sut.rodarPassoDaSimulacao())
+        }
+        
+        XCTAssertFalse(sut.rodarPassoDaSimulacao())
+        XCTAssertFalse(sut.rodarPassoDaSimulacao())
+        
+        let chegadas = filaSpy1.chegadaTempoSpy
+        let saidas = filaSpy1.saidaTempoSpy
+        let randoms = randomSpy.uniformizadoSpy
+        let eventos = escalonadorSpy.eventoSpy
+        let proximos = escalonadorSpy.proximoSpy
+        let filas = escalonadorSpy.filaSpy
+        let proximaChegadas = filaSpy1.proximaChegadaSpy
+        let proximaSaida = filaSpy1.proximaSaidaSpy
+        
+        randoms
+            .enumerated()
+            .forEach { XCTAssertEqual(self.valoresFixos[$0.offset], $0.element) }
+        
+        XCTAssertEqual(filaSpy1.perdasSpy, 1)
+        
+        XCTAssertEqual(proximos[0].tempo, 2.0)
+        XCTAssertEqual(proximos[0].evt!.tipo, .chegada)
+        XCTAssertEqual(proximos[1].tempo, 3.8851)
+        XCTAssertEqual(proximos[1].evt!.tipo, .chegada)
+        XCTAssertEqual(proximos[2].tempo, 5.0494)
+        XCTAssertEqual(proximos[2].evt!.tipo, .chegada)
+        XCTAssertEqual(proximos[3].tempo, 5.9828)
+        XCTAssertEqual(proximos[3].evt!.tipo, .saida)
+        XCTAssertEqual(proximos[4].tempo, 6.6036)
+        XCTAssertEqual(proximos[4].evt!.tipo, .chegada)
+        XCTAssertEqual(proximos[5].tempo, 8.3257)
+        XCTAssertEqual(proximos[5].evt!.tipo, .chegada)
+        
+        XCTAssertEqual(filas[0].tempo, 11.0267)
+        XCTAssertEqual(filas[0].evento.tipo, .saida)
+        XCTAssertEqual(filas[1].tempo, 10.3138, accuracy: 0.0001)
+        XCTAssertEqual(filas[1].evento.tipo, .chegada)
+        
+        XCTAssertEqual(eventos[0].tempo, 2.0)
+        XCTAssertEqual(eventos[0].tipo, .chegada)
+        XCTAssertEqual(eventos[1].tempo, 3.9828)
+        XCTAssertEqual(eventos[1].tipo, .saida)
+        XCTAssertEqual(eventos[2].tempo, 1.8851)
+        XCTAssertEqual(eventos[2].tipo, .chegada)
+        XCTAssertEqual(eventos[3].tempo, 1.1643)
+        XCTAssertEqual(eventos[3].tipo, .chegada)
+        XCTAssertEqual(eventos[4].tempo, 1.5542)
+        XCTAssertEqual(eventos[4].tipo, .chegada)
+        XCTAssertEqual(eventos[5].tempo, 5.0439)
+        XCTAssertEqual(eventos[5].tipo, .saida)
+        XCTAssertEqual(eventos[6].tempo, 1.7221)
+        XCTAssertEqual(eventos[6].tipo, .chegada)
+        XCTAssertEqual(eventos[7].tempo, 1.9881)
+        XCTAssertEqual(eventos[7].tipo, .chegada)
+        
+        XCTAssertEqual(chegadas.count, 5)
+        XCTAssertEqual(saidas.count, 1)
+        XCTAssertEqual(eventos.count, 8)
+        XCTAssertEqual(proximos.count, 6)
+        XCTAssertEqual(filas.count, 2)
+        XCTAssertEqual(randoms.count, 8)
+        XCTAssertEqual(proximaChegadas.count, 6)
+        XCTAssertEqual(proximaSaida.count, 2)
+    }
+    
     func test_filaSimples_configuracaoDeEventos() {
         
         setupFilaSimples()
@@ -117,7 +188,6 @@ class SimuladorFilaSimplesTests: XCTestCase {
         XCTAssertEqual(eventos[0].tipo, .chegada)
         XCTAssertEqual(randoms[0], valoresFixos[3])
         XCTAssertEqual(proximaChegadas[0], 1.1643)
-//        XCTAssertEqual(proximaSaida[0], 3.9828)
         XCTAssertEqual(eventos[0].tempo, 1.1643)
         XCTAssertEqual(eventos[0].fila, filaSpy1)
         
@@ -151,91 +221,12 @@ class SimuladorFilaSimplesTests: XCTestCase {
         XCTAssertEqual(eventos[0].tempo, 5.0439)
         XCTAssertEqual(eventos[0].fila, filaSpy1)
         
-        // agendamento de chegada
-//        XCTAssertEqual(eventos[0].tipo, .chegada)
-//        XCTAssertEqual(randoms[0], valoresFixos[4])
-//        XCTAssertEqual(proximaChegadas[0], 1.5542)
-//        XCTAssertEqual(proximaSaida[0], 3.9828)
-//        XCTAssertEqual(eventos[0].tempo, 1.5542)
-//        XCTAssertEqual(eventos[0].fila, filaSpy1)
-        
         XCTAssertEqual(chegadas.count, 0)
         XCTAssertEqual(saidas.count, 1)
         XCTAssertEqual(eventos.count, 1)
         XCTAssertEqual(randoms.count, 1)
         XCTAssertEqual(proximaChegadas.count, 0)
         XCTAssertEqual(proximaSaida.count, 1)
-    }
-    
-    func test_filaSimples_loopCompleto() {
-        
-        setupFilaSimples()
-        
-        for _ in 0 ..< 6 {
-            XCTAssertTrue(sut.rodarPassoDaSimulacao())
-        }
-        
-        XCTAssertFalse(sut.rodarPassoDaSimulacao())
-        XCTAssertFalse(sut.rodarPassoDaSimulacao())
-        
-        let chegadas = filaSpy1.chegadaTempoSpy
-        let saidas = filaSpy1.saidaTempoSpy
-        let randoms = randomSpy.uniformizadoSpy
-        let eventos = escalonadorSpy.eventoSpy
-        let proximos = escalonadorSpy.proximoSpy
-        let filas = escalonadorSpy.filaSpy
-        let proximaChegadas = filaSpy1.proximaChegadaSpy
-        let proximaSaida = filaSpy1.proximaSaidaSpy
-        
-        randoms
-            .enumerated()
-            .forEach { XCTAssertEqual(self.valoresFixos[$0.offset], $0.element) }
-
-        XCTAssertEqual(filaSpy1.perdasSpy, 1)
-        
-        XCTAssertEqual(proximos[0].tempo, 2.0)
-        XCTAssertEqual(proximos[0].evt!.tipo, .chegada)
-        XCTAssertEqual(proximos[1].tempo, 3.8851)
-        XCTAssertEqual(proximos[1].evt!.tipo, .chegada)
-        XCTAssertEqual(proximos[2].tempo, 5.0494)
-        XCTAssertEqual(proximos[2].evt!.tipo, .chegada)
-        XCTAssertEqual(proximos[3].tempo, 5.9828)
-        XCTAssertEqual(proximos[3].evt!.tipo, .saida)
-        XCTAssertEqual(proximos[4].tempo, 6.6036)
-        XCTAssertEqual(proximos[4].evt!.tipo, .chegada)
-        XCTAssertEqual(proximos[5].tempo, 8.3257)
-        XCTAssertEqual(proximos[5].evt!.tipo, .chegada)
-        
-        XCTAssertEqual(filas[0].tempo, 11.0267)
-        XCTAssertEqual(filas[0].evento.tipo, .saida)
-        XCTAssertEqual(filas[1].tempo, 10.3138, accuracy: 0.0001)
-        XCTAssertEqual(filas[1].evento.tipo, .chegada)
-        
-        XCTAssertEqual(eventos[0].tempo, 2.0)
-        XCTAssertEqual(eventos[0].tipo, .chegada)
-        XCTAssertEqual(eventos[1].tempo, 3.9828)
-        XCTAssertEqual(eventos[1].tipo, .saida)
-        XCTAssertEqual(eventos[2].tempo, 1.8851)
-        XCTAssertEqual(eventos[2].tipo, .chegada)
-        XCTAssertEqual(eventos[3].tempo, 1.1643)
-        XCTAssertEqual(eventos[3].tipo, .chegada)
-        XCTAssertEqual(eventos[4].tempo, 1.5542)
-        XCTAssertEqual(eventos[4].tipo, .chegada)
-        XCTAssertEqual(eventos[5].tempo, 5.0439)
-        XCTAssertEqual(eventos[5].tipo, .saida)
-        XCTAssertEqual(eventos[6].tempo, 1.7221)
-        XCTAssertEqual(eventos[6].tipo, .chegada)
-        XCTAssertEqual(eventos[7].tempo, 1.9881)
-        XCTAssertEqual(eventos[7].tipo, .chegada)
-        
-        XCTAssertEqual(chegadas.count, 5)
-        XCTAssertEqual(saidas.count, 1)
-        XCTAssertEqual(eventos.count, 8)
-        XCTAssertEqual(proximos.count, 6)
-        XCTAssertEqual(filas.count, 2)
-        XCTAssertEqual(randoms.count, 8)
-        XCTAssertEqual(proximaChegadas.count, 6)
-        XCTAssertEqual(proximaSaida.count, 2)
     }
     
     func executarEventos(pulando: Int) {
