@@ -112,92 +112,38 @@ extension Simulador {
                 gerarEventoChegada(fila)
             
             case let .transicao(filaDeOrigem, filaDeDestino):
-                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem,
-                                                 filaDeDestino: filaDeDestino)
+                configurarAgendamentoDeTransicao(
+                    filaDeOrigem: filaDeOrigem,
+                    destinos: [(filaDeDestino, 1)])
+//                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem,
+//                                                 filaDeDestino: filaDeDestino)
             
             case let .transicaoPonderada(filaDeOrigem, filaDeDestino, saida):
-                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem,
-                                                 filaDeDestino: filaDeDestino,
-                                                 saida: saida)
+                configurarAgendamentoDeTransicao(
+                    filaDeOrigem: filaDeOrigem,
+                    destinos: [(filaDeDestino, 1 - saida)])
+//                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem,
+//                                                 filaDeDestino: filaDeDestino,
+//                                                 saida: saida)
             
             case let .transicaoPonderadaComRetorno(filaDeOrigem, filaDeDestino, saida, retorno):
-                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem,
-                                                 filaDeDestino: filaDeDestino,
-                                                 saida: saida,
-                                                 retorno: retorno)
+                configurarAgendamentoDeTransicao(
+                    filaDeOrigem: filaDeOrigem,
+                    destinos: [(filaDeDestino, 1 - saida - retorno),
+                               (filaDeOrigem, retorno)])
+//                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem,
+//                                                 filaDeDestino: filaDeDestino,
+//                                                 saida: saida,
+//                                                 retorno: retorno)
             
             case let .saida(fila):
-                configurarAgendamentoDeSaida(fila)
+                configurarAgendamentoDeTransicao(filaDeOrigem: fila,
+                                                 destinos: [])
+//                configurarAgendamentoDeSaida(fila)
             
             case let .transicaoRede(filaDeOrigem, destinos):
                 configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem,
                                                  destinos: destinos)
-        }
-    }
-    
-    /// configura a saida da fila
-    private func configurarAgendamentoDeSaida(_ fila: Fila) {
-        fila.agendarSaida = { [weak self] in
-            if
-                let self = self,
-                let randomUniformizado = self.random.uniformizado()
-            {
-                self.gerarEventoSaida(fila, randomUniformizado: randomUniformizado)
-            }
-        }
-    }
-    
-    /**
-     configura a transicao de uma fila para outra fila, para a saida ou para a mesma fila.
-     
-     A prioridade é para saida, ou seja, se o parametro SAIDA for 100% será gerado um evento de saída.
-     
-     O RETORNO é caculado: (100% - SAIDA) * RETORNO + SAIDA, ou seja,
-     se a SAIDA = 20%, e o RETORNO = 40% a probabilidade de retorno é (100% - 20%) * 40% + 20% = 52%,
-     
-     então entre 0 e 20% a probabilidade de ir pra saida,
-     entre 20 e 52% a probabilidade de ir pra mesma fila,
-     e acima disse a probabilidade de ir pra fila de saida
-     
-     como visto no exemplo acima, o Agendamento é deirecionado a fila de saida somente se nenhum dos outros critérios for atendido.
-     
-     - parameter saida: Probabilidade em porcentagem do evento direcionar para saida.
-     - parameter retorno: Probabilidade em porcentagem do evento direcionar para a mesma fila.
-     */
-    private func configurarAgendamentoDeTransicao(filaDeOrigem: Fila,
-                                          filaDeDestino: Fila,
-                                          saida: Double = 0,
-                                          retorno: Double = 0) {
-        var taxaDeSaida: Double = saida
-        taxaDeSaida = min(taxaDeSaida, 1)
-        taxaDeSaida = max(taxaDeSaida, 0)
-        
-        var taxaDeRetorno: Double = retorno
-        taxaDeRetorno = min(taxaDeRetorno, 1)
-        taxaDeRetorno = max(taxaDeRetorno, 0)
-        taxaDeRetorno = (1 - taxaDeSaida) * taxaDeRetorno + taxaDeSaida
-        
-        filaDeOrigem.agendarSaida = { [weak self] in
-            if
-                let self = self,
-                let randomUniformizado = self.random.uniformizado()
-            {
-                
-                if randomUniformizado < taxaDeSaida {
-                    self.gerarEventoSaida(filaDeOrigem,
-                                          randomUniformizado: randomUniformizado)
-                }
-                else if randomUniformizado < taxaDeRetorno {
-                    self.gerarEventoTransicao(filaDeOrigem: filaDeOrigem,
-                                              filaDeDestino: filaDeOrigem,
-                                              randomUniformizado: randomUniformizado)
-                }
-                else {
-                    self.gerarEventoTransicao(filaDeOrigem: filaDeOrigem,
-                                              filaDeDestino: filaDeDestino,
-                                              randomUniformizado: randomUniformizado)
-                }
-            }
         }
     }
     
@@ -208,20 +154,9 @@ extension Simulador {
         
         var destinosNormalizados: [(fila: Fila, probabilidade: Double)]
         
-        let probabilidadeTotal = destinos
-            .map { $0.probabilidade }
-            .reduce(0, +)
-        
-        if probabilidadeTotal > 1 {
-            destinosNormalizados = destinos
-                .map { ($0.fila, $0.probabilidade / probabilidadeTotal )}
-        }
-        else {
-            destinosNormalizados = destinos
-        }
-        
-        destinosNormalizados.sort(by: { $0.probabilidade < $1.probabilidade })
-        
+        destinosNormalizados = destinos
+            .sorted(by: { $0.probabilidade < $1.probabilidade })
+                    
         filaDeOrigem.agendarSaida = { [weak self] in
             if
                 let self = self,
@@ -229,6 +164,7 @@ extension Simulador {
             {
                 
                 var aux: Double = 0
+                
                 for dest in destinosNormalizados {
                     if randomUniformizado <= (dest.probabilidade + aux) {
                         self.gerarEventoTransicao(
@@ -247,4 +183,70 @@ extension Simulador {
             }
         }
     }
+    
+    /// configura a saida da fila
+//    private func configurarAgendamentoDeSaida(_ fila: Fila) {
+//        fila.agendarSaida = { [weak self] in
+//            if
+//                let self = self,
+//                let randomUniformizado = self.random.uniformizado()
+//            {
+//                self.gerarEventoSaida(fila, randomUniformizado: randomUniformizado)
+//            }
+//        }
+//    }
+    
+    /**
+     configura a transicao de uma fila para outra fila, para a saida ou para a mesma fila.
+     
+     A prioridade é para saida, ou seja, se o parametro SAIDA for 100% será gerado um evento de saída.
+     
+     O RETORNO é caculado: (100% - SAIDA) * RETORNO + SAIDA, ou seja,
+     se a SAIDA = 20%, e o RETORNO = 40% a probabilidade de retorno é (100% - 20%) * 40% + 20% = 52%,
+     
+     então entre 0 e 20% a probabilidade de ir pra saida,
+     entre 20 e 52% a probabilidade de ir pra mesma fila,
+     e acima disse a probabilidade de ir pra fila de saida
+     
+     como visto no exemplo acima, o Agendamento é deirecionado a fila de saida somente se nenhum dos outros critérios for atendido.
+     
+     - parameter saida: Probabilidade em porcentagem do evento direcionar para saida.
+     - parameter retorno: Probabilidade em porcentagem do evento direcionar para a mesma fila.
+     */
+//    private func configurarAgendamentoDeTransicao(filaDeOrigem: Fila,
+//                                          filaDeDestino: Fila,
+//                                          saida: Double = 0,
+//                                          retorno: Double = 0) {
+//        var taxaDeSaida: Double = saida
+//        taxaDeSaida = min(taxaDeSaida, 1)
+//        taxaDeSaida = max(taxaDeSaida, 0)
+//
+//        var taxaDeRetorno: Double = retorno
+//        taxaDeRetorno = min(taxaDeRetorno, 1)
+//        taxaDeRetorno = max(taxaDeRetorno, 0)
+//        taxaDeRetorno = (1 - taxaDeSaida) * taxaDeRetorno + taxaDeSaida
+//
+//        filaDeOrigem.agendarSaida = { [weak self] in
+//            if
+//                let self = self,
+//                let randomUniformizado = self.random.uniformizado()
+//            {
+//
+//                if randomUniformizado < taxaDeSaida {
+//                    self.gerarEventoSaida(filaDeOrigem,
+//                                          randomUniformizado: randomUniformizado)
+//                }
+//                else if randomUniformizado < taxaDeRetorno {
+//                    self.gerarEventoTransicao(filaDeOrigem: filaDeOrigem,
+//                                              filaDeDestino: filaDeOrigem,
+//                                              randomUniformizado: randomUniformizado)
+//                }
+//                else {
+//                    self.gerarEventoTransicao(filaDeOrigem: filaDeOrigem,
+//                                              filaDeDestino: filaDeDestino,
+//                                              randomUniformizado: randomUniformizado)
+//                }
+//            }
+//        }
+//    }
 }

@@ -66,23 +66,23 @@ func FilaRede() -> [Fila] {
                                   valoresFixos: [2.0/3])
     
     let fila1 = Fila(
-        id: 0,
+        id: 1,
         tipoDeFila: .rede,
         taxaEntrada: Tempo(inicio: 1, fim: 4),
         taxaSaida: Tempo(inicio: 1, fim: 1.5),
         kendall: kendallFila1)
     
     let fila2 = Fila(
-        id: 1,
-        tipoDeFila: .rede,
-        taxaSaida: Tempo(inicio: 5, fim: 10),
-        kendall: Kendall(c: 3, k: 5))
-    
-    let fila3 = Fila(
         id: 2,
         tipoDeFila: .rede,
+        taxaSaida: Tempo(inicio: 5, fim: 10),
+        kendall: Kendall(c: 3, k: 5, n: 100000))
+    
+    let fila3 = Fila(
+        id: 3,
+        tipoDeFila: .rede,
         taxaSaida: Tempo(inicio: 2, fim: 8),
-        kendall: Kendall(c: 10, k: 20))
+        kendall: Kendall(c: 10, k: 20, n: 100000))
     
     let sut = Simulador(
         configDeEventos: [

@@ -124,7 +124,7 @@ class SimuladorFilaRedeTests: XCTestCase {
 
         setupFilaRede()
 
-        for i in 0 ..< 17 {
+        for i in 0 ..< 16 {
             XCTAssertTrue(sut.rodarPassoDaSimulacao(), "index: \(i)")
         }
 
@@ -151,7 +151,7 @@ class SimuladorFilaRedeTests: XCTestCase {
         XCTAssertEqual(eventos[0].tipo, .chegada)
        
         XCTAssertEqual(estatisticasFila1.perdas, 0)
-        XCTAssertEqual(estatisticasFila1.tempo, 17.4, accuracy: 0.0001)
+        XCTAssertEqual(estatisticasFila1.tempo, 14.9, accuracy: 0.0001)
     }
     
     func executarEventos(pulando: Int) {
