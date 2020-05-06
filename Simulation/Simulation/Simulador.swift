@@ -220,6 +220,8 @@ extension Simulador {
             destinosNormalizados = destinos
         }
         
+        destinosNormalizados.sort(by: { $0.probabilidade < $1.probabilidade })
+        
         filaDeOrigem.agendarSaida = { [weak self] in
             if
                 let self = self,
