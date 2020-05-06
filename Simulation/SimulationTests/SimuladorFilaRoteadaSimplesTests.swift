@@ -14,8 +14,8 @@ class SimuladorFilaRoteadaSimplesTests: XCTestCase {
     
     override func setUp() {
         valoresFixos = [
-            1, 0.0103, 0.1109, 0.9910, 0.2323, 0.9211,
-            0.1211 , 0.5131, 0.7208, 0.9922, 0.5011, 0.2931
+            1, 0.2176, 0.0103, 0.1109, 0.3456, 0.9910, 0.2323, 0.9211, 0.0322,
+            0.1211 , 0.5131, 0.7208, 0.9172, 0.9922, 0.8324, 0.5011, 0.2931
         ]
         
         kendall = Kendall(c: 2, k: 4, n: valoresFixos.count)
@@ -53,8 +53,8 @@ class SimuladorFilaRoteadaSimplesTests: XCTestCase {
     func test_filaRede_loopCompleto() {
         
         setupFilaRede()
-        clearSpy()
-        for i in 0 ..< 9 {
+        
+        for i in 0 ..< 8 {
             XCTAssertTrue(sut.rodarPassoDaSimulacao(), "index: \(i)")
         }
         
@@ -77,114 +77,87 @@ class SimuladorFilaRoteadaSimplesTests: XCTestCase {
         let proximos = escalonadorSpy.proximoSpy
         let filas = escalonadorSpy.filaSpy
         
-//        self.valoresFixos
-//            .enumerated()
-//            .forEach { XCTAssertEqual(randoms[$0.offset], $0.element) }
+        self.valoresFixos
+            .enumerated()
+            .forEach { XCTAssertEqual(randoms[$0.offset], $0.element) }
 
         XCTAssertEqual(filaSpy1.perdasSpy, -1)
         XCTAssertEqual(filaSpy2.perdasSpy, -1)
 
         XCTAssertFalse(filaSpy1 == filaSpy2)
 
-//        XCTAssertEqual(proximos[0].tempo, 3)
-//        XCTAssertEqual(proximos[0].evt!.tipo, .chegada)
-//        XCTAssertEqual(proximos[0].evt!.fila, filaSpy1)
-//        XCTAssertEqual(proximos[1].tempo, 4.5004)
-//        XCTAssertEqual(proximos[1].evt!.tipo, .chegada)
-//        XCTAssertEqual(proximos[1].evt!.fila, filaSpy1)
-//        XCTAssertEqual(proximos[2].tempo, 6.7765)
-//        XCTAssertEqual(proximos[2].evt!.tipo, .chegada)
-//        XCTAssertEqual(proximos[2].evt!.fila, filaSpy1)
-//        XCTAssertEqual(proximos[3].tempo, 7.4763)
-//        XCTAssertEqual(proximos[3].evt!.tipo, .transicao)
-//        XCTAssertEqual(proximos[3].evt!.fila, filaSpy1)
-//        XCTAssertEqual(proximos[4].tempo, 8.1606)
-//        XCTAssertEqual(proximos[4].evt!.tipo, .transicao)
-//        XCTAssertEqual(proximos[4].evt!.fila, filaSpy1)
-//        XCTAssertEqual(proximos[5].tempo, 9.1163)
-//        XCTAssertEqual(proximos[5].evt!.tipo, .chegada)
-//        XCTAssertEqual(proximos[5].evt!.fila, filaSpy1)
-//        XCTAssertEqual(proximos[6].tempo, 11.1559)
-//        XCTAssertEqual(proximos[6].evt!.tipo, .transicao)
-//        XCTAssertEqual(proximos[6].evt!.fila, filaSpy1)
-//        XCTAssertEqual(proximos[7].tempo, 11.5732)
-//        XCTAssertEqual(proximos[7].evt!.tipo, .chegada)
-//        XCTAssertEqual(proximos[7].evt!.fila, filaSpy1)
-//        XCTAssertEqual(proximos[8].tempo, 12.1652)
-//        XCTAssertEqual(proximos[8].evt!.tipo, .transicao)
-//        XCTAssertEqual(proximos[8].evt!.fila, filaSpy1)
-//        XCTAssertEqual(proximos[9].tempo, 12.2809, accuracy: 0.0001)
-//        XCTAssertEqual(proximos[9].evt!.tipo, .saida)
-//        XCTAssertEqual(proximos[9].evt!.fila, filaSpy2)
-//        XCTAssertEqual(proximos[10].tempo, 14.494)
-//        XCTAssertEqual(proximos[10].evt!.tipo, .chegada)
-//        XCTAssertEqual(proximos[10].evt!.fila, filaSpy1)
-//        XCTAssertEqual(proximos[11].tempo, 15.1095)
-//        XCTAssertEqual(proximos[11].evt!.tipo, .transicao)
-//        XCTAssertEqual(proximos[11].evt!.fila, filaSpy1)
-//        XCTAssertEqual(proximos[12].tempo, 15.3151)
-//        XCTAssertEqual(proximos[12].evt!.tipo, .saida)
-//        XCTAssertEqual(proximos[12].evt!.fila, filaSpy2)
-//        XCTAssertEqual(proximos[13].tempo, 17.1837)
-//        XCTAssertEqual(proximos[13].evt!.tipo, .transicao)
-//        XCTAssertEqual(proximos[13].evt!.fila, filaSpy1)
-//        XCTAssertEqual(proximos[14].tempo, 17.3485)
-//        XCTAssertEqual(proximos[14].evt!.tipo, .chegada)
-//        XCTAssertEqual(proximos[14].evt!.fila, filaSpy1)
-//
-//        XCTAssertEqual(filas[0].tempo, 20.2248, accuracy: 0.0001)
-//        XCTAssertEqual(filas[0].evento.tipo, .transicao)
-//        XCTAssertEqual(filas[1].tempo, 19.5153, accuracy: 0.0001)
-//        XCTAssertEqual(filas[1].evento.tipo, .saida)
-//
-        XCTAssertEqual(eventos[0].tempo, 4.0309)
-        XCTAssertEqual(eventos[0].tipo, .transicao)
-        XCTAssertEqual(eventos[1].tempo, 2.1109)
-        XCTAssertEqual(eventos[1].tipo, .chegada)
-        XCTAssertEqual(eventos[2].tempo, 6.9730, accuracy: 0.0001)
-        XCTAssertEqual(eventos[2].tipo, .transicao)
-        XCTAssertEqual(eventos[3].tempo, 2.2323)
-        XCTAssertEqual(eventos[3].tipo, .chegada)
-        XCTAssertEqual(eventos[4].tempo, 7.6844)
-        XCTAssertEqual(eventos[4].tipo, .saida)
-        XCTAssertEqual(eventos[5].tempo, 2.3398)
-        XCTAssertEqual(eventos[5].tipo, .transicao)
-        XCTAssertEqual(eventos[6].tempo, 4.6889)
-        XCTAssertEqual(eventos[6].tipo, .chegada)
-        XCTAssertEqual(eventos[7].tempo, 4.8046)
+        XCTAssertEqual(proximos[0].tempo, 3)
+        XCTAssertEqual(proximos[0].evt!.tipo, .chegada)
+        XCTAssertEqual(proximos[0].evt!.fila, filaSpy1)
+        XCTAssertEqual(proximos[1].tempo, 5.1109)
+        XCTAssertEqual(proximos[1].evt!.tipo, .chegada)
+        XCTAssertEqual(proximos[1].evt!.fila, filaSpy1)
+        XCTAssertEqual(proximos[2].tempo, 7.0309)
+        XCTAssertEqual(proximos[2].evt!.tipo, .transicao)
+        XCTAssertEqual(proximos[2].evt!.fila, filaSpy1)
+        XCTAssertEqual(proximos[3].tempo, 7.3432, accuracy: 0.0001)
+        XCTAssertEqual(proximos[3].evt!.tipo, .chegada)
+        XCTAssertEqual(proximos[3].evt!.fila, filaSpy1)
+        XCTAssertEqual(proximos[4].tempo, 9.8563)
+        XCTAssertEqual(proximos[4].evt!.tipo, .chegada)
+        XCTAssertEqual(proximos[4].evt!.fila, filaSpy1)
+        XCTAssertEqual(proximos[5].tempo, 11.7065, accuracy: 0.0001)
+        XCTAssertEqual(proximos[5].evt!.tipo, .transicao)
+        XCTAssertEqual(proximos[5].evt!.fila, filaSpy1)
+        XCTAssertEqual(proximos[6].tempo, 12.0839)
+        XCTAssertEqual(proximos[6].evt!.tipo, .transicao)
+        XCTAssertEqual(proximos[6].evt!.fila, filaSpy1)
+        XCTAssertEqual(proximos[7].tempo, 12.5771)
+        XCTAssertEqual(proximos[7].evt!.tipo, .chegada)
+        XCTAssertEqual(proximos[7].evt!.fila, filaSpy1)
+
+        XCTAssertEqual(filas[0].tempo, 18.6831, accuracy: 0.0001)
+        XCTAssertEqual(filas[0].evento.tipo, .saida)
+        XCTAssertEqual(filas[1].tempo, 18.0804, accuracy: 0.0001)
+        XCTAssertEqual(filas[1].evento.tipo, .saida)
+        XCTAssertEqual(filas[2].tempo, 14.8702, accuracy: 0.0001)
+        XCTAssertEqual(filas[2].evento.tipo, .chegada)
+        XCTAssertEqual(filas[3].tempo, 14.7153, accuracy: 0.0001)
+        XCTAssertEqual(filas[3].evento.tipo, .saida)
+
+        XCTAssertEqual(eventos[0].tempo, 3)
+        XCTAssertEqual(eventos[0].tipo, .chegada)
+        XCTAssertEqual(eventos[1].tempo, 4.0309)
+        XCTAssertEqual(eventos[1].tipo, .transicao)
+        XCTAssertEqual(eventos[2].tempo, 2.1109)
+        XCTAssertEqual(eventos[2].tipo, .chegada)
+        XCTAssertEqual(eventos[3].tempo, 6.9730, accuracy: 0.0001)
+        XCTAssertEqual(eventos[3].tipo, .transicao)
+        XCTAssertEqual(eventos[4].tempo, 2.2323)
+        XCTAssertEqual(eventos[4].tipo, .chegada)
+        XCTAssertEqual(eventos[5].tempo, 7.6844)
+        XCTAssertEqual(eventos[5].tipo, .saida)
+        XCTAssertEqual(eventos[6].tempo, 4.3633)
+        XCTAssertEqual(eventos[6].tipo, .transicao)
+        XCTAssertEqual(eventos[7].tempo, 2.5131)
         XCTAssertEqual(eventos[7].tipo, .chegada)
-        XCTAssertEqual(eventos[8].tempo, 2.0396)
-        XCTAssertEqual(eventos[8].tipo, .saida)
-        XCTAssertEqual(eventos[9].tempo, 2.4569)
+        XCTAssertEqual(eventos[8].tempo, 2.7208)
+        XCTAssertEqual(eventos[8].tipo, .chegada)
+        XCTAssertEqual(eventos[9].tempo, 6.9766, accuracy: 0.0001)
         XCTAssertEqual(eventos[9].tipo, .saida)
-//        XCTAssertEqual(eventos[10].tempo, 3.5363, accuracy: 0.0001)
-//        XCTAssertEqual(eventos[10].tipo, .chegada)
-//        XCTAssertEqual(eventos[11].tempo, 2.9208)
-//        XCTAssertEqual(eventos[11].tipo, .chegada)
-//        XCTAssertEqual(eventos[12].tempo, 3.0342)
-//        XCTAssertEqual(eventos[12].tipo, .saida)
-//        XCTAssertEqual(eventos[13].tempo, 2.6897)
-//        XCTAssertEqual(eventos[13].tipo, .transicao)
-//        XCTAssertEqual(eventos[14].tempo, 2.8545)
-//        XCTAssertEqual(eventos[14].tipo, .chegada)
-//        XCTAssertEqual(eventos[15].tempo, 4.2002)
-//        XCTAssertEqual(eventos[15].tipo, .saida)
-//        XCTAssertEqual(eventos[16].tempo, 2.8763)
-//        XCTAssertEqual(eventos[16].tipo, .transicao)
+        XCTAssertEqual(eventos[10].tempo, 5.5033, accuracy: 0.0001)
+        XCTAssertEqual(eventos[10].tipo, .saida)
+        XCTAssertEqual(eventos[11].tempo, 2.2931, accuracy: 0.0001)
+        XCTAssertEqual(eventos[11].tipo, .chegada)
         
         XCTAssertEqual(chegadas1.count, 5)
-        XCTAssertEqual(saidas1.count, 6)
-        XCTAssertEqual(proximaChegadas1.count, 3)
+        XCTAssertEqual(proximaChegadas1.count, 6)
+        XCTAssertEqual(saidas1.count, 3)
         XCTAssertEqual(proximaSaida1.count, 5)
         
-        XCTAssertEqual(chegadas2.count, 6)
-        XCTAssertEqual(saidas2.count, 1)
+        XCTAssertEqual(chegadas2.count, 3)
         XCTAssertEqual(proximaChegadas2.count, 0)
-        XCTAssertEqual(proximaSaida2.count, 3)
+        XCTAssertEqual(saidas2.count, 0)
+        XCTAssertEqual(proximaSaida2.count, 1)
         
-        XCTAssertEqual(proximos.count, 15)
-        XCTAssertEqual(filas.count, 2)
-        XCTAssertEqual(eventos.count, 17)
+        XCTAssertEqual(proximos.count, 8)
+        XCTAssertEqual(filas.count, 4)
+        XCTAssertEqual(eventos.count, 12)
         
         XCTAssertEqual(randoms.count, 17)
     }
@@ -227,6 +200,8 @@ class SimuladorFilaRoteadaSimplesTests: XCTestCase {
                 
                 .transicaoRede(origem: filaSpy1,
                                destinos: [(filaSpy2, 0.7)]),
+                
+                .saida(fila: filaSpy2),
                 
             ],
             random: randomSpy,

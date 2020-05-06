@@ -146,28 +146,25 @@ extension Simulador {
         destinosNormalizados = destinos
             .sorted(by: { $0.probabilidade < $1.probabilidade })
         
-        var saida = destinosNormalizados.map { $0.probabilidade }.reduce(0, +)
+        let saida = 1 - destinosNormalizados.map { $0.probabilidade }.reduce(0, +)
+        let escolherCaminho: Bool = saida > 0 && saida < 1
                     
         filaDeOrigem.agendarSaida = { [weak self] in
             if
                 let self = self,
-                let randomUniformizado = self.random.uniformizado()
+                let random1 = self.random.uniformizado(),
+                let random2 = escolherCaminho ? self.random.uniformizado() : random1
             {
                 
-                if randomUniformizado <= saida {
-                    self.gerarEventoSaida(filaDeOrigem,
-                                          randomUniformizado: randomUniformizado)
-                    return
-                }
-                
-                var aux: Double = saida
+                var aux: Double = 0
                 
                 for dest in destinosNormalizados {
-                    if randomUniformizado <= (dest.probabilidade + aux) {
+                    if random1 <= (dest.probabilidade + aux) {
+
                         self.gerarEventoTransicao(
                             filaDeOrigem: filaDeOrigem,
                             filaDeDestino: dest.fila,
-                            randomUniformizado: randomUniformizado)
+                            randomUniformizado: random2)
                         return
                     }
                     else {
@@ -175,74 +172,8 @@ extension Simulador {
                     }
                 }
                 
-                
+                self.gerarEventoSaida(filaDeOrigem, randomUniformizado: random2)
             }
         }
     }
-    
-    /// configura a saida da fila
-//    private func configurarAgendamentoDeSaida(_ fila: Fila) {
-//        fila.agendarSaida = { [weak self] in
-//            if
-//                let self = self,
-//                let randomUniformizado = self.random.uniformizado()
-//            {
-//                self.gerarEventoSaida(fila, randomUniformizado: randomUniformizado)
-//            }
-//        }
-//    }
-    
-    /**
-     configura a transicao de uma fila para outra fila, para a saida ou para a mesma fila.
-     
-     A prioridade é para saida, ou seja, se o parametro SAIDA for 100% será gerado um evento de saída.
-     
-     O RETORNO é caculado: (100% - SAIDA) * RETORNO + SAIDA, ou seja,
-     se a SAIDA = 20%, e o RETORNO = 40% a probabilidade de retorno é (100% - 20%) * 40% + 20% = 52%,
-     
-     então entre 0 e 20% a probabilidade de ir pra saida,
-     entre 20 e 52% a probabilidade de ir pra mesma fila,
-     e acima disse a probabilidade de ir pra fila de saida
-     
-     como visto no exemplo acima, o Agendamento é deirecionado a fila de saida somente se nenhum dos outros critérios for atendido.
-     
-     - parameter saida: Probabilidade em porcentagem do evento direcionar para saida.
-     - parameter retorno: Probabilidade em porcentagem do evento direcionar para a mesma fila.
-     */
-//    private func configurarAgendamentoDeTransicao(filaDeOrigem: Fila,
-//                                          filaDeDestino: Fila,
-//                                          saida: Double = 0,
-//                                          retorno: Double = 0) {
-//        var taxaDeSaida: Double = saida
-//        taxaDeSaida = min(taxaDeSaida, 1)
-//        taxaDeSaida = max(taxaDeSaida, 0)
-//
-//        var taxaDeRetorno: Double = retorno
-//        taxaDeRetorno = min(taxaDeRetorno, 1)
-//        taxaDeRetorno = max(taxaDeRetorno, 0)
-//        taxaDeRetorno = (1 - taxaDeSaida) * taxaDeRetorno + taxaDeSaida
-//
-//        filaDeOrigem.agendarSaida = { [weak self] in
-//            if
-//                let self = self,
-//                let randomUniformizado = self.random.uniformizado()
-//            {
-//
-//                if randomUniformizado < taxaDeSaida {
-//                    self.gerarEventoSaida(filaDeOrigem,
-//                                          randomUniformizado: randomUniformizado)
-//                }
-//                else if randomUniformizado < taxaDeRetorno {
-//                    self.gerarEventoTransicao(filaDeOrigem: filaDeOrigem,
-//                                              filaDeDestino: filaDeOrigem,
-//                                              randomUniformizado: randomUniformizado)
-//                }
-//                else {
-//                    self.gerarEventoTransicao(filaDeOrigem: filaDeOrigem,
-//                                              filaDeDestino: filaDeDestino,
-//                                              randomUniformizado: randomUniformizado)
-//                }
-//            }
-//        }
-//    }
 }

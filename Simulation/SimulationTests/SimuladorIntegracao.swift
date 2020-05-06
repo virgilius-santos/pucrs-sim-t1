@@ -119,6 +119,6 @@ class SimuladorIntegracao: XCTestCase {
             XCTAssertEqual(estatistica.contatores.values.reduce(0, +), estatistica.tempo)
         }
 
-        XCTAssertEqual(estatisticas.count, 26)
+        XCTAssertEqual(estatisticas.count, 18)
     }
 }
