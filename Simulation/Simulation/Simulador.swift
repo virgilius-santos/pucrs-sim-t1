@@ -115,31 +115,20 @@ extension Simulador {
                 configurarAgendamentoDeTransicao(
                     filaDeOrigem: filaDeOrigem,
                     destinos: [(filaDeDestino, 1)])
-//                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem,
-//                                                 filaDeDestino: filaDeDestino)
             
             case let .transicaoPonderada(filaDeOrigem, filaDeDestino, saida):
                 configurarAgendamentoDeTransicao(
                     filaDeOrigem: filaDeOrigem,
                     destinos: [(filaDeDestino, 1 - saida)])
-//                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem,
-//                                                 filaDeDestino: filaDeDestino,
-//                                                 saida: saida)
             
             case let .transicaoPonderadaComRetorno(filaDeOrigem, filaDeDestino, saida, retorno):
                 configurarAgendamentoDeTransicao(
                     filaDeOrigem: filaDeOrigem,
                     destinos: [(filaDeDestino, 1 - saida - retorno),
                                (filaDeOrigem, retorno)])
-//                configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem,
-//                                                 filaDeDestino: filaDeDestino,
-//                                                 saida: saida,
-//                                                 retorno: retorno)
             
             case let .saida(fila):
-                configurarAgendamentoDeTransicao(filaDeOrigem: fila,
-                                                 destinos: [])
-//                configurarAgendamentoDeSaida(fila)
+                configurarAgendamentoDeTransicao(filaDeOrigem: fila)
             
             case let .transicaoRede(filaDeOrigem, destinos):
                 configurarAgendamentoDeTransicao(filaDeOrigem: filaDeOrigem,
@@ -149,7 +138,7 @@ extension Simulador {
     
     private func configurarAgendamentoDeTransicao(
         filaDeOrigem: Fila,
-        destinos: [(fila: Fila, probabilidade: Double)]
+        destinos: [(fila: Fila, probabilidade: Double)] = []
     ) {
         
         var destinosNormalizados: [(fila: Fila, probabilidade: Double)]
