@@ -145,6 +145,8 @@ extension Simulador {
         
         destinosNormalizados = destinos
             .sorted(by: { $0.probabilidade < $1.probabilidade })
+        
+        var saida = destinosNormalizados.map { $0.probabilidade }.reduce(0, +)
                     
         filaDeOrigem.agendarSaida = { [weak self] in
             if
@@ -152,7 +154,13 @@ extension Simulador {
                 let randomUniformizado = self.random.uniformizado()
             {
                 
-                var aux: Double = 0
+                if randomUniformizado <= saida {
+                    self.gerarEventoSaida(filaDeOrigem,
+                                          randomUniformizado: randomUniformizado)
+                    return
+                }
+                
+                var aux: Double = saida
                 
                 for dest in destinosNormalizados {
                     if randomUniformizado <= (dest.probabilidade + aux) {
@@ -167,8 +175,7 @@ extension Simulador {
                     }
                 }
                 
-                self.gerarEventoSaida(filaDeOrigem,
-                                      randomUniformizado: randomUniformizado)
+                
             }
         }
     }
