@@ -160,6 +160,13 @@ class SimuladorFilaRoteadaSimplesTests: XCTestCase {
         XCTAssertEqual(eventos.count, 12)
         
         XCTAssertEqual(randoms.count, 17)
+        
+        XCTAssertEqual(filaSpy1.dados.estatisticaAtual.tempo, 12.5771, accuracy: 0.0001)
+        XCTAssertEqual(filaSpy1.dados.estatisticaAtual.evento, .chegada)
+        XCTAssertEqual(filaSpy1.dados.estatisticaAtual.quantDaFila, 2)
+        XCTAssertEqual(filaSpy2.dados.estatisticaAtual.tempo, 12.5771, accuracy: 0.0001)
+        XCTAssertEqual(filaSpy2.dados.estatisticaAtual.evento, .chegada)
+        XCTAssertEqual(filaSpy2.dados.estatisticaAtual.quantDaFila, 3)
     }
     
     func executarEventos(pulando: Int) {
