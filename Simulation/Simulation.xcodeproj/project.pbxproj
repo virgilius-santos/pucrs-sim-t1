@@ -36,6 +36,7 @@
 		18E6CB1D242F9B6500B1FDA6 /* DoubleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB1C242F9B6500B1FDA6 /* DoubleExt.swift */; };
 		18E6CB22242F9BD100B1FDA6 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB21242F9BD100B1FDA6 /* ArrayExt.swift */; };
 		18E6CB24242F9C1800B1FDA6 /* CollectionExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB23242F9C1800B1FDA6 /* CollectionExt.swift */; };
+		18F6572D2463B32400B7AB96 /* NewSim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6572C2463B32400B7AB96 /* NewSim.swift */; };
 		18FEC158241E484000A9C8E9 /* GerenciadorEstatisticas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FEC157241E484000A9C8E9 /* GerenciadorEstatisticas.swift */; };
 		18FEC15C241E49D100A9C8E9 /* Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FEC15B241E49D100A9C8E9 /* Alias.swift */; };
 /* End PBXBuildFile section */
@@ -83,6 +84,7 @@
 		18E6CB1C242F9B6500B1FDA6 /* DoubleExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExt.swift; sourceTree = "<group>"; };
 		18E6CB21242F9BD100B1FDA6 /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
 		18E6CB23242F9C1800B1FDA6 /* CollectionExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExt.swift; sourceTree = "<group>"; };
+		18F6572C2463B32400B7AB96 /* NewSim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSim.swift; sourceTree = "<group>"; };
 		18FEC157241E484000A9C8E9 /* GerenciadorEstatisticas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GerenciadorEstatisticas.swift; sourceTree = "<group>"; };
 		18FEC15B241E49D100A9C8E9 /* Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alias.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,6 +137,7 @@
 				18402502241CF8F0008DE504 /* Escalonador.swift */,
 				1840250C241D155B008DE504 /* Fila.swift */,
 				18402520241D9461008DE504 /* Simulador.swift */,
+				18F6572C2463B32400B7AB96 /* NewSim.swift */,
 			);
 			path = Simulation;
 			sourceTree = "<group>";
@@ -267,7 +270,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1120;
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Virgilius Santos";
 				TargetAttributes = {
 					184024E1241CEDE9008DE504 = {
@@ -326,6 +329,7 @@
 				18E6CB24242F9C1800B1FDA6 /* CollectionExt.swift in Sources */,
 				18E6CB22242F9BD100B1FDA6 /* ArrayExt.swift in Sources */,
 				18FEC15C241E49D100A9C8E9 /* Alias.swift in Sources */,
+				18F6572D2463B32400B7AB96 /* NewSim.swift in Sources */,
 				18E6CB1B242F9B4900B1FDA6 /* IntExt.swift in Sources */,
 				18402505241CFA16008DE504 /* Evento.swift in Sources */,
 				18E6CB19242F9B2D00B1FDA6 /* StringExt.swift in Sources */,
@@ -493,7 +497,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -523,7 +527,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
