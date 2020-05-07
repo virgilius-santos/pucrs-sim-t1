@@ -1,6 +1,8 @@
 
 import Foundation
 
+private var estatisticasGerais = [Int: GerenciadorEstatisticas]()
+
 public class GerenciadorEstatisticas {
     
     /// guarda as informações da fila em relcao ao ultimo tempo passado,
@@ -27,6 +29,7 @@ public class GerenciadorEstatisticas {
             tempo: .zero,
             contatores: [:])
         self.estatisticas = [estatisticaAtual]
+        estatisticasGerais[id] = self
     }
     
     /// atualiza as estatisticas de acordo com o tipo e tempo recebido
@@ -49,5 +52,29 @@ public class GerenciadorEstatisticas {
             evento: evt,
             tempo: tempo,
             contatores: contatores)
+        
+        updateOutras(evt: evt, tempo: tempo)
+    }
+    
+    func updateOutras(evt: Evento.Tipo,
+                      tempo: Double) {
+        estatisticasGerais
+            .filter( { $0.key != id })
+            .forEach { (key, value) in
+                let estatisticaAtual = value.estatisticaAtual
+                var contatores = estatisticaAtual.contatores
+                let index: Int = estatisticaAtual.quantDaFila
+                contatores[index] = (contatores[estatisticaAtual.quantDaFila] ?? 0)
+                    + (tempo - estatisticaAtual.tempo)
+                
+                value.estatisticaAtual = Estatistica(
+                    filaID: estatisticaAtual.filaID,
+                    quantDaFila: estatisticaAtual.quantDaFila,
+                    perdas: estatisticaAtual.perdas,
+                    evento: evt,
+                    tempo: tempo,
+                    contatores: contatores)
+        }
+        
     }
 }
