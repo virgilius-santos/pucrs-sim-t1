@@ -93,9 +93,11 @@ var filas: [Fila]
 //}
 //filas.imprimir()
 
-filas = [Fila]()
-for i in 0 ..< sementes.count {
-    Config.CongruenteLinear.semente = sementes[i]
-    filas += exec(.rede)
-}
-filas.imprimir()
+//filas = [Fila]()
+//for i in 0 ..< sementes.count {
+//    Config.CongruenteLinear.semente = sementes[i]
+//    filas += exec(.rede)
+//}
+//filas.imprimir()
+
+simular()
