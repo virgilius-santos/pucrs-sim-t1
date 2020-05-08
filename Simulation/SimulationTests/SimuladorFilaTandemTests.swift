@@ -10,7 +10,6 @@ class SimuladorFilaTandemTests: XCTestCase {
     var randomSpy: CongruenteLinear!
     var filaSpy1: Fila!
     var filaSpy2: Fila!
-    var escalonadorSpy: Escalonador!
     
     override func setUp() {
         valoresFixos = [
@@ -24,20 +23,17 @@ class SimuladorFilaTandemTests: XCTestCase {
             maxIteracoes: kendall.n,
             valoresFixos: valoresFixos)
         
-        filaSpy1 = .init(
-            id: 1,
-            tipoDeFila: .tandem,
-            taxaEntrada: Tempo(inicio: 2, fim: 3),
-            taxaSaida: Tempo(inicio: 2, fim: 5),
-            kendall: kendall)
+        filaSpy1 = .init(nome: "Q1",
+            c: kendall.c,
+            k: kendall.k,
+            taxaEntrada: (inicio: 2, fim: 3),
+            taxaSaida: (inicio: 2, fim: 5),
+            transicoes: [ ("Q2", 1) ])
         
-        filaSpy2 = .init(
-            id: 2,
-            tipoDeFila: .tandem,
-            taxaSaida: Tempo(inicio: 3, fim: 5),
-            kendall: Kendall(c: 1, k: 3))
-        
-        escalonadorSpy = .init()
+        filaSpy2 = .init(nome: "Q2",
+            c: 1,
+            k: 3,
+            taxaSaida: (inicio: 3, fim: 5))
     }
     
     override func tearDown() {
@@ -47,7 +43,6 @@ class SimuladorFilaTandemTests: XCTestCase {
         randomSpy = nil
         filaSpy1 = nil
         filaSpy2 = nil
-        escalonadorSpy = nil
     }
     
     func test_filaTandem_loopCompleto() {
@@ -124,10 +119,9 @@ class SimuladorFilaTandemTests: XCTestCase {
     func setupFilaTandem() {
         sut = SimuladorEncadeado(filaDeEntrada: filaSpy1,
                                  filaDeSaida: filaSpy2,
-                                 random: randomSpy,
-                                 escalonador: escalonadorSpy)
+                                 random: randomSpy)
             .simulador
         
-        sut.processar()
+        sut.simular()
     }
 }

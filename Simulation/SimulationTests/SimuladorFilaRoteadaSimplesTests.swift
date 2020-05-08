@@ -6,11 +6,9 @@ class SimuladorFilaRoteadaSimplesTests: XCTestCase {
     
     var sut: NovoSimulador!
     var valoresFixos: [Double]!
-    var kendall: Kendall!
     var randomSpy: CongruenteLinear!
     var filaSpy1: Fila!
     var filaSpy2: Fila!
-    var escalonadorSpy: Escalonador!
     
     override func setUp() {
         valoresFixos = [
@@ -18,40 +16,53 @@ class SimuladorFilaRoteadaSimplesTests: XCTestCase {
             0.1211 , 0.5131, 0.7208, 0.9172, 0.9922, 0.8324, 0.5011, 0.2931
         ]
         
-        kendall = Kendall(c: 2, k: 4, n: valoresFixos.count)
-        
         randomSpy = .init(
-            maxIteracoes: kendall.n,
+            maxIteracoes: valoresFixos.count,
             valoresFixos: valoresFixos)
         
-        filaSpy1 = .init(
-            id: 1,
-            tipoDeFila: .tandem,
-            taxaEntrada: Tempo(inicio: 2, fim: 3),
-            taxaSaida: Tempo(inicio: 4, fim: 7),
-            kendall: kendall)
+        filaSpy1 = .init(nome: "Q1",
+                         c: 2,
+                         k: 4,
+                         taxaEntrada: (inicio: 2, fim: 3),
+                         taxaSaida: (inicio: 4, fim: 7),
+                         transicoes: [ ("Q2", 0.7) ])
         
-        filaSpy2 = .init(
-            id: 2,
-            tipoDeFila: .tandem,
-            taxaSaida: Tempo(inicio: 4, fim: 8),
-            kendall: Kendall(c: 1))
-        
-        escalonadorSpy = .init()
+        filaSpy2 = .init(nome: "Q2",
+                         c: 1,
+                         taxaSaida: (inicio: 4, fim: 8))
     }
     
     override func tearDown() {
         sut = nil
         valoresFixos = nil
-        kendall = nil
         randomSpy = nil
         filaSpy1 = nil
         filaSpy2 = nil
-        escalonadorSpy = nil
     }
     
     func test_NovoSimulador() {
-        NovoSimulador(semente: 1).simular()
+        NovoSimulador(random: .init(semente: 1, maxIteracoes: 100000),
+                      filas: [
+                        Fila(nome: "Q1",
+                             c: 1,
+                             taxaEntrada: (1, 4),
+                             taxaSaida: (1, 1.5),
+                             transicoes: [ ("Q2", 0.8), ("Q3", 0.2) ]),
+                        
+                        Fila(nome: "Q2",
+                             c: 3,
+                             k: 5,
+                             taxaSaida: (5, 10),
+                             transicoes: [ ("Q1", 0.3), ("Q3", 0.5) ]),
+                        
+                        Fila(nome: "Q3",
+                             c: 2,
+                             k: 8,
+                             taxaSaida: (10, 20),
+                             transicoes: [ ("Q2", 0.7) ]),
+        ])
+            
+            .simular()
         XCTAssertEqual(Config.CongruenteLinear.semente, 1)
         
         XCTAssertEqual(qs[0].contador[0], 14293.9554, accuracy: 0.0001)
@@ -134,27 +145,9 @@ class SimuladorFilaRoteadaSimplesTests: XCTestCase {
     }
     
     func setupFilaRede() {
-        sut = .init(maxIteracoes: kendall.n,
-                    valoresFixos: valoresFixos)
+        sut = .init(random: randomSpy,
+                    filas: [ filaSpy1, filaSpy2, ] )
         
-        qs = [
-            
-            // configuração da fila 1
-            sut.gerarFila(nome: "Q1",
-                          c: filaSpy1.kendall.c,
-                          k: filaSpy1.kendall.k,
-                          taxaEntrada: (filaSpy1.taxaEntrada.inicio, filaSpy1.taxaEntrada.fim),
-                          taxaSaida: (filaSpy1.taxaSaida.inicio, filaSpy1.taxaSaida.fim),
-                          transicoes: [ ("Q2", 0.7) ]),
-            
-            // configuração da fila 2
-            sut.gerarFila(nome: "Q2",
-                          c: filaSpy2.kendall.c,
-                          k: filaSpy2.kendall.k,
-                          taxaEntrada: (filaSpy2.taxaEntrada.inicio, filaSpy2.taxaEntrada.fim),
-                          taxaSaida: (filaSpy2.taxaSaida.inicio, filaSpy2.taxaSaida.fim)),
-        ]
-        
-        sut.processar()
+        sut.simular()
     }
 }

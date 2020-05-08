@@ -7,38 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1835E5BA241E799600526060 /* SimuladorEncadeadoPonderado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835E5B9241E799600526060 /* SimuladorEncadeadoPonderado.swift */; };
 		184024EC241CEDEA008DE504 /* Simulation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184024E2241CEDE9008DE504 /* Simulation.framework */; };
 		184024F1241CEDEA008DE504 /* CongruenteLinearTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184024F0241CEDEA008DE504 /* CongruenteLinearTests.swift */; };
 		184024F3241CEDEA008DE504 /* Simulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 184024E5241CEDE9008DE504 /* Simulation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		184024FE241CEE0F008DE504 /* CongruenteLinear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184024FC241CEE0F008DE504 /* CongruenteLinear.swift */; };
 		184024FF241CEE0F008DE504 /* Configuracao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184024FD241CEE0F008DE504 /* Configuracao.swift */; };
-		18402501241CF7BB008DE504 /* EscalonadorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402500241CF7BB008DE504 /* EscalonadorTests.swift */; };
-		18402503241CF8F0008DE504 /* Escalonador.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402502241CF8F0008DE504 /* Escalonador.swift */; };
-		18402505241CFA16008DE504 /* Evento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402504241CFA16008DE504 /* Evento.swift */; };
 		18402507241D0E75008DE504 /* Kendall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402506241D0E75008DE504 /* Kendall.swift */; };
-		18402509241D1181008DE504 /* Tempo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402508241D1181008DE504 /* Tempo.swift */; };
-		1840250B241D136B008DE504 /* TempoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840250A241D136B008DE504 /* TempoTests.swift */; };
-		1840250D241D155B008DE504 /* Fila.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840250C241D155B008DE504 /* Fila.swift */; };
 		1840250F241D189B008DE504 /* SimuladorSimples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840250E241D189B008DE504 /* SimuladorSimples.swift */; };
 		18402511241D18C4008DE504 /* SimuladorFilaSimplesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402510241D18C4008DE504 /* SimuladorFilaSimplesTests.swift */; };
 		18402513241D1C79008DE504 /* FilaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402512241D1C79008DE504 /* FilaTests.swift */; };
 		1840251D241D90BE008DE504 /* SimuladorEncadeado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251C241D90BE008DE504 /* SimuladorEncadeado.swift */; };
-		1840251F241D93DA008DE504 /* Estatistica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251E241D93DA008DE504 /* Estatistica.swift */; };
-		18402521241D9461008DE504 /* Simulador.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402520241D9461008DE504 /* Simulador.swift */; };
 		187FF65B246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF65A246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift */; };
-		187FF65E2464DDCB004F4418 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF65D2464DDCB004F4418 /* Queue.swift */; };
+		187FF65E2464DDCB004F4418 /* Fila.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF65D2464DDCB004F4418 /* Fila.swift */; };
 		187FF6632464E25E004F4418 /* Print.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF6622464E25E004F4418 /* Print.swift */; };
 		187FF6652464E834004F4418 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF6642464E834004F4418 /* Random.swift */; };
-		189E2758242C4DDA0014D570 /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E2757242C4DDA0014D570 /* ConfigTests.swift */; };
 		189E275A242D7E1A0014D570 /* SimuladorFilaTandemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */; };
 		18E6CB19242F9B2D00B1FDA6 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB18242F9B2D00B1FDA6 /* StringExt.swift */; };
 		18E6CB1B242F9B4900B1FDA6 /* IntExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB1A242F9B4900B1FDA6 /* IntExt.swift */; };
 		18E6CB1D242F9B6500B1FDA6 /* DoubleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB1C242F9B6500B1FDA6 /* DoubleExt.swift */; };
-		18E6CB22242F9BD100B1FDA6 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB21242F9BD100B1FDA6 /* ArrayExt.swift */; };
-		18E6CB24242F9C1800B1FDA6 /* CollectionExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB23242F9C1800B1FDA6 /* CollectionExt.swift */; };
-		18F6572D2463B32400B7AB96 /* NewSim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6572C2463B32400B7AB96 /* NewSim.swift */; };
-		18FEC158241E484000A9C8E9 /* GerenciadorEstatisticas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FEC157241E484000A9C8E9 /* GerenciadorEstatisticas.swift */; };
+		18F6572D2463B32400B7AB96 /* NovoSimulador.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6572C2463B32400B7AB96 /* NovoSimulador.swift */; };
+		18F6573724658E8F00B7AB96 /* TipoDeFila.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6573624658E8F00B7AB96 /* TipoDeFila.swift */; };
 		18FEC15C241E49D100A9C8E9 /* Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FEC15B241E49D100A9C8E9 /* Alias.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,7 +41,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1835E5B9241E799600526060 /* SimuladorEncadeadoPonderado.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorEncadeadoPonderado.swift; sourceTree = "<group>"; };
 		184024E2241CEDE9008DE504 /* Simulation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Simulation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		184024E5241CEDE9008DE504 /* Simulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Simulation.h; sourceTree = "<group>"; };
 		184024E6241CEDE9008DE504 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,32 +49,21 @@
 		184024F2241CEDEA008DE504 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		184024FC241CEE0F008DE504 /* CongruenteLinear.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongruenteLinear.swift; sourceTree = "<group>"; };
 		184024FD241CEE0F008DE504 /* Configuracao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuracao.swift; sourceTree = "<group>"; };
-		18402500241CF7BB008DE504 /* EscalonadorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EscalonadorTests.swift; sourceTree = "<group>"; };
-		18402502241CF8F0008DE504 /* Escalonador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Escalonador.swift; sourceTree = "<group>"; };
-		18402504241CFA16008DE504 /* Evento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evento.swift; sourceTree = "<group>"; };
 		18402506241D0E75008DE504 /* Kendall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kendall.swift; sourceTree = "<group>"; };
-		18402508241D1181008DE504 /* Tempo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tempo.swift; sourceTree = "<group>"; };
-		1840250A241D136B008DE504 /* TempoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoTests.swift; sourceTree = "<group>"; };
-		1840250C241D155B008DE504 /* Fila.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fila.swift; sourceTree = "<group>"; };
 		1840250E241D189B008DE504 /* SimuladorSimples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorSimples.swift; sourceTree = "<group>"; };
 		18402510241D18C4008DE504 /* SimuladorFilaSimplesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorFilaSimplesTests.swift; sourceTree = "<group>"; };
 		18402512241D1C79008DE504 /* FilaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilaTests.swift; sourceTree = "<group>"; };
 		1840251C241D90BE008DE504 /* SimuladorEncadeado.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorEncadeado.swift; sourceTree = "<group>"; };
-		1840251E241D93DA008DE504 /* Estatistica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Estatistica.swift; sourceTree = "<group>"; };
-		18402520241D9461008DE504 /* Simulador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulador.swift; sourceTree = "<group>"; };
 		187FF65A246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorFilaRoteadaSimplesTests.swift; sourceTree = "<group>"; };
-		187FF65D2464DDCB004F4418 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		187FF65D2464DDCB004F4418 /* Fila.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fila.swift; sourceTree = "<group>"; };
 		187FF6622464E25E004F4418 /* Print.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Print.swift; sourceTree = "<group>"; };
 		187FF6642464E834004F4418 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
-		189E2757242C4DDA0014D570 /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
 		189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorFilaTandemTests.swift; sourceTree = "<group>"; };
 		18E6CB18242F9B2D00B1FDA6 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		18E6CB1A242F9B4900B1FDA6 /* IntExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExt.swift; sourceTree = "<group>"; };
 		18E6CB1C242F9B6500B1FDA6 /* DoubleExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExt.swift; sourceTree = "<group>"; };
-		18E6CB21242F9BD100B1FDA6 /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
-		18E6CB23242F9C1800B1FDA6 /* CollectionExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExt.swift; sourceTree = "<group>"; };
-		18F6572C2463B32400B7AB96 /* NewSim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSim.swift; sourceTree = "<group>"; };
-		18FEC157241E484000A9C8E9 /* GerenciadorEstatisticas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GerenciadorEstatisticas.swift; sourceTree = "<group>"; };
+		18F6572C2463B32400B7AB96 /* NovoSimulador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovoSimulador.swift; sourceTree = "<group>"; };
+		18F6573624658E8F00B7AB96 /* TipoDeFila.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipoDeFila.swift; sourceTree = "<group>"; };
 		18FEC15B241E49D100A9C8E9 /* Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alias.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,11 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				184024F2241CEDEA008DE504 /* Info.plist */,
-				189E2757242C4DDA0014D570 /* ConfigTests.swift */,
 				184024F0241CEDEA008DE504 /* CongruenteLinearTests.swift */,
-				18402500241CF7BB008DE504 /* EscalonadorTests.swift */,
 				18402512241D1C79008DE504 /* FilaTests.swift */,
-				1840250A241D136B008DE504 /* TempoTests.swift */,
 				18402510241D18C4008DE504 /* SimuladorFilaSimplesTests.swift */,
 				189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */,
 				187FF65A246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift */,
@@ -156,33 +129,19 @@
 		187FF65C2464DDB0004F4418 /* new */ = {
 			isa = PBXGroup;
 			children = (
-				18F6572C2463B32400B7AB96 /* NewSim.swift */,
-				187FF65D2464DDCB004F4418 /* Queue.swift */,
-				187FF6622464E25E004F4418 /* Print.swift */,
+				18E6CB1E242F9B8A00B1FDA6 /* Ext */,
+				18FEC15A241E48EE00A9C8E9 /* Models */,
+				184024FC241CEE0F008DE504 /* CongruenteLinear.swift */,
+				18FEC159241E48C300A9C8E9 /* Simuladores */,
+				187FF65D2464DDCB004F4418 /* Fila.swift */,
 				187FF6642464E834004F4418 /* Random.swift */,
 			);
 			path = new;
 			sourceTree = "<group>";
 		};
-		187FF6612464DEE7004F4418 /* old */ = {
-			isa = PBXGroup;
-			children = (
-				18FEC156241E482800A9C8E9 /* Estatistica */,
-				18FEC15A241E48EE00A9C8E9 /* Models */,
-				18FEC159241E48C300A9C8E9 /* Simuladores */,
-				184024FC241CEE0F008DE504 /* CongruenteLinear.swift */,
-				18402502241CF8F0008DE504 /* Escalonador.swift */,
-				1840250C241D155B008DE504 /* Fila.swift */,
-				18402520241D9461008DE504 /* Simulador.swift */,
-			);
-			path = old;
-			sourceTree = "<group>";
-		};
 		18E6CB1E242F9B8A00B1FDA6 /* Ext */ = {
 			isa = PBXGroup;
 			children = (
-				18E6CB21242F9BD100B1FDA6 /* ArrayExt.swift */,
-				18E6CB23242F9C1800B1FDA6 /* CollectionExt.swift */,
 				18E6CB1C242F9B6500B1FDA6 /* DoubleExt.swift */,
 				18E6CB1A242F9B4900B1FDA6 /* IntExt.swift */,
 				18E6CB18242F9B2D00B1FDA6 /* StringExt.swift */,
@@ -193,27 +152,16 @@
 		18FEC154241E47E500A9C8E9 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				187FF6612464DEE7004F4418 /* old */,
 				184024E5241CEDE9008DE504 /* Simulation.h */,
 				184024E6241CEDE9008DE504 /* Info.plist */,
 			);
 			name = Support;
 			sourceTree = "<group>";
 		};
-		18FEC156241E482800A9C8E9 /* Estatistica */ = {
-			isa = PBXGroup;
-			children = (
-				1840251E241D93DA008DE504 /* Estatistica.swift */,
-				18FEC157241E484000A9C8E9 /* GerenciadorEstatisticas.swift */,
-				18E6CB1E242F9B8A00B1FDA6 /* Ext */,
-			);
-			path = Estatistica;
-			sourceTree = "<group>";
-		};
 		18FEC159241E48C300A9C8E9 /* Simuladores */ = {
 			isa = PBXGroup;
 			children = (
-				1835E5B9241E799600526060 /* SimuladorEncadeadoPonderado.swift */,
+				18F6572C2463B32400B7AB96 /* NovoSimulador.swift */,
 				1840251C241D90BE008DE504 /* SimuladorEncadeado.swift */,
 				1840250E241D189B008DE504 /* SimuladorSimples.swift */,
 			);
@@ -225,9 +173,9 @@
 			children = (
 				18FEC15B241E49D100A9C8E9 /* Alias.swift */,
 				184024FD241CEE0F008DE504 /* Configuracao.swift */,
-				18402504241CFA16008DE504 /* Evento.swift */,
 				18402506241D0E75008DE504 /* Kendall.swift */,
-				18402508241D1181008DE504 /* Tempo.swift */,
+				187FF6622464E25E004F4418 /* Print.swift */,
+				18F6573624658E8F00B7AB96 /* TipoDeFila.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -343,24 +291,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				18E6CB1D242F9B6500B1FDA6 /* DoubleExt.swift in Sources */,
-				187FF65E2464DDCB004F4418 /* Queue.swift in Sources */,
-				18FEC158241E484000A9C8E9 /* GerenciadorEstatisticas.swift in Sources */,
-				1840250D241D155B008DE504 /* Fila.swift in Sources */,
-				18E6CB24242F9C1800B1FDA6 /* CollectionExt.swift in Sources */,
-				18E6CB22242F9BD100B1FDA6 /* ArrayExt.swift in Sources */,
+				187FF65E2464DDCB004F4418 /* Fila.swift in Sources */,
 				18FEC15C241E49D100A9C8E9 /* Alias.swift in Sources */,
 				187FF6652464E834004F4418 /* Random.swift in Sources */,
-				18F6572D2463B32400B7AB96 /* NewSim.swift in Sources */,
+				18F6572D2463B32400B7AB96 /* NovoSimulador.swift in Sources */,
 				18E6CB1B242F9B4900B1FDA6 /* IntExt.swift in Sources */,
-				18402505241CFA16008DE504 /* Evento.swift in Sources */,
 				18E6CB19242F9B2D00B1FDA6 /* StringExt.swift in Sources */,
-				1840251F241D93DA008DE504 /* Estatistica.swift in Sources */,
-				1835E5BA241E799600526060 /* SimuladorEncadeadoPonderado.swift in Sources */,
 				1840250F241D189B008DE504 /* SimuladorSimples.swift in Sources */,
+				18F6573724658E8F00B7AB96 /* TipoDeFila.swift in Sources */,
 				184024FF241CEE0F008DE504 /* Configuracao.swift in Sources */,
-				18402503241CF8F0008DE504 /* Escalonador.swift in Sources */,
-				18402521241D9461008DE504 /* Simulador.swift in Sources */,
-				18402509241D1181008DE504 /* Tempo.swift in Sources */,
 				187FF6632464E25E004F4418 /* Print.swift in Sources */,
 				1840251D241D90BE008DE504 /* SimuladorEncadeado.swift in Sources */,
 				184024FE241CEE0F008DE504 /* CongruenteLinear.swift in Sources */,
@@ -375,11 +314,8 @@
 				18402513241D1C79008DE504 /* FilaTests.swift in Sources */,
 				189E275A242D7E1A0014D570 /* SimuladorFilaTandemTests.swift in Sources */,
 				187FF65B246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift in Sources */,
-				189E2758242C4DDA0014D570 /* ConfigTests.swift in Sources */,
 				184024F1241CEDEA008DE504 /* CongruenteLinearTests.swift in Sources */,
-				1840250B241D136B008DE504 /* TempoTests.swift in Sources */,
 				18402511241D18C4008DE504 /* SimuladorFilaSimplesTests.swift in Sources */,
-				18402501241CF7BB008DE504 /* EscalonadorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,7 +454,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = KR99UBUHUT;
@@ -548,7 +484,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = KR99UBUHUT;
@@ -577,7 +513,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KR99UBUHUT;
 				INFOPLIST_FILE = SimulationTests/Info.plist;
@@ -601,7 +537,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KR99UBUHUT;
 				INFOPLIST_FILE = SimulationTests/Info.plist;

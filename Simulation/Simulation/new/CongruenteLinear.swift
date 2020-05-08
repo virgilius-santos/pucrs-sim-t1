@@ -25,11 +25,10 @@ public class CongruenteLinear {
     /// valores aleatorios fornecidos arbitrariamente
     let valoresFixos: [Double]
     
-    public init(maxIteracoes: Int, valoresFixos: [Double] = []) {
+    public init(semente: UInt = 29, maxIteracoes: Int, valoresFixos: [Double] = []) {
+        Config.CongruenteLinear.semente = semente
         self.maxIteracoes = maxIteracoes
         self.valoresFixos = valoresFixos
-        
-        let semente: UInt = Config.CongruenteLinear.semente
         updateValues(valor: semente)
     }
     

@@ -1,12 +1,13 @@
 
 import Foundation
 
-class Queue {
-    let n: String
+public class Fila {
+    let nome: String
     let c: Int
     let k: Int
     let taxaEntrada: (inicio: Double, fim: Double)
     let taxaSaida: (inicio: Double, fim: Double)
+    let transicoes: [(nome: String, taxa: Double)]
     
     var qtdDaFila: Int = .zero
     var contador: [Double] = []
@@ -14,7 +15,7 @@ class Queue {
     
     var contabilizarTempo: ActionVoid?
     
-    var funcaoDeTransicao: ((Queue) -> Void)?
+    var funcaoDeTransicao: ((Fila) -> Void)?
     
     var funcaoDeAgendamento: Agendamento? {
         didSet {
@@ -26,18 +27,20 @@ class Queue {
         }
     }
     
-    init(
-        n: String,
+    public init(
+        nome: String,
         c: Int,
-        k: Int,
-        taxaEntrada: (inicio: Double, fim: Double),
-        taxaSaida: (inicio: Double, fim: Double)
+        k: Int = .max,
+        taxaEntrada: (inicio: Double, fim: Double) = (.zero, .zero),
+        taxaSaida: (inicio: Double, fim: Double),
+        transicoes: [(nome: String, taxa: Double)] = []
     ) {
-        self.n = n
+        self.nome = nome
         self.c = c
         self.k = k
         self.taxaEntrada = taxaEntrada
         self.taxaSaida = taxaSaida
+        self.transicoes = transicoes
     }
     
     // MARK: Função saidas das filas
@@ -70,7 +73,7 @@ class Queue {
         }
     }
     
-    func evento(_ fila: Queue? = nil) -> ActionVoid {
+    func evento(_ fila: Fila? = nil) -> ActionVoid {
         return { [saidaDaFila, contabilizarTempo] in
             contabilizarTempo?()
             saidaDaFila()

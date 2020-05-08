@@ -13,12 +13,12 @@ func imprimir() {
             })
     }
     
-    func imprimir(q: Queue) {
+    func imprimir(q: Fila) {
         
         print(
 """
 *******************
-Queue:   \(q.n) (G/G/\(q.c)\(q.k == .max ? "" : "/\(q.k)")
+Fila:   \(q.nome) (G/G/\(q.c)\(q.k == .max ? "" : "/\(q.k)")
 Arrival: \(q.taxaEntrada.inicio.format(2, p: 2)) ... \(q.taxaEntrada.fim.format(2, p: 2))
 Service: \(q.taxaSaida.inicio.format(2, p: 2)) ... \(q.taxaSaida.fim.format(2, p: 2))
 *******************
@@ -27,7 +27,6 @@ State           Time             Probability
 
 Number of losses: \(q.perdas)
 
-Simulation average time: \(T.format(f: 6, 2, p: 7))
 *******************
 
 """
@@ -42,6 +41,9 @@ Simulation average time: \(T.format(f: 6, 2, p: 7))
 """
     )
     qs.forEach { imprimir(q: $0) }
+    
+    print("Simulation average time: \(T.format(f: 6, 2, p: 7))")
+    
     print("=========================================================")
 }
 

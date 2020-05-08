@@ -9,7 +9,6 @@ class SimuladorFilaSimplesTests: XCTestCase {
     var kendall: Kendall!
     var randomSpy: CongruenteLinear!
     var filaSpy1: Fila!
-    var escalonadorSpy: Escalonador!
     
     override func setUp() {
         valoresFixos = [1, 0.3276, 0.8851, 0.1643, 0.5542, 0.6813, 0.7221, 0.9881]
@@ -20,13 +19,11 @@ class SimuladorFilaSimplesTests: XCTestCase {
             maxIteracoes: kendall.n,
             valoresFixos: valoresFixos)
         
-        filaSpy1 = .init(
-            tipoDeFila: .simples,
-            taxaEntrada: Tempo(inicio: 1, fim: 2),
-            taxaSaida: Tempo(inicio: 3, fim: 6),
-            kendall: kendall)
-        
-        escalonadorSpy = .init()
+        filaSpy1 = .init(nome: "Q1",
+                         c: kendall.c,
+                         k: kendall.k,
+                         taxaEntrada: (inicio: 1, fim: 2),
+                         taxaSaida: (inicio: 3, fim: 6))
     }
     
     override func tearDown() {
@@ -35,7 +32,6 @@ class SimuladorFilaSimplesTests: XCTestCase {
         kendall = nil
         randomSpy = nil
         filaSpy1 = nil
-        escalonadorSpy = nil
     }
     
     func test_filaSimples_loopCompleto() {
@@ -79,10 +75,9 @@ class SimuladorFilaSimplesTests: XCTestCase {
     
     func setupFilaSimples() {
         sut = SimuladorSimples(fila: filaSpy1,
-                               random: randomSpy,
-                               escalonador: escalonadorSpy)
+                               random: randomSpy)
             .simulador
         
-        sut.processar()
+        sut.simular()
     }
 }
