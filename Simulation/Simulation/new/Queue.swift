@@ -5,67 +5,76 @@ class Queue {
     let n: String
     let c: Int
     let k: Int
-    let ec: Double
-    let ef: Double
-    let sc: Double
-    let sf: Double
+    let taxaEntrada: (inicio: Double, fim: Double)
+    let taxaSaida: (inicio: Double, fim: Double)
     
-    var f: Int = .zero
+    var qtdDaFila: Int = .zero
     var contador: [Double] = []
     var perdas: Int = .zero
     
-    var t: ((Queue) -> Void)?
+    var contabilizarTempo: ActionVoid?
+    
+    var funcaoDeTransicao: ((Queue) -> Void)?
+    
+    var funcaoDeAgendamento: Agendamento? {
+        didSet {
+            if
+                taxaEntrada.fim - taxaEntrada.inicio > 0,
+                let r = rnd(taxaEntrada.inicio, taxaEntrada.fim), r > 0 {
+                funcaoDeAgendamento?(chegadaNaFila, r, .chegada)
+            }
+        }
+    }
     
     init(
         n: String,
         c: Int,
         k: Int,
-        ec: Double,
-        ef: Double,
-        sc: Double,
-        sf: Double
+        taxaEntrada: (inicio: Double, fim: Double),
+        taxaSaida: (inicio: Double, fim: Double)
     ) {
         self.n = n
         self.c = c
         self.k = k
-        self.ec = ec
-        self.ef = ef
-        self.sc = sc
-        self.sf = sf
+        self.taxaEntrada = taxaEntrada
+        self.taxaSaida = taxaSaida
     }
     
     // MARK: Função saidas das filas
     
-    func s() {
-        f -= 1
-        if f >= c { t?(self) }
+    func saidaDaFila() {
+        qtdDaFila -= 1
+        if qtdDaFila >= c { funcaoDeTransicao?(self) }
     }
     
     // MARK: Função de entradas das filas
     
-    func e() {
-        if f < k {
-            f += 1
-            if f <= c { t?(self) }
+    func entradaNaFila() {
+        if qtdDaFila < k {
+            qtdDaFila += 1
+            if qtdDaFila <= c { funcaoDeTransicao?(self) }
         }
         else {
             perdas += 1
         }
     }
     
-    func ch() {
-        contabiliza()
-        e()
-        if let r = rnd(ec, ef) {
-            agenda(ch, r)
+    func chegadaNaFila() {
+        contabilizarTempo?()
+        entradaNaFila()
+        if
+            taxaEntrada.fim - taxaEntrada.inicio > 0,
+            let r = rnd(taxaEntrada.inicio, taxaEntrada.fim)
+        {
+            funcaoDeAgendamento?(chegadaNaFila, r, .chegada)
         }
     }
     
-    func p(_ q: Queue? = nil) -> ActionVoid {
-        return { [s] in
-            contabiliza()
-            s()
-            q?.e()
+    func evento(_ fila: Queue? = nil) -> ActionVoid {
+        return { [saidaDaFila, contabilizarTempo] in
+            contabilizarTempo?()
+            saidaDaFila()
+            fila?.entradaNaFila()
         }
     }
 }

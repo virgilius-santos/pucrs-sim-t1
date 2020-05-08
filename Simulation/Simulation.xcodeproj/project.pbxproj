@@ -23,14 +23,13 @@
 		1840250F241D189B008DE504 /* SimuladorSimples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840250E241D189B008DE504 /* SimuladorSimples.swift */; };
 		18402511241D18C4008DE504 /* SimuladorFilaSimplesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402510241D18C4008DE504 /* SimuladorFilaSimplesTests.swift */; };
 		18402513241D1C79008DE504 /* FilaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402512241D1C79008DE504 /* FilaTests.swift */; };
-		1840251B241D856A008DE504 /* SimuladorIntegracao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251A241D856A008DE504 /* SimuladorIntegracao.swift */; };
 		1840251D241D90BE008DE504 /* SimuladorEncadeado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251C241D90BE008DE504 /* SimuladorEncadeado.swift */; };
 		1840251F241D93DA008DE504 /* Estatistica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251E241D93DA008DE504 /* Estatistica.swift */; };
 		18402521241D9461008DE504 /* Simulador.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402520241D9461008DE504 /* Simulador.swift */; };
-		187FF65924617B17004F4418 /* SimuladorFilaRedeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF65824617B17004F4418 /* SimuladorFilaRedeTests.swift */; };
 		187FF65B246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF65A246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift */; };
 		187FF65E2464DDCB004F4418 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF65D2464DDCB004F4418 /* Queue.swift */; };
-		187FF6602464DE00004F4418 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF65F2464DE00004F4418 /* Time.swift */; };
+		187FF6632464E25E004F4418 /* Print.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF6622464E25E004F4418 /* Print.swift */; };
+		187FF6652464E834004F4418 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF6642464E834004F4418 /* Random.swift */; };
 		189E2758242C4DDA0014D570 /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E2757242C4DDA0014D570 /* ConfigTests.swift */; };
 		189E275A242D7E1A0014D570 /* SimuladorFilaTandemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */; };
 		18E6CB19242F9B2D00B1FDA6 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB18242F9B2D00B1FDA6 /* StringExt.swift */; };
@@ -73,14 +72,13 @@
 		1840250E241D189B008DE504 /* SimuladorSimples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorSimples.swift; sourceTree = "<group>"; };
 		18402510241D18C4008DE504 /* SimuladorFilaSimplesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorFilaSimplesTests.swift; sourceTree = "<group>"; };
 		18402512241D1C79008DE504 /* FilaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilaTests.swift; sourceTree = "<group>"; };
-		1840251A241D856A008DE504 /* SimuladorIntegracao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorIntegracao.swift; sourceTree = "<group>"; };
 		1840251C241D90BE008DE504 /* SimuladorEncadeado.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorEncadeado.swift; sourceTree = "<group>"; };
 		1840251E241D93DA008DE504 /* Estatistica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Estatistica.swift; sourceTree = "<group>"; };
 		18402520241D9461008DE504 /* Simulador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulador.swift; sourceTree = "<group>"; };
-		187FF65824617B17004F4418 /* SimuladorFilaRedeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorFilaRedeTests.swift; sourceTree = "<group>"; };
 		187FF65A246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorFilaRoteadaSimplesTests.swift; sourceTree = "<group>"; };
 		187FF65D2464DDCB004F4418 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
-		187FF65F2464DE00004F4418 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		187FF6622464E25E004F4418 /* Print.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Print.swift; sourceTree = "<group>"; };
+		187FF6642464E834004F4418 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		189E2757242C4DDA0014D570 /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
 		189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorFilaTandemTests.swift; sourceTree = "<group>"; };
 		18E6CB18242F9B2D00B1FDA6 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
@@ -134,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				18FEC154241E47E500A9C8E9 /* Support */,
-				187FF6612464DEE7004F4418 /* old */,
 				187FF65C2464DDB0004F4418 /* new */,
 			);
 			path = Simulation;
@@ -152,8 +149,6 @@
 				18402510241D18C4008DE504 /* SimuladorFilaSimplesTests.swift */,
 				189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */,
 				187FF65A246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift */,
-				187FF65824617B17004F4418 /* SimuladorFilaRedeTests.swift */,
-				1840251A241D856A008DE504 /* SimuladorIntegracao.swift */,
 			);
 			path = SimulationTests;
 			sourceTree = "<group>";
@@ -163,7 +158,8 @@
 			children = (
 				18F6572C2463B32400B7AB96 /* NewSim.swift */,
 				187FF65D2464DDCB004F4418 /* Queue.swift */,
-				187FF65F2464DE00004F4418 /* Time.swift */,
+				187FF6622464E25E004F4418 /* Print.swift */,
+				187FF6642464E834004F4418 /* Random.swift */,
 			);
 			path = new;
 			sourceTree = "<group>";
@@ -197,6 +193,7 @@
 		18FEC154241E47E500A9C8E9 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				187FF6612464DEE7004F4418 /* old */,
 				184024E5241CEDE9008DE504 /* Simulation.h */,
 				184024E6241CEDE9008DE504 /* Info.plist */,
 			);
@@ -348,11 +345,11 @@
 				18E6CB1D242F9B6500B1FDA6 /* DoubleExt.swift in Sources */,
 				187FF65E2464DDCB004F4418 /* Queue.swift in Sources */,
 				18FEC158241E484000A9C8E9 /* GerenciadorEstatisticas.swift in Sources */,
-				187FF6602464DE00004F4418 /* Time.swift in Sources */,
 				1840250D241D155B008DE504 /* Fila.swift in Sources */,
 				18E6CB24242F9C1800B1FDA6 /* CollectionExt.swift in Sources */,
 				18E6CB22242F9BD100B1FDA6 /* ArrayExt.swift in Sources */,
 				18FEC15C241E49D100A9C8E9 /* Alias.swift in Sources */,
+				187FF6652464E834004F4418 /* Random.swift in Sources */,
 				18F6572D2463B32400B7AB96 /* NewSim.swift in Sources */,
 				18E6CB1B242F9B4900B1FDA6 /* IntExt.swift in Sources */,
 				18402505241CFA16008DE504 /* Evento.swift in Sources */,
@@ -364,6 +361,7 @@
 				18402503241CF8F0008DE504 /* Escalonador.swift in Sources */,
 				18402521241D9461008DE504 /* Simulador.swift in Sources */,
 				18402509241D1181008DE504 /* Tempo.swift in Sources */,
+				187FF6632464E25E004F4418 /* Print.swift in Sources */,
 				1840251D241D90BE008DE504 /* SimuladorEncadeado.swift in Sources */,
 				184024FE241CEE0F008DE504 /* CongruenteLinear.swift in Sources */,
 				18402507241D0E75008DE504 /* Kendall.swift in Sources */,
@@ -376,9 +374,7 @@
 			files = (
 				18402513241D1C79008DE504 /* FilaTests.swift in Sources */,
 				189E275A242D7E1A0014D570 /* SimuladorFilaTandemTests.swift in Sources */,
-				1840251B241D856A008DE504 /* SimuladorIntegracao.swift in Sources */,
 				187FF65B246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift in Sources */,
-				187FF65924617B17004F4418 /* SimuladorFilaRedeTests.swift in Sources */,
 				189E2758242C4DDA0014D570 /* ConfigTests.swift in Sources */,
 				184024F1241CEDEA008DE504 /* CongruenteLinearTests.swift in Sources */,
 				1840250B241D136B008DE504 /* TempoTests.swift in Sources */,

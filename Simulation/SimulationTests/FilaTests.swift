@@ -6,10 +6,6 @@ class FilaTests: XCTestCase {
 
     var sut: Fila!
     
-    func test_() {
-        simular()
-    }
-    
     func testChegada_QtdFila_aoIniciar_deveSerZero() {
         
         // given: dado que foi inicializado

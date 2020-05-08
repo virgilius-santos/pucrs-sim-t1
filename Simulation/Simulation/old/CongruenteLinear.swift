@@ -20,10 +20,10 @@ public class CongruenteLinear {
     private var numeroIterecoes: Int = 0
     
     /// quantidade maxima de randomicos
-    private let maxIteracoes: Int
+    let maxIteracoes: Int
     
     /// valores aleatorios fornecidos arbitrariamente
-    private let valoresFixos: [Double]
+    let valoresFixos: [Double]
     
     public init(maxIteracoes: Int, valoresFixos: [Double] = []) {
         self.maxIteracoes = maxIteracoes

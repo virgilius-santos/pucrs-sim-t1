@@ -4,29 +4,29 @@ import XCTest
 
 class SimuladorFilaSimplesTests: XCTestCase {
 
-    var sut: Simulador!
+    var sut: NovoSimulador!
     var valoresFixos: [Double]!
     var kendall: Kendall!
-    var randomSpy: CongruenteLinearSpy!
-    var filaSpy1: FilaSpy!
-    var escalonadorSpy: EscalonadorSpy!
+    var randomSpy: CongruenteLinear!
+    var filaSpy1: Fila!
+    var escalonadorSpy: Escalonador!
     
     override func setUp() {
         valoresFixos = [1, 0.3276, 0.8851, 0.1643, 0.5542, 0.6813, 0.7221, 0.9881]
         
         kendall = Kendall(c: 1, k: 3, n: valoresFixos.count)
         
-        randomSpy = CongruenteLinearSpy(
+        randomSpy = .init(
             maxIteracoes: kendall.n,
             valoresFixos: valoresFixos)
         
-        filaSpy1 = FilaSpy(
+        filaSpy1 = .init(
             tipoDeFila: .simples,
             taxaEntrada: Tempo(inicio: 1, fim: 2),
             taxaSaida: Tempo(inicio: 3, fim: 6),
             kendall: kendall)
         
-        escalonadorSpy = EscalonadorSpy()
+        escalonadorSpy = .init()
     }
     
     override func tearDown() {
@@ -42,210 +42,39 @@ class SimuladorFilaSimplesTests: XCTestCase {
         
         setupFilaSimples()
         
-        for _ in 0 ..< 6 {
-            XCTAssertTrue(sut.rodarPassoDaSimulacao())
-        }
+        XCTAssertEqual(sut.processados[0].t, 2.0)
+        XCTAssertEqual(sut.processados[0].i, 0)
+        XCTAssertEqual(sut.processados[0].tipo, .chegada)
+        XCTAssertEqual(sut.processados[1].t, 3.8851)
+        XCTAssertEqual(sut.processados[1].i, 2)
+        XCTAssertEqual(sut.processados[1].tipo, .chegada)
+        XCTAssertEqual(sut.processados[2].t, 5.0494)
+        XCTAssertEqual(sut.processados[2].i, 3)
+        XCTAssertEqual(sut.processados[2].tipo, .chegada)
+        XCTAssertEqual(sut.processados[3].t, 5.9828)
+        XCTAssertEqual(sut.processados[3].i, 1)
+        XCTAssertEqual(sut.processados[3].tipo, .saida)
+        XCTAssertEqual(sut.processados[4].t, 6.6036)
+        XCTAssertEqual(sut.processados[4].i, 4)
+        XCTAssertEqual(sut.processados[4].tipo, .chegada)
+        XCTAssertEqual(sut.processados[5].t, 8.3257)
+        XCTAssertEqual(sut.processados[5].i, 6)
+        XCTAssertEqual(sut.processados[5].tipo, .chegada)
         
-        XCTAssertFalse(sut.rodarPassoDaSimulacao())
-        XCTAssertFalse(sut.rodarPassoDaSimulacao())
+        XCTAssertEqual(sut.eventos[0].t, 11.0267)
+        XCTAssertEqual(sut.eventos[0].i, 5)
+        XCTAssertEqual(sut.eventos[0].tipo, .saida)
+        XCTAssertEqual(sut.eventos[1].t, 10.3138, accuracy: 0.0001)
+        XCTAssertEqual(sut.eventos[1].i, 7)
+        XCTAssertEqual(sut.eventos[1].tipo, .chegada)
         
-        let chegadas = filaSpy1.chegadaTempoSpy
-        let saidas = filaSpy1.saidaTempoSpy
-        let randoms = randomSpy.uniformizadoSpy
-        let eventos = escalonadorSpy.eventoSpy
-        let proximos = escalonadorSpy.proximoSpy
-        let filas = escalonadorSpy.filaSpy
-        let proximaChegadas = filaSpy1.proximaChegadaSpy
-        let proximaSaida = filaSpy1.proximaSaidaSpy
+        XCTAssertEqual(qs[0].contador[0], 2, accuracy: 0.0001)
+        XCTAssertEqual(qs[0].contador[1], 1.8851, accuracy: 0.0001)
+        XCTAssertEqual(qs[0].contador[2], 1.7851, accuracy: 0.0001)
+        XCTAssertEqual(qs[0].contador[3], 2.6555, accuracy: 0.0001)
+        XCTAssertEqual(qs[0].perdas, 1)
         
-        randoms
-            .enumerated()
-            .forEach { XCTAssertEqual(self.valoresFixos[$0.offset], $0.element) }
-        
-        XCTAssertEqual(filaSpy1.perdasSpy, 1)
-        
-        XCTAssertEqual(proximos[0].tempo, 2.0)
-        XCTAssertEqual(proximos[0].evt!.tipo, .chegada)
-        XCTAssertEqual(proximos[1].tempo, 3.8851)
-        XCTAssertEqual(proximos[1].evt!.tipo, .chegada)
-        XCTAssertEqual(proximos[2].tempo, 5.0494)
-        XCTAssertEqual(proximos[2].evt!.tipo, .chegada)
-        XCTAssertEqual(proximos[3].tempo, 5.9828)
-        XCTAssertEqual(proximos[3].evt!.tipo, .saida)
-        XCTAssertEqual(proximos[4].tempo, 6.6036)
-        XCTAssertEqual(proximos[4].evt!.tipo, .chegada)
-        XCTAssertEqual(proximos[5].tempo, 8.3257)
-        XCTAssertEqual(proximos[5].evt!.tipo, .chegada)
-        
-        XCTAssertEqual(filas[0].tempo, 11.0267)
-        XCTAssertEqual(filas[0].evento.tipo, .saida)
-        XCTAssertEqual(filas[1].tempo, 10.3138, accuracy: 0.0001)
-        XCTAssertEqual(filas[1].evento.tipo, .chegada)
-        
-        XCTAssertEqual(eventos[0].tempo, 2.0)
-        XCTAssertEqual(eventos[0].tipo, .chegada)
-        XCTAssertEqual(eventos[1].tempo, 3.9828)
-        XCTAssertEqual(eventos[1].tipo, .saida)
-        XCTAssertEqual(eventos[2].tempo, 1.8851)
-        XCTAssertEqual(eventos[2].tipo, .chegada)
-        XCTAssertEqual(eventos[3].tempo, 1.1643)
-        XCTAssertEqual(eventos[3].tipo, .chegada)
-        XCTAssertEqual(eventos[4].tempo, 1.5542)
-        XCTAssertEqual(eventos[4].tipo, .chegada)
-        XCTAssertEqual(eventos[5].tempo, 5.0439)
-        XCTAssertEqual(eventos[5].tipo, .saida)
-        XCTAssertEqual(eventos[6].tempo, 1.7221)
-        XCTAssertEqual(eventos[6].tipo, .chegada)
-        XCTAssertEqual(eventos[7].tempo, 1.9881)
-        XCTAssertEqual(eventos[7].tipo, .chegada)
-        
-        XCTAssertEqual(chegadas.count, 5)
-        XCTAssertEqual(saidas.count, 1)
-        XCTAssertEqual(eventos.count, 8)
-        XCTAssertEqual(proximos.count, 6)
-        XCTAssertEqual(filas.count, 2)
-        XCTAssertEqual(randoms.count, 8)
-        XCTAssertEqual(proximaChegadas.count, 6)
-        XCTAssertEqual(proximaSaida.count, 2)
-    }
-    
-    func test_filaSimples_configuracaoDeEventos() {
-        
-        setupFilaSimples()
-        
-        let eventos = escalonadorSpy.eventoSpy
-        let randoms = randomSpy.uniformizadoSpy
-        let proximaChegadas = filaSpy1.proximaChegadaSpy
-        
-        XCTAssertEqual(eventos.count, 1)
-        XCTAssertEqual(randoms.count, 1)
-        XCTAssertEqual(proximaChegadas.count, 1)
-        
-        XCTAssertEqual(eventos[0].tipo, .chegada)
-        XCTAssertEqual(randoms[0], valoresFixos[0])
-        XCTAssertEqual(proximaChegadas[0], 2)
-        XCTAssertEqual(eventos[0].tempo, 2)
-        XCTAssertEqual(eventos[0].fila, filaSpy1)
-        
-        XCTAssertNotNil(filaSpy1.agendarSaida)
-    }
-    
-    func test_filaSimples_evento_chegada_comAgendamentoDeSaida() {
-        
-        setupFilaSimples()
-        
-        executarEventos(pulando: 0)
-        
-        let chegadas = filaSpy1.chegadaTempoSpy
-        let saidas = filaSpy1.saidaTempoSpy
-        let randoms = randomSpy.uniformizadoSpy
-        let eventos = escalonadorSpy.eventoSpy
-        let proximaChegadas = filaSpy1.proximaChegadaSpy
-        let proximaSaida = filaSpy1.proximaSaidaSpy
-
-        // chegada na fila
-        XCTAssertEqual(chegadas[0], 2)
-        
-        // agendamento de saida
-        XCTAssertEqual(randoms[0], valoresFixos[1])
-        XCTAssertEqual(eventos[0].tipo, .saida)
-        XCTAssertEqual(eventos[0].tempo, 3.9828)
-        XCTAssertEqual(eventos[0].fila, filaSpy1)
-        
-        // agendamento de chegada
-        XCTAssertEqual(eventos[1].tipo, .chegada)
-        XCTAssertEqual(randoms[1], valoresFixos[2])
-        XCTAssertEqual(proximaChegadas[0], 1.8851)
-        XCTAssertEqual(proximaSaida[0], 3.9828)
-        XCTAssertEqual(eventos[1].tempo, 1.8851)
-        XCTAssertEqual(eventos[1].fila, filaSpy1)
-        
-        XCTAssertEqual(chegadas.count, 1)
-        XCTAssertEqual(saidas.count, 0)
-        XCTAssertEqual(eventos.count, 2)
-        XCTAssertEqual(randoms.count, 2)
-        XCTAssertEqual(proximaChegadas.count, 1)
-        XCTAssertEqual(proximaSaida.count, 1)
-    }
-    
-    func test_filaSimples_evento_chegada_semAgendamentoDeSaida() {
-        
-        setupFilaSimples()
-        
-        executarEventos(pulando: 1)
-        
-        let chegadas = filaSpy1.chegadaTempoSpy
-        let saidas = filaSpy1.saidaTempoSpy
-        let randoms = randomSpy.uniformizadoSpy
-        let eventos = escalonadorSpy.eventoSpy
-        let proximaChegadas = filaSpy1.proximaChegadaSpy
-        let proximaSaida = filaSpy1.proximaSaidaSpy
-        
-        // chegada na fila
-        XCTAssertEqual(chegadas[0], 3.8851)
-        
-        // agendamento de chegada
-        XCTAssertEqual(eventos[0].tipo, .chegada)
-        XCTAssertEqual(randoms[0], valoresFixos[3])
-        XCTAssertEqual(proximaChegadas[0], 1.1643)
-        XCTAssertEqual(eventos[0].tempo, 1.1643)
-        XCTAssertEqual(eventos[0].fila, filaSpy1)
-        
-        XCTAssertEqual(chegadas.count, 1)
-        XCTAssertEqual(saidas.count, 0)
-        XCTAssertEqual(eventos.count, 1)
-        XCTAssertEqual(randoms.count, 1)
-        XCTAssertEqual(proximaChegadas.count, 1)
-        XCTAssertEqual(proximaSaida.count, 0)
-    }
-    
-    func test_filaSimples_evento_saida_comAgendamentoDeSaida() {
-        
-        setupFilaSimples()
-        
-        executarEventos(pulando: 3)
-        
-        let chegadas = filaSpy1.chegadaTempoSpy
-        let saidas = filaSpy1.saidaTempoSpy
-        let randoms = randomSpy.uniformizadoSpy
-        let eventos = escalonadorSpy.eventoSpy
-        let proximaChegadas = filaSpy1.proximaChegadaSpy
-        let proximaSaida = filaSpy1.proximaSaidaSpy
-        
-        // saida na fila
-        XCTAssertEqual(saidas[0], 5.9828)
-        
-        // agendamento de saida
-        XCTAssertEqual(randoms[0], valoresFixos[5])
-        XCTAssertEqual(eventos[0].tipo, .saida)
-        XCTAssertEqual(eventos[0].tempo, 5.0439)
-        XCTAssertEqual(eventos[0].fila, filaSpy1)
-        
-        XCTAssertEqual(chegadas.count, 0)
-        XCTAssertEqual(saidas.count, 1)
-        XCTAssertEqual(eventos.count, 1)
-        XCTAssertEqual(randoms.count, 1)
-        XCTAssertEqual(proximaChegadas.count, 0)
-        XCTAssertEqual(proximaSaida.count, 1)
-    }
-    
-    func executarEventos(pulando: Int) {
-        for _ in 0 ..< pulando {
-            XCTAssertTrue(sut.rodarPassoDaSimulacao())
-        }
-        
-        clearSpy()
-        
-        XCTAssertTrue(sut.rodarPassoDaSimulacao())
-    }
-    
-    func clearSpy() {
-        filaSpy1.chegadaTempoSpy = []
-        filaSpy1.saidaTempoSpy = []
-        randomSpy.uniformizadoSpy = []
-        escalonadorSpy.eventoSpy = []
-        filaSpy1.proximaChegadaSpy = []
-        filaSpy1.proximaSaidaSpy = []
+        XCTAssertEqual(T, 8.3257)
     }
     
     func setupFilaSimples() {
@@ -254,80 +83,6 @@ class SimuladorFilaSimplesTests: XCTestCase {
                                escalonador: escalonadorSpy)
             .simulador
         
-        sut.configurar()
-    }
-    
-    class EscalonadorSpy: Escalonador {
-        var eventoSpy: [Evento] = []
-        var proximoSpy: [(tempo: Double, evt: Evento?)] = []
-        var filaSpy: [KeyValue] = []
-        
-        override func adicionar(_ evento: Evento) {
-            super.adicionar(evento)
-            eventoSpy.append(evento)
-            filaSpy = fila
-        }
-        
-        override func proximo() -> Evento? {
-            let proximo = super.proximo()
-            proximoSpy.append((tempo, proximo))
-            filaSpy = fila
-            return proximo
-        }
-    }
-    
-    class FilaSpy: Fila {
-        
-        var saidaTempoSpy: [Double] = []
-        var chegadaTempoSpy: [Double] = []
-        var proximaChegadaSpy: [Double] = []
-        var proximaSaidaSpy: [Double] = []
-        var agendarSaidaSpy: [(ActionVoid)?] = []
-        var perdasSpy: Int = -1
-        
-        override var agendarSaida: (ActionVoid)? {
-            didSet {
-                agendarSaidaSpy.append(agendarSaida)
-            }
-        }
-        
-        override var perdas: Int {
-            didSet {
-                perdasSpy = perdas
-            }
-        }
-        
-        override func saida(tempo: Double) {
-            super.saida(tempo: tempo)
-            saidaTempoSpy.append(tempo)
-        }
-        
-        override func chegada(tempo: Double) {
-            super.chegada(tempo: tempo)
-            chegadaTempoSpy.append(tempo)
-        }
-        
-        override func proximaChegada(randomUniformizado: Double) -> Double {
-            let proximaChegada = super.proximaChegada(randomUniformizado: randomUniformizado)
-            proximaChegadaSpy.append(proximaChegada)
-            return proximaChegada
-        }
-        
-        override func proximaSaida(randomUniformizado: Double) -> Double {
-            let proximaSaida = super.proximaSaida(randomUniformizado: randomUniformizado)
-            proximaSaidaSpy.append(proximaSaida)
-            return proximaSaida
-        }
-    }
-    
-    class CongruenteLinearSpy: CongruenteLinear {
-        
-        var uniformizadoSpy: [Double?] = []
-        
-        override func uniformizado() -> Double? {
-            let uniformizado = super.uniformizado()
-            uniformizadoSpy.append(uniformizado)
-            return uniformizado
-        }
+        sut.processar()
     }
 }

@@ -3,29 +3,31 @@ import Foundation
 
 public class SimuladorSimples {
     
-    let simulador: Simulador
+    let simulador: NovoSimulador
     
     public init(
         fila: Fila,
-        random: CongruenteLinear,
+        random rnd: CongruenteLinear,
         escalonador: Escalonador = Escalonador()
     ) {
         
-        simulador = Simulador(
-            configDeEventos: [
-                
-                // gera a primeira chegada no escalonador
-                .chegada(fila: fila),
-                
-                // configurar a saida da fila
-                .saida(fila: fila),
-                
-            ],
-            random: random,
-            escalonador: escalonador)
+        simulador = .init(
+            semente: Config.CongruenteLinear.semente,
+            maxIteracoes: rnd.maxIteracoes,
+            valoresFixos: rnd.valoresFixos)
+        
+        qs = [
+            
+            // configuração da fila 3
+            simulador.gerarFila(nome: "Q\(fila.id)",
+                                c: fila.kendall.c,
+                                k: fila.kendall.k,
+                                taxaEntrada: (fila.taxaEntrada.inicio, fila.taxaEntrada.fim),
+                                taxaSaida: (fila.taxaSaida.inicio, fila.taxaSaida.fim)),
+        ]
     }
     
     public func simular() {
-        simulador.simular()
+        simulador.processar()
     }
 }
