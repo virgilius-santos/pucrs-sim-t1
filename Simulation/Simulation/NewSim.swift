@@ -6,8 +6,6 @@ import Foundation
 // tempo de processamento
 var T: Double = .zero
 
-typealias Contadores = (_ f1: Int, _ f2: Int, _ f3: Int) -> Void
-
 // contabiliza os tempos
 func contabiliza() {
         
@@ -49,6 +47,8 @@ class Queue {
     var contador: [Double] = []
     var perdas: Int = .zero
     
+    var t: ActionVoid
+    
     init(
         n: String,
         c: Int,
@@ -56,7 +56,8 @@ class Queue {
         ec: Double,
         ef: Double,
         sc: Double,
-        sf: Double
+        sf: Double,
+        t: @escaping ActionVoid
     ) {
         self.n = n
         self.c = c
@@ -65,6 +66,42 @@ class Queue {
         self.ef = ef
         self.sc = sc
         self.sf = sf
+        self.t = t
+    }
+    
+    // MARK: Função saidas das filas
+    
+    func s() {
+        f -= 1
+        if f >= c { t() }
+    }
+    
+    // MARK: Função de entradas das filas
+    
+    func e() {
+        if f < k {
+            f += 1
+            if f <= c { t() }
+        }
+        else {
+            perdas += 1
+        }
+    }
+    
+    func ch() {
+        contabiliza()
+        e()
+        if let r = rnd(ec, ef) {
+            agenda(ch, r)
+        }
+    }
+    
+    func p(_ q: Queue? = nil) -> ActionVoid {
+        return { [s] in
+            contabiliza()
+            s()
+            q?.e()
+        }
     }
 }
 
@@ -75,7 +112,8 @@ var q1 = Queue(n: "Q1",
                ec: 1,
                ef: 4,
                sc: 1,
-               sf: 1.5)
+               sf: 1.5,
+               t: t1)
 
 // configuração da fila 2
 var q2 = Queue(n: "Q2",
@@ -84,7 +122,8 @@ var q2 = Queue(n: "Q2",
                ec: 0,
                ef: 0,
                sc: 5,
-               sf: 10)
+               sf: 10,
+               t: t2)
 
 // configuração da fila 3
 var q3 = Queue(n: "Q3",
@@ -93,7 +132,8 @@ var q3 = Queue(n: "Q3",
                ec: 0,
                ef: 0,
                sc: 10,
-               sf: 20)
+               sf: 20,
+               t: t3)
 
 // qtds das filas
 let qs: [Queue] = [q1, q2, q3]
@@ -126,16 +166,15 @@ var terminou = false
 
 // funcao que busca um aleatorio normalizado
 // se nao existir retorna nil
-var rnd: ((_ s: Double, _ e: Double) -> Double?) =
-    { (s, e) in
-        if let r = random.uniformizado() {
-            return Tempo(inicio: s, fim: e).tempo(uniformizado: r)
-        }
-        else {
-            terminou = true
-            return nil
-        }
+var rnd: ((_ s: Double, _ e: Double) -> Double?) = { (s, e) in
+    if let r = random.uniformizado() {
+        return Tempo(inicio: s, fim: e).tempo(uniformizado: r)
     }
+    else {
+        terminou = true
+        return nil
+    }
+}
 
 // MARK: - Agendamento
 
@@ -149,34 +188,15 @@ var agenda: ((_ f: @escaping ActionVoid, _ t: Double) -> Void) = { f, t in
 
 // MARK: - Funções
 
-// MARK: Função de entradas das filas
-
-func e(_ q: Queue, _ t: ActionVoid) {
-    if q.f < q.k {
-        q.f += 1
-        if q.f <= q.c { t() }
-    }
-    else {
-        q.perdas += 1
-    }
-}
-
-// MARK: Função saidas das filas
-
-func s(_ q: Queue, _ t: ActionVoid) {
-    q.f -= 1
-    if q.f >= q.c { t() }
-}
-
 // MARK: Função transição das filas
 
 func t1() {
     if let r1 = rnd(0,1), let r2 = rnd(q1.sc, q1.sf) {
         if r1 < 0.8 {
-            agenda(p12, r2)
+            agenda(q1.p(q2), r2)
         }
         else {
-            agenda(p13, r2)
+            agenda(q1.p(q3), r2)
         }
     }
 }
@@ -184,13 +204,13 @@ func t1() {
 func t2() {
     if let r1 = rnd(0,1), let r2 = rnd(q2.sc, q2.sf) {
         if r1 <= 0.3 {
-            agenda(p21, r2)
+            agenda(q2.p(q1), r2)
         }
         else if r1 <= 0.3 + 0.5 {
-            agenda(p23, r2)
+            agenda(q2.p(q3), r2)
         }
         else {
-            agenda(sa2, r2)
+            agenda(q2.p(), r2)
         }
     }
 }
@@ -198,69 +218,18 @@ func t2() {
 func t3() {
     if let r1 = rnd(0,1), let r2 = rnd(q3.sc, q3.sf) {
         if r1 < 0.7 {
-            agenda(p32, r2)
+            agenda(q3.p(q2), r2)
         }
         else {
-            agenda(sa3, r2)
+            agenda(q3.p(), r2)
         }
     }
-}
-
-// MARK: Eventos
-
-func ch1() {
-    contabiliza()
-    e(q1, t1)
-    if let r = rnd(q1.ec, q1.ef) {
-        agenda(ch1, r)
-    }
-}
-
-func p12() {
-    contabiliza()
-    s(q1, t1)
-    e(q2, t2)
-}
-
-func p13() {
-    contabiliza()
-    s(q1, t1)
-    e(q3, t3)
-}
-
-func p21() {
-    contabiliza()
-    s(q2, t2)
-    e(q1, t1)
-}
-
-func p23() {
-    contabiliza()
-    s(q2, t2)
-    e(q3, t3)
-}
-
-func sa2() {
-    contabiliza()
-    s(q2, t2)
-}
-
-func p32() {
-    contabiliza()
-    s(q3, t3)
-    e(q2, t2)
-}
-
-func sa3() {
-    contabiliza()
-    s(q3, t3)
 }
 
 public func simular() {
     
-    
     guard let r = rnd(q1.ec, q1.ef) else { return }
-    agenda(ch1, r)
+    agenda(q1.ch, r)
     
     while
         terminou == false,
