@@ -3,9 +3,8 @@
 import XCTest
 
 class SimuladorFilaTandemTests: XCTestCase {
-    var sut: NovoSimulador!
+    var sut: Simulador!
     var valoresFixos: [Double]!
-    var kendall: Kendall!
     var randomSpy: CongruenteLinear!
     var filaSpy1: Fila!
     var filaSpy2: Fila!
@@ -16,38 +15,38 @@ class SimuladorFilaTandemTests: XCTestCase {
             0.4569, 0.5121, 0.9208, 0.0171, 0.2299, 0.8545, 0.6001, 0.2921
         ]
 
-        kendall = Kendall(c: 2, k: 3, n: valoresFixos.count)
-
         randomSpy = .init(
-            maxIteracoes: kendall.n,
+            maxIteracoes: valoresFixos.count,
             valoresFixos: valoresFixos
         )
 
         filaSpy1 = .init(nome: "Q1",
-                         c: kendall.c,
-                         k: kendall.k,
+                         kendall: .init(c: 2, k: 3, n: valoresFixos.count),
                          taxaEntrada: (inicio: 2, fim: 3),
                          taxaSaida: (inicio: 2, fim: 5),
                          transicoes: [("Q2", 1)])
 
         filaSpy2 = .init(nome: "Q2",
-                         c: 1,
-                         k: 3,
+                         kendall: .init(c: 1, k: 3),
                          taxaSaida: (inicio: 3, fim: 5))
+
+        sut = SimuladorTandem(filaDeEntrada: filaSpy1,
+                              filaDeSaida: filaSpy2,
+                              random: randomSpy)
+
+        sut.simular()
     }
 
     override func tearDown() {
         sut = nil
         valoresFixos = nil
-        kendall = nil
         randomSpy = nil
         filaSpy1 = nil
         filaSpy2 = nil
     }
 
     func test_filaTandem_loopCompleto() {
-        setupFilaTandem()
-
+        let filas = sut.filas
         XCTAssertEqual(filas[0].contador[0], 2.6648, accuracy: 0.0001)
         XCTAssertEqual(filas[0].contador[1], 7.7764, accuracy: 0.0001)
         XCTAssertEqual(filas[0].contador[2], 6.2075, accuracy: 0.0001)
@@ -112,15 +111,7 @@ class SimuladorFilaTandemTests: XCTestCase {
         XCTAssertEqual(sut.eventos[1].i, 15)
         XCTAssertEqual(sut.eventos[1].tipo, .saida)
 
+        let T = sut.T
         XCTAssertEqual(T, 17.3485)
-    }
-
-    func setupFilaTandem() {
-        sut = SimuladorEncadeado(filaDeEntrada: filaSpy1,
-                                 filaDeSaida: filaSpy2,
-                                 random: randomSpy)
-            .simulador
-
-        sut.simular()
     }
 }

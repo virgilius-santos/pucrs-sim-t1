@@ -1,17 +1,14 @@
 
 import Foundation
 
-// MARK: - Tempo
+// MARK: - Simulador
 
-// tempo de processamento
-private(set) var T = Double.zero
+public class Simulador {
+    // MARK: - Tempo
 
-// qtds das filas
-private(set) var filas = [Fila]()
+    // tempo de processamento
+    private(set) var T = Double.zero
 
-// MARK: - NovoSimulador
-
-public final class NovoSimulador {
     // MARK: - Random
 
     // gerador de numeros pseudo aleatorios
@@ -38,6 +35,9 @@ public final class NovoSimulador {
 
     // filas registradas
     private var filasDict = [String: Fila]()
+
+    // qtds das filas
+    private(set) var filas = [Fila]()
 
     public init(random rnd: CongruenteLinear,
                 filas fs: [Fila] = [Fila]()) {
@@ -98,5 +98,53 @@ public final class NovoSimulador {
             processados.append(ultimoEventoDaLista)
             eventoEmProcessamento = nil
         }
+    }
+}
+
+// MARK: - Imprimir
+
+extension Simulador {
+    func imprimir() {
+        func formatCont(_ contador: [Double]) -> String {
+            let total = contador.reduce(0, +)
+            return contador
+                .enumerated()
+                .reduce("") { $0 + "\t" + "\($1.offset.format(4))"
+                    + "\t" + "\($1.element.format(f: 10, 4))"
+                    + "\t\t\t\(($1.element * 100 / total).format(f: 3, 2))\n"
+                }
+        }
+
+        func imprimir(q: Fila) {
+            print(
+                """
+                *******************
+                Fila:   \(q.nome) (G/G/\(q.kendall.c)\(q.kendall.k == .max ? "" : "/\(q.kendall.k)")
+                Arrival: \(q.taxaEntrada.inicio.format(2, p: 2)) ... \(q.taxaEntrada.fim.format(2, p: 2))
+                Service: \(q.taxaSaida.inicio.format(2, p: 2)) ... \(q.taxaSaida.fim.format(2, p: 2))
+                *******************
+                State           Time             Probability
+                \(formatCont(q.contador))
+
+                Number of losses: \(q.perdas)
+
+                *******************
+
+                """
+            )
+        }
+
+        print(
+            """
+            =========================================================
+            ===============    REPORT (semente: \(Config.CongruenteLinear.semente))   ======================
+            =========================================================
+            """
+        )
+        filas.forEach { imprimir(q: $0) }
+
+        print("Simulation average time: \(T.format(f: 6, 2, p: 7))")
+
+        print("=========================================================")
     }
 }

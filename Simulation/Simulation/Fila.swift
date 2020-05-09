@@ -3,8 +3,7 @@ import Foundation
 
 public class Fila {
     let nome: String
-    let c: Int
-    let k: Int
+    let kendall: Kendall
     let taxaEntrada: (inicio: Double, fim: Double)
     let taxaSaida: (inicio: Double, fim: Double)
     let transicoes: [(nomeDaFila: String, taxa: Double)]
@@ -29,15 +28,13 @@ public class Fila {
 
     public init(
         nome: String,
-        c: Int,
-        k: Int = .max,
+        kendall: Kendall,
         taxaEntrada: (inicio: Double, fim: Double) = (.zero, .zero),
         taxaSaida: (inicio: Double, fim: Double),
         transicoes: [(nomeDaFila: String, taxa: Double)] = []
     ) {
         self.nome = nome
-        self.c = c
-        self.k = k
+        self.kendall = kendall
         self.taxaEntrada = taxaEntrada
         self.taxaSaida = taxaSaida
         self.transicoes = transicoes
@@ -49,15 +46,15 @@ public class Fila {
 
     func saidaDaFila() {
         qtdDaFila -= 1
-        if qtdDaFila >= c { transicaoEntreFilas() }
+        if qtdDaFila >= kendall.c { transicaoEntreFilas() }
     }
 
     // MARK: Função de entradas das filas
 
     func entradaNaFila() {
-        if qtdDaFila < k {
+        if qtdDaFila < kendall.k {
             qtdDaFila += 1
-            if qtdDaFila <= c { transicaoEntreFilas() }
+            if qtdDaFila <= kendall.c { transicaoEntreFilas() }
         } else {
             perdas += 1
         }
@@ -111,6 +108,8 @@ public class Fila {
             filaDeDestino?.entradaNaFila()
         }
     }
+
+    // MARK: Função para gerar evento
 
     func atualizarContador(delta: Double) {
         if qtdDaFila < contador.count {

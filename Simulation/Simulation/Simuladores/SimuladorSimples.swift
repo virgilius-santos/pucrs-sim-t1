@@ -1,14 +1,12 @@
 
 import Foundation
 
-public class SimuladorSimples {
-    let simulador: NovoSimulador
-
+public class SimuladorSimples: Simulador {
     public init(
         fila: Fila,
         random rnd: CongruenteLinear
     ) {
-        simulador = .init(
+        super.init(
             random: rnd,
             filas: [fila]
         )

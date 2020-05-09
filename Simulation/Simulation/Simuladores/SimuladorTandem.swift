@@ -1,15 +1,13 @@
 
 import Foundation
 
-public class SimuladorEncadeado {
-    let simulador: NovoSimulador
-
+public class SimuladorTandem: Simulador {
     public init(
         filaDeEntrada: Fila,
         filaDeSaida: Fila,
         random rnd: CongruenteLinear
     ) {
-        simulador = .init(
+        super.init(
             random: rnd,
             filas: [filaDeEntrada, filaDeSaida]
         )
