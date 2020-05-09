@@ -14,15 +14,15 @@ public struct Kendall {
     public let n: Int
     /// política de atendimento
     let d: Int
-    
+
     public init(
         a: String = "G",
         b: String = "G",
         c: Int = .max,
         k: Int = .max,
         n: Int = 10,
-        d: Int = .zero) {
-        
+        d: Int = .zero
+    ) {
         self.a = a
         self.b = b
         self.c = c

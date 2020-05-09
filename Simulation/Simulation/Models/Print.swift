@@ -1,8 +1,7 @@
 
 import Foundation
-    
+
 func imprimir() {
-    
     func formatCont(_ contador: [Double]) -> String {
         let total = contador.reduce(0, +)
         return contador
@@ -12,9 +11,8 @@ func imprimir() {
                 + "\t\t\t\(($1.element * 100 / total).format(f: 3, 2))\n"
             })
     }
-    
+
     func imprimir(q: Fila) {
-        
         print(
 """
 *******************
@@ -30,9 +28,9 @@ Number of losses: \(q.perdas)
 *******************
 
 """
-)  
+)
     }
-    
+
     print(
 """
 =========================================================
@@ -40,11 +38,9 @@ Number of losses: \(q.perdas)
 =========================================================
 """
     )
-    qs.forEach { imprimir(q: $0) }
-    
+    filas.forEach { imprimir(q: $0) }
+
     print("Simulation average time: \(T.format(f: 6, 2, p: 7))")
-    
+
     print("=========================================================")
 }
-
-

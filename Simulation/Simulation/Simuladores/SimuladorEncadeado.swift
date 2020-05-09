@@ -1,22 +1,17 @@
 
 import Foundation
 
-public class SimuladorSimples {
-    
+public class SimuladorEncadeado {
     let simulador: NovoSimulador
-    
+
     public init(
-        fila: Fila,
+        filaDeEntrada: Fila,
+        filaDeSaida: Fila,
         random rnd: CongruenteLinear
     ) {
-        
         simulador = .init(
             random: rnd,
-            filas: [ fila, ]
+            filas: [ filaDeEntrada, filaDeSaida, ]
         )
-    }
-    
-    public func simular() {
-        simulador.simular()
     }
 }

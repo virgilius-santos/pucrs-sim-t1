@@ -15,12 +15,10 @@
 		18402507241D0E75008DE504 /* Kendall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402506241D0E75008DE504 /* Kendall.swift */; };
 		1840250F241D189B008DE504 /* SimuladorSimples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840250E241D189B008DE504 /* SimuladorSimples.swift */; };
 		18402511241D18C4008DE504 /* SimuladorFilaSimplesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402510241D18C4008DE504 /* SimuladorFilaSimplesTests.swift */; };
-		18402513241D1C79008DE504 /* FilaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18402512241D1C79008DE504 /* FilaTests.swift */; };
 		1840251D241D90BE008DE504 /* SimuladorEncadeado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840251C241D90BE008DE504 /* SimuladorEncadeado.swift */; };
 		187FF65B246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF65A246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift */; };
 		187FF65E2464DDCB004F4418 /* Fila.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF65D2464DDCB004F4418 /* Fila.swift */; };
 		187FF6632464E25E004F4418 /* Print.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF6622464E25E004F4418 /* Print.swift */; };
-		187FF6652464E834004F4418 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FF6642464E834004F4418 /* Random.swift */; };
 		189E275A242D7E1A0014D570 /* SimuladorFilaTandemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */; };
 		18E6CB19242F9B2D00B1FDA6 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB18242F9B2D00B1FDA6 /* StringExt.swift */; };
 		18E6CB1B242F9B4900B1FDA6 /* IntExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6CB1A242F9B4900B1FDA6 /* IntExt.swift */; };
@@ -52,12 +50,10 @@
 		18402506241D0E75008DE504 /* Kendall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kendall.swift; sourceTree = "<group>"; };
 		1840250E241D189B008DE504 /* SimuladorSimples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorSimples.swift; sourceTree = "<group>"; };
 		18402510241D18C4008DE504 /* SimuladorFilaSimplesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorFilaSimplesTests.swift; sourceTree = "<group>"; };
-		18402512241D1C79008DE504 /* FilaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilaTests.swift; sourceTree = "<group>"; };
 		1840251C241D90BE008DE504 /* SimuladorEncadeado.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorEncadeado.swift; sourceTree = "<group>"; };
 		187FF65A246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorFilaRoteadaSimplesTests.swift; sourceTree = "<group>"; };
 		187FF65D2464DDCB004F4418 /* Fila.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fila.swift; sourceTree = "<group>"; };
 		187FF6622464E25E004F4418 /* Print.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Print.swift; sourceTree = "<group>"; };
-		187FF6642464E834004F4418 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimuladorFilaTandemTests.swift; sourceTree = "<group>"; };
 		18E6CB18242F9B2D00B1FDA6 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		18E6CB1A242F9B4900B1FDA6 /* IntExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExt.swift; sourceTree = "<group>"; };
@@ -107,8 +103,12 @@
 		184024E4241CEDE9008DE504 /* Simulation */ = {
 			isa = PBXGroup;
 			children = (
+				18E6CB1E242F9B8A00B1FDA6 /* Ext */,
+				18FEC15A241E48EE00A9C8E9 /* Models */,
+				18FEC159241E48C300A9C8E9 /* Simuladores */,
+				184024FC241CEE0F008DE504 /* CongruenteLinear.swift */,
+				187FF65D2464DDCB004F4418 /* Fila.swift */,
 				18FEC154241E47E500A9C8E9 /* Support */,
-				187FF65C2464DDB0004F4418 /* new */,
 			);
 			path = Simulation;
 			sourceTree = "<group>";
@@ -118,25 +118,11 @@
 			children = (
 				184024F2241CEDEA008DE504 /* Info.plist */,
 				184024F0241CEDEA008DE504 /* CongruenteLinearTests.swift */,
-				18402512241D1C79008DE504 /* FilaTests.swift */,
 				18402510241D18C4008DE504 /* SimuladorFilaSimplesTests.swift */,
 				189E2759242D7E1A0014D570 /* SimuladorFilaTandemTests.swift */,
 				187FF65A246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift */,
 			);
 			path = SimulationTests;
-			sourceTree = "<group>";
-		};
-		187FF65C2464DDB0004F4418 /* new */ = {
-			isa = PBXGroup;
-			children = (
-				18E6CB1E242F9B8A00B1FDA6 /* Ext */,
-				18FEC15A241E48EE00A9C8E9 /* Models */,
-				184024FC241CEE0F008DE504 /* CongruenteLinear.swift */,
-				18FEC159241E48C300A9C8E9 /* Simuladores */,
-				187FF65D2464DDCB004F4418 /* Fila.swift */,
-				187FF6642464E834004F4418 /* Random.swift */,
-			);
-			path = new;
 			sourceTree = "<group>";
 		};
 		18E6CB1E242F9B8A00B1FDA6 /* Ext */ = {
@@ -293,7 +279,6 @@
 				18E6CB1D242F9B6500B1FDA6 /* DoubleExt.swift in Sources */,
 				187FF65E2464DDCB004F4418 /* Fila.swift in Sources */,
 				18FEC15C241E49D100A9C8E9 /* Alias.swift in Sources */,
-				187FF6652464E834004F4418 /* Random.swift in Sources */,
 				18F6572D2463B32400B7AB96 /* NovoSimulador.swift in Sources */,
 				18E6CB1B242F9B4900B1FDA6 /* IntExt.swift in Sources */,
 				18E6CB19242F9B2D00B1FDA6 /* StringExt.swift in Sources */,
@@ -311,7 +296,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18402513241D1C79008DE504 /* FilaTests.swift in Sources */,
 				189E275A242D7E1A0014D570 /* SimuladorFilaTandemTests.swift in Sources */,
 				187FF65B246247A6004F4418 /* SimuladorFilaRoteadaSimplesTests.swift in Sources */,
 				184024F1241CEDEA008DE504 /* CongruenteLinearTests.swift in Sources */,

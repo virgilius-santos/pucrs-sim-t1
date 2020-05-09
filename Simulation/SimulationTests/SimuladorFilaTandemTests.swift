@@ -1,41 +1,41 @@
 
-import XCTest
 @testable import Simulation
+import XCTest
 
 class SimuladorFilaTandemTests: XCTestCase {
-    
     var sut: NovoSimulador!
     var valoresFixos: [Double]!
     var kendall: Kendall!
     var randomSpy: CongruenteLinear!
     var filaSpy1: Fila!
     var filaSpy2: Fila!
-    
+
     override func setUp() {
         valoresFixos = [
-            0.5, 0.9921, 0.0004, 0.5534, 0.2761 , 0.3398, 0.8963, 0.9023, 0.0132,
+            0.5, 0.9921, 0.0004, 0.5534, 0.2761, 0.3398, 0.8963, 0.9023, 0.0132,
             0.4569, 0.5121, 0.9208, 0.0171, 0.2299, 0.8545, 0.6001, 0.2921
         ]
-        
+
         kendall = Kendall(c: 2, k: 3, n: valoresFixos.count)
-        
+
         randomSpy = .init(
             maxIteracoes: kendall.n,
-            valoresFixos: valoresFixos)
-        
+            valoresFixos: valoresFixos
+        )
+
         filaSpy1 = .init(nome: "Q1",
-            c: kendall.c,
-            k: kendall.k,
-            taxaEntrada: (inicio: 2, fim: 3),
-            taxaSaida: (inicio: 2, fim: 5),
-            transicoes: [ ("Q2", 1) ])
-        
+                         c: kendall.c,
+                         k: kendall.k,
+                         taxaEntrada: (inicio: 2, fim: 3),
+                         taxaSaida: (inicio: 2, fim: 5),
+                         transicoes: [ ("Q2", 1) ])
+
         filaSpy2 = .init(nome: "Q2",
-            c: 1,
-            k: 3,
-            taxaSaida: (inicio: 3, fim: 5))
+                         c: 1,
+                         k: 3,
+                         taxaSaida: (inicio: 3, fim: 5))
     }
-    
+
     override func tearDown() {
         sut = nil
         valoresFixos = nil
@@ -44,22 +44,21 @@ class SimuladorFilaTandemTests: XCTestCase {
         filaSpy1 = nil
         filaSpy2 = nil
     }
-    
+
     func test_filaTandem_loopCompleto() {
-        
         setupFilaTandem()
 
-        XCTAssertEqual(qs[0].contador[0], 2.6648, accuracy: 0.0001)
-        XCTAssertEqual(qs[0].contador[1], 7.7764, accuracy: 0.0001)
-        XCTAssertEqual(qs[0].contador[2], 6.2075, accuracy: 0.0001)
-        XCTAssertEqual(qs[0].contador[3], 0.6998, accuracy: 0.0001)
-        XCTAssertEqual(qs[0].perdas, 0)
-        XCTAssertEqual(qs[1].contador[0], 7.4763, accuracy: 0.0001)
-        XCTAssertEqual(qs[1].contador[1], 0.6843, accuracy: 0.0001)
-        XCTAssertEqual(qs[1].contador[2], 7.6925, accuracy: 0.0001)
-        XCTAssertEqual(qs[1].contador[3], 1.4954, accuracy: 0.0001)
-        XCTAssertEqual(qs[1].perdas, 1)
-        
+        XCTAssertEqual(filas[0].contador[0], 2.6648, accuracy: 0.0001)
+        XCTAssertEqual(filas[0].contador[1], 7.7764, accuracy: 0.0001)
+        XCTAssertEqual(filas[0].contador[2], 6.2075, accuracy: 0.0001)
+        XCTAssertEqual(filas[0].contador[3], 0.6998, accuracy: 0.0001)
+        XCTAssertEqual(filas[0].perdas, 0)
+        XCTAssertEqual(filas[1].contador[0], 7.4763, accuracy: 0.0001)
+        XCTAssertEqual(filas[1].contador[1], 0.6843, accuracy: 0.0001)
+        XCTAssertEqual(filas[1].contador[2], 7.6925, accuracy: 0.0001)
+        XCTAssertEqual(filas[1].contador[3], 1.4954, accuracy: 0.0001)
+        XCTAssertEqual(filas[1].perdas, 1)
+
         XCTAssertEqual(sut.processados[0].t, 2.5)
         XCTAssertEqual(sut.processados[0].tipo, .chegada)
         XCTAssertEqual(sut.processados[0].i, 0)
@@ -105,23 +104,23 @@ class SimuladorFilaTandemTests: XCTestCase {
         XCTAssertEqual(sut.processados[14].t, 17.3485)
         XCTAssertEqual(sut.processados[14].tipo, .chegada)
         XCTAssertEqual(sut.processados[14].i, 14)
-        
+
         XCTAssertEqual(sut.eventos[0].t, 20.2248, accuracy: 0.0001)
         XCTAssertEqual(sut.eventos[0].i, 16)
         XCTAssertEqual(sut.eventos[0].tipo, .transicao)
         XCTAssertEqual(sut.eventos[1].t, 19.5153, accuracy: 0.0001)
         XCTAssertEqual(sut.eventos[1].i, 15)
         XCTAssertEqual(sut.eventos[1].tipo, .saida)
-        
+
         XCTAssertEqual(T, 17.3485)
     }
-    
+
     func setupFilaTandem() {
         sut = SimuladorEncadeado(filaDeEntrada: filaSpy1,
                                  filaDeSaida: filaSpy2,
                                  random: randomSpy)
             .simulador
-        
+
         sut.simular()
     }
 }

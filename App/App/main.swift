@@ -15,17 +15,15 @@ func filaSimples() -> NovoSimulador {
                  taxaSaida: (inicio: 3, fim: 6)),
         ]
     )
-    
 }
 
 func filaTandem() -> NovoSimulador {
-    
     print("\n\nFILA TANDEM\n")
     let v = [
-        0.5, 0.9921, 0.0004, 0.5534, 0.2761 , 0.3398, 0.8963, 0.9023, 0.0132,
+        0.5, 0.9921, 0.0004, 0.5534, 0.2761, 0.3398, 0.8963, 0.9023, 0.0132,
         0.4569, 0.5121, 0.9208, 0.0171, 0.2299, 0.8545, 0.6001, 0.2921
     ]
-    
+
     return NovoSimulador(
         random: .init(semente: 1, maxIteracoes: v.count, valoresFixos: v),
         filas: [
@@ -35,14 +33,13 @@ func filaTandem() -> NovoSimulador {
                  taxaEntrada: (inicio: 2, fim: 3),
                  taxaSaida: (inicio: 2, fim: 5),
                  transicoes: [ ("Q2", 1) ]),
-            
+
             Fila(nome: "Q2",
                  c: 1,
                  k: 3,
                  taxaSaida: (inicio: 3, fim: 5))
         ]
     )
-    
 }
 
 func filaRede() -> NovoSimulador {
@@ -55,13 +52,13 @@ func filaRede() -> NovoSimulador {
                  taxaEntrada: (1, 4),
                  taxaSaida: (1, 1.5),
                  transicoes: [ ("Q2", 0.8), ("Q3", 0.2) ]),
-            
+
             Fila(nome: "Q2",
                  c: 3,
                  k: 5,
                  taxaSaida: (5, 10),
                  transicoes: [ ("Q1", 0.3), ("Q3", 0.5) ]),
-            
+
             Fila(nome: "Q3",
                  c: 2,
                  k: 8,
