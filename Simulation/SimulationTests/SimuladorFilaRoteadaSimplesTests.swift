@@ -25,7 +25,7 @@ class SimuladorFilaRoteadaSimplesTests: XCTestCase {
                          k: 4,
                          taxaEntrada: (inicio: 2, fim: 3),
                          taxaSaida: (inicio: 4, fim: 7),
-                         transicoes: [ ("Q2", 0.7) ])
+                         transicoes: [("Q2", 0.7)])
 
         filaSpy2 = .init(nome: "Q2",
                          c: 1,
@@ -41,25 +41,25 @@ class SimuladorFilaRoteadaSimplesTests: XCTestCase {
     }
 
     func test_NovoSimulador() {
-        NovoSimulador(random: .init(semente: 1, maxIteracoes: 100000),
+        NovoSimulador(random: .init(semente: 1, maxIteracoes: 100_000),
                       filas: [
-                        Fila(nome: "Q1",
-                             c: 1,
-                             taxaEntrada: (1, 4),
-                             taxaSaida: (1, 1.5),
-                             transicoes: [ ("Q2", 0.8), ("Q3", 0.2) ]),
+                          Fila(nome: "Q1",
+                               c: 1,
+                               taxaEntrada: (1, 4),
+                               taxaSaida: (1, 1.5),
+                               transicoes: [("Q2", 0.8), ("Q3", 0.2)]),
 
-                        Fila(nome: "Q2",
-                             c: 3,
-                             k: 5,
-                             taxaSaida: (5, 10),
-                             transicoes: [ ("Q1", 0.3), ("Q3", 0.5) ]),
+                          Fila(nome: "Q2",
+                               c: 3,
+                               k: 5,
+                               taxaSaida: (5, 10),
+                               transicoes: [("Q1", 0.3), ("Q3", 0.5)]),
 
-                        Fila(nome: "Q3",
-                             c: 2,
-                             k: 8,
-                             taxaSaida: (10, 20),
-                             transicoes: [ ("Q2", 0.7) ]),
+                          Fila(nome: "Q3",
+                               c: 2,
+                               k: 8,
+                               taxaSaida: (10, 20),
+                               transicoes: [("Q2", 0.7)])
                       ])
 
             .simular()
@@ -144,7 +144,7 @@ class SimuladorFilaRoteadaSimplesTests: XCTestCase {
 
     func setupFilaRede() {
         sut = .init(random: randomSpy,
-                    filas: [ filaSpy1, filaSpy2, ] )
+                    filas: [filaSpy1, filaSpy2])
 
         sut.simular()
     }

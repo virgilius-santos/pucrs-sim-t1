@@ -28,7 +28,7 @@ class SimuladorFilaTandemTests: XCTestCase {
                          k: kendall.k,
                          taxaEntrada: (inicio: 2, fim: 3),
                          taxaSaida: (inicio: 2, fim: 5),
-                         transicoes: [ ("Q2", 1) ])
+                         transicoes: [("Q2", 1)])
 
         filaSpy2 = .init(nome: "Q2",
                          c: 1,

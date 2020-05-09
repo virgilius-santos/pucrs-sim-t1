@@ -11,7 +11,7 @@ public class SimuladorEncadeado {
     ) {
         simulador = .init(
             random: rnd,
-            filas: [ filaDeEntrada, filaDeSaida, ]
+            filas: [filaDeEntrada, filaDeSaida]
         )
     }
 }

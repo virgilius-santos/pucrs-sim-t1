@@ -10,7 +10,7 @@ public class SimuladorSimples {
     ) {
         simulador = .init(
             random: rnd,
-            filas: [ fila, ]
+            filas: [fila]
         )
     }
 }
